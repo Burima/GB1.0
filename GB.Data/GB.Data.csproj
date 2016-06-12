@@ -69,6 +69,9 @@
     <Compile Include="DBEntity\LicenceType.cs">
       <DependentUpon>GBEntityContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\ReferePersonDetail.cs">
+      <DependentUpon>GBEntityContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\Role.cs">
       <DependentUpon>GBEntityContext.tt</DependentUpon>
     </Compile>

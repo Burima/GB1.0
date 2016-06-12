@@ -34,5 +34,17 @@ namespace GBAdmin.Web.Models
         public bool Ola { get; set; }
         [Display(Name = "Tfs")]
         public bool Tfs { get; set; }
+        public bool IsReferred { get; set; }
+        public long UserID { get; set; }
+
+        //public ReferPersonViewModel ReferPersonViewModel { get; set; }
+    }
+
+    public class ReferPersonViewModel
+    {
+        public long ReferPersonID { get; set; }
+        public string Email { get; set; }
+
+        public int PhoneNumber { get; set; }
     }
 }

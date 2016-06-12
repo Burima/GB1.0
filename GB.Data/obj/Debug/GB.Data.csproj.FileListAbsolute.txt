@@ -1,9 +1,0 @@
-F:\GitHub\GB1.0\GB.Data\bin\Debug\GB.Data.dll.config
-F:\GitHub\GB1.0\GB.Data\bin\Debug\GB.Data.dll
-F:\GitHub\GB1.0\GB.Data\bin\Debug\GB.Data.pdb
-F:\GitHub\GB1.0\GB.Data\bin\Debug\EntityFramework.dll
-F:\GitHub\GB1.0\GB.Data\bin\Debug\EntityFramework.SqlServer.dll
-F:\GitHub\GB1.0\GB.Data\bin\Debug\EntityFramework.xml
-F:\GitHub\GB1.0\GB.Data\bin\Debug\EntityFramework.SqlServer.xml
-F:\GitHub\GB1.0\GB.Data\obj\Debug\GB.Data.dll
-F:\GitHub\GB1.0\GB.Data\obj\Debug\GB.Data.pdb
