@@ -44,7 +44,7 @@ namespace GB.Web.Controllers
         }
 
         [AllowAnonymous]
-        [Route("Login", Name = RouteNames.Careers)]
+        [Route("Careers", Name = RouteNames.Careers)]
         public ActionResult Careers()
         {
             return View();
