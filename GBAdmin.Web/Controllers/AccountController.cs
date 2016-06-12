@@ -23,9 +23,9 @@ namespace GBAdmin.Web.Controllers
     {
         private UserManager _userManager;
         AccountViewModel accountViewModel = new AccountViewModel();
-        TripleDES tripleDES = new TripleDES();
+        TripleDES tripleDES = new TripleDES();       
         public AccountController()
-        {
+        {           
         }
 
         public AccountController(UserManager userManager)
