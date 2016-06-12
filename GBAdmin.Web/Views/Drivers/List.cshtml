@@ -1,0 +1,101 @@
+﻿@model IList<GBAdmin.Web.Models.DriverViewModel>
+
+@{
+    ViewBag.Title = "Drivers";
+}
+
+@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+<div class="wrapper wrapper-content animated fadeInRight white-bg">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Drivers</h5>                   
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover dataTables-drivers">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone Number</th>
+                                <th>Pincode</th>
+                                <th>Licence Type</th>
+                                <th>Licence No</th>
+                                <th>Experience In Kolkata</th>
+                                <th>Uber</th>
+                                <th>Ola</th>
+                                <th>Tfs</th>
+                                <th>Status</th>
+                                <th>Pending with</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var driver in Model)
+                                {
+
+                                    <tr class="gradeX">
+                                        <td>@driver.FirstName</td>
+                                        <td>@driver.LastName/td>
+                                        <td>@driver.PhoneNumber</td>
+                                        <td>@driver.Pincode</td>
+                                        <td>@driver.LicenceType</td>
+                                        <td>@driver.LicenceNo</td>
+                                        <td>@driver.ExperienceInKolkata</td>
+                                        <td>@driver.Uber</td>
+                                        <td>@driver.Ola</td>
+                                        <td>@driver.Tfs</td>
+                                        <td>@driver.Tfs</td>
+                                        <td>@driver.Tfs</td>
+                                    </tr>
+
+                                }
+                            }
+                            else
+                            {
+                                <tr class="gradeX">
+                                    <td colspan="12"><center>No data found</center> </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone Number</th>
+                                <th>Pincode</th>
+                                <th>Licence Type</th>
+                                <th>Licence No</th>
+                                <th>Experience In Kolkata</th>
+                                <th>Uber</th>
+                                <th>Ola</th>
+                                <th>Tfs</th>
+                                <th>Status</th>
+                                <th>Pending with</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+@Scripts.Render("~/plugins/dataTables")
+    <script>
+        $(document).ready(function () {
+            //Initialize data table
+            $('.dataTables-drivers').dataTable({
+                /* Disable initial sort */
+                "aaSorting": []
+            });
+        })
+    </script>
+
+}

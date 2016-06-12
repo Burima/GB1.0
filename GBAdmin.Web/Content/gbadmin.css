@@ -1,0 +1,12 @@
+﻿/*validation error*/
+.error {
+  /*color: #ff5a5f;*/
+  border: 1px solid red;
+}
+.input-validation-error{
+    border: 1px solid red;
+}
+
+.has-error{
+    border: 1px solid red;
+}
