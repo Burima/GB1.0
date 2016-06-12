@@ -25,6 +25,8 @@ namespace GB.Data.DBEntity
         public Nullable<bool> Uber { get; set; }
         public Nullable<bool> Ola { get; set; }
         public Nullable<bool> Tfs { get; set; }
+        public bool IsReferred { get; set; }
+        public long UserID { get; set; }
     
         public virtual LicenceType LicenceType1 { get; set; }
     }

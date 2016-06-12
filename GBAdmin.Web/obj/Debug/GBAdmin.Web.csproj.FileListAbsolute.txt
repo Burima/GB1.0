@@ -4,6 +4,7 @@ F:\GitHub\GB1.0\GBAdmin.Web\bin\GBAdmin.Web.pdb
 F:\GitHub\GB1.0\GBAdmin.Web\bin\Antlr3.Runtime.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\EntityFramework.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\EntityFramework.SqlServer.dll
+F:\GitHub\GB1.0\GBAdmin.Web\bin\GB.Data.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\GB.Membership.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\Microsoft.AspNet.Identity.Core.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
@@ -28,6 +29,7 @@ F:\GitHub\GB1.0\GBAdmin.Web\bin\System.Web.WebPages.Deployment.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\System.Web.WebPages.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\System.Web.WebPages.Razor.dll
 F:\GitHub\GB1.0\GBAdmin.Web\bin\WebGrease.dll
+F:\GitHub\GB1.0\GBAdmin.Web\bin\GB.Data.pdb
 F:\GitHub\GB1.0\GBAdmin.Web\bin\GB.Membership.pdb
 F:\GitHub\GB1.0\GBAdmin.Web\bin\Antlr3.Runtime.xml
 F:\GitHub\GB1.0\GBAdmin.Web\bin\EntityFramework.xml

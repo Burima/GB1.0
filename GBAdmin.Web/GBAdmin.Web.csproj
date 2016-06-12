@@ -795,7 +795,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_NavigationOffCanvas.cshtml" />
@@ -823,6 +823,10 @@
     <Content Include="Scripts\plugins\justified-gallery\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GB.Data\GB.Data.csproj">
+      <Project>{7da0b927-f9be-4bc3-bcaf-26488ded4c6e}</Project>
+      <Name>GB.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GB.Membership\GB.Membership.csproj">
       <Project>{0ebee9f9-979f-440f-94b1-5c6a726f6367}</Project>
       <Name>GB.Membership</Name>

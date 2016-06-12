@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <h3 class="m-t-none m-b">Add new driver</h3>
-                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnBegin = "signupBegin", OnSuccess = "signupSuccess", OnFailure = "signupFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
+                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnBegin = "addDriverBegin", OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
                 {
 
                     @Html.AntiForgeryToken();
@@ -92,6 +92,15 @@
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
         })
+        function addDriverBegin() {
+
+        }
+        function addDriverSuccess() {
+
+        }
+        function addDriverFailed() {
+
+        }
     </script>
     
 }

@@ -160,6 +160,7 @@
       <End Role="LicenceType" EntitySet="LicenceTypes" />
       <End Role="DriverDetail" EntitySet="DriverDetails" />
     </AssociationSet>
+    <EntitySet Name="ReferePersonDetails" EntityType="GB.Data.ReferePersonDetail" />
   </EntityContainer>
   <EntityType Name="DriverDetail">
     <Key>
@@ -176,6 +177,8 @@
     <Property Name="Uber" Type="Boolean" />
     <Property Name="Ola" Type="Boolean" />
     <Property Name="Tfs" Type="Boolean" />
+    <Property Name="IsReferred" Type="Boolean" Nullable="false" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
     <NavigationProperty Name="LicenceType1" Relationship="GB.Data.FK_DriverDetails_LicenceType" FromRole="DriverDetail" ToRole="LicenceType" />
   </EntityType>
   <Association Name="FK_DriverDetails_LicenceType">
@@ -190,4 +193,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ReferePersonDetail">
+    <Key>
+      <PropertyRef Name="ReferPersonID" />
+    </Key>
+    <Property Name="ReferPersonID" Type="Int64" Nullable="false" />
+    <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

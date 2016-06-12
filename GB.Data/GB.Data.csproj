@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{10299095-5344-431B-96A2-9F8ADD69E295}</ProjectGuid>
+    <ProjectGuid>{7DA0B927-F9BE-4BC3-BCAF-26488DED4C6E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GB.Data</RootNamespace>
@@ -67,6 +67,9 @@
       <DependentUpon>GBEntityContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\LicenceType.cs">
+      <DependentUpon>GBEntityContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\ReferePersonDetail.cs">
       <DependentUpon>GBEntityContext.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\Role.cs">

@@ -95,6 +95,8 @@
     <EntitySetMapping Name="DriverDetails">
       <EntityTypeMapping TypeName="GB.Data.DriverDetail">
         <MappingFragment StoreEntitySet="DriverDetails">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
           <ScalarProperty Name="Tfs" ColumnName="Tfs" />
           <ScalarProperty Name="Ola" ColumnName="Ola" />
           <ScalarProperty Name="Uber" ColumnName="Uber" />
@@ -106,6 +108,15 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferePersonDetails">
+      <EntityTypeMapping TypeName="GB.Data.ReferePersonDetail">
+        <MappingFragment StoreEntitySet="ReferePersonDetails">
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="ReferPersonID" ColumnName="ReferPersonID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
