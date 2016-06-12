@@ -1,4 +1,5 @@
 ﻿using GB.Web.BE;
+using GB.Web.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,13 @@ namespace GB.Web.Controllers
                 return Content("Failed");
             }
 
+        }
+
+        [AllowAnonymous]
+        [Route("Login", Name = RouteNames.Careers)]
+        public ActionResult Careers()
+        {
+            return View();
         }
     }
 }
