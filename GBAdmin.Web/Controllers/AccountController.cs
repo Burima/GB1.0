@@ -79,7 +79,7 @@ namespace GBAdmin.Web.Controllers
                     await SignInAsync(user, model.LoginViewModel.RememberMe);
                     //sessionize user
                     SessionManager.SessionizeUser(user);
-                    return RedirectToAction("Dashboard", "Dashboard");
+                    return RedirectToRoute(RouteNames.Dashboard);
 
                 }
                 else

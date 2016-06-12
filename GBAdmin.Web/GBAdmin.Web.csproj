@@ -795,7 +795,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_NavigationOffCanvas.cshtml" />
@@ -806,6 +805,7 @@
     <Content Include="Views\Drivers\Add.cshtml" />
     <Content Include="Views\Drivers\List.cshtml" />
     <Content Include="Views\Users\Add.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
