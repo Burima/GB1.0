@@ -15,8 +15,6 @@
     <Property Name="Uber" Type="bit" />
     <Property Name="Ola" Type="bit" />
     <Property Name="Tfs" Type="bit" />
-    <Property Name="IsReferred" Type="bit" Nullable="false" />
-    <Property Name="UserID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="LicenceTypes">
     <Key>
@@ -24,14 +22,6 @@
     </Key>
     <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Type" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="ReferePersonDetails">
-    <Key>
-      <PropertyRef Name="ReferPersonID" />
-    </Key>
-    <Property Name="ReferPersonID" Type="bigint" Nullable="false" />
-    <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="PhoneNumber" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
@@ -196,7 +186,6 @@
   <EntityContainer Name="GBDataStoreContainer">
     <EntitySet Name="DriverDetails" EntityType="Self.DriverDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LicenceTypes" EntityType="Self.LicenceTypes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ReferePersonDetails" EntityType="Self.ReferePersonDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />

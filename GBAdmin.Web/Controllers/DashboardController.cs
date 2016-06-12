@@ -10,7 +10,7 @@ namespace GBAdmin.Web.Controllers
     public class DashboardController : Controller
     {
         [Route("Dashboard", Name = RouteNames.Dashboard)]
-        public ActionResult Dashboard()
+        public ActionResult Index()
         {
             return View();
         }

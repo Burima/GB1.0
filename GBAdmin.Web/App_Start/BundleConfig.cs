@@ -14,7 +14,7 @@ namespace GBAdmin.Web
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
                       "~/Content/style.css",
-                      "~/Content/GBAdmin.css"));
+                      "~/Content/GBAdmin.Web.css"));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
@@ -42,8 +42,8 @@ namespace GBAdmin.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
             // Bootstrap
-            bundles.Add(new ScriptBundle("~/bundles/GBAdmin").Include(
-                      "~/Scripts/GBAdmin.js"));
+            bundles.Add(new ScriptBundle("~/bundles/GBAdmin.Web").Include(
+                      "~/Scripts/GBAdmin.Web.js"));
             // Inspinia script
             bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
                       "~/Scripts/plugins/metisMenu/metisMenu.min.js",
