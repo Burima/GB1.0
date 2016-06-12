@@ -23,6 +23,7 @@ namespace GBAdmin.Web.Models
         [Required]
         public int LicenceType { get; set; }
         [Display(Name = "Licence No")]
+        [Required]
         public string LicenceNo { get; set; }
         [Display(Name = "Experience In Kolkata")]
         [Required]

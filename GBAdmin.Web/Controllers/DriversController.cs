@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using GB.Data;
 namespace GBAdmin.Web.Controllers
 {
     public class DriversController : Controller
@@ -18,6 +18,10 @@ namespace GBAdmin.Web.Controllers
         [HttpPost]
         public ActionResult Add(DriverViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
         public ActionResult List()

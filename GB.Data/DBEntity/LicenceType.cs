@@ -14,7 +14,14 @@ namespace GB.Data.DBEntity
     
     public partial class LicenceType
     {
+        public LicenceType()
+        {
+            this.DriverDetails = new HashSet<DriverDetail>();
+        }
+    
         public int TypeID { get; set; }
         public string Type { get; set; }
+    
+        public virtual ICollection<DriverDetail> DriverDetails { get; set; }
     }
 }

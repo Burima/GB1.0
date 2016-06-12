@@ -31,5 +31,6 @@ namespace GB.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
     }
 }

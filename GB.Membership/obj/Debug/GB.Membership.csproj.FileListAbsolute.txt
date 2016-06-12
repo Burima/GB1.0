@@ -22,6 +22,5 @@ F:\GitHub\GB1.0\GB.Membership\bin\Debug\Microsoft.Owin.Security.xml
 F:\GitHub\GB1.0\GB.Membership\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 F:\GitHub\GB1.0\GB.Membership\bin\Debug\Microsoft.Owin.Security.OAuth.xml
 F:\GitHub\GB1.0\GB.Membership\bin\Debug\Newtonsoft.Json.xml
-F:\GitHub\GB1.0\GB.Membership\obj\Debug\GB.Membership.csprojResolveAssemblyReference.cache
 F:\GitHub\GB1.0\GB.Membership\obj\Debug\GB.Membership.dll
 F:\GitHub\GB1.0\GB.Membership\obj\Debug\GB.Membership.pdb
