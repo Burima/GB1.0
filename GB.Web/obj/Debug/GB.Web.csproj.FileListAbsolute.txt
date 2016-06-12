@@ -30,3 +30,5 @@ F:\GitHub\GB1.0\GB.Web\bin\System.Web.WebPages.Razor.xml
 F:\GitHub\GB1.0\GB.Web\obj\Debug\GB.Web.csprojResolveAssemblyReference.cache
 F:\GitHub\GB1.0\GB.Web\obj\Debug\GB.Web.dll
 F:\GitHub\GB1.0\GB.Web\obj\Debug\GB.Web.pdb
+F:\GitHub\GB1.0\GB.Web\bin\EntityFramework.SqlServer.dll
+F:\GitHub\GB1.0\GB.Web\bin\EntityFramework.SqlServer.xml
