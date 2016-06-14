@@ -8,9 +8,9 @@ namespace GB.Web
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/bundles/GBjquery").Include(
                         "~/Scripts/jquery.js"));
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/GBbootstrap").Include(
                         "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/GBScripts").Include(
@@ -19,10 +19,10 @@ namespace GB.Web
                         "~/Scripts/jqBootstrapValidation.js",
                         "~/Scripts/contact_me.js",
                         "~/Scripts/agency.js"));
-            bundles.Add(new ScriptBundle("~/bundles/googleanalytics").Include(
+            bundles.Add(new ScriptBundle("~/bundles/GBgoogleanalytics").Include(
                        "~/Scripts/googleanalytics.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/GBcss").Include(
                         "~/Content/css/bootstrap.min.css",
                         "~/Content/css/agency.css",
                         "~/Content/font-awesome/css/font-awesome.min.css",
@@ -37,7 +37,7 @@ namespace GB.Web
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
 
-            bundles.Add(new StyleBundle("~/Content/Careers").Include(
+            bundles.Add(new StyleBundle("~/Content/GBCareers").Include(
                         "~/Content/Custom/Careers.css"));
         }
     }

@@ -187,12 +187,14 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\about\1.jpg" />
     <Content Include="Images\about\2.jpg" />
     <Content Include="Images\about\3.jpg" />
     <Content Include="Images\about\4.jpg" />
+    <Content Include="Images\career-bg.jpg" />
     <Content Include="Images\header-bg.jpg" />
     <Content Include="Images\logos\aetuts.jpg" />
     <Content Include="Images\logos\creative-market.jpg" />
@@ -220,6 +222,7 @@
     <Content Include="Images\team\1.JPG" />
     <Content Include="Images\team\2.jpg" />
     <Content Include="Images\team\3.jpg" />
+    <Content Include="MailMessageBody.html" />
     <Content Include="Scripts\agency.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -278,6 +281,11 @@
     <Content Include="Content\less\mixins.less" />
     <Content Include="Content\less\variables.less" />
     <Content Include="Scripts\googleanalytics.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

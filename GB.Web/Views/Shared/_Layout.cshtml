@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Gaddibaba | @ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/GBcss")
     @*<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/agency.css" rel="stylesheet" />
     <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
@@ -78,8 +78,8 @@
     <!-- Footer -->
     @Html.Partial("_Footer")
 
-    @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/GBjquery")
+        @Scripts.Render("~/bundles/GBbootstrap")
     @*<script src="~/Scripts/jquery.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>*@
     <!-- Plugin JavaScript -->
@@ -93,7 +93,7 @@
     <!--GA-->
     @if (GB.Web.Services.Common.GBAdminConfig.EnvironmentName.ToUpper() == "PRODUCTION")
     {
-         @Scripts.Render("~/bundles/googleanalytics")
+         @Scripts.Render("~/bundles/GBgoogleanalytics")
     }
     @RenderSection("scripts", required: false)
 </body>
