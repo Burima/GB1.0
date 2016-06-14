@@ -19,6 +19,8 @@ namespace GB.Web
                         "~/Scripts/jqBootstrapValidation.js",
                         "~/Scripts/contact_me.js",
                         "~/Scripts/agency.js"));
+            bundles.Add(new ScriptBundle("~/bundles/googleanalytics").Include(
+                       "~/Scripts/googleanalytics.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/css/bootstrap.min.css",
@@ -33,6 +35,10 @@ namespace GB.Web
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+
+            bundles.Add(new StyleBundle("~/Content/Careers").Include(
+                        "~/Content/Custom/Careers.css"));
         }
     }
 }
