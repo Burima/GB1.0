@@ -22,16 +22,16 @@ namespace GB.Data.DBEntity
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+           
         }
     
+        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
         public virtual DbSet<LicenceType> LicenceTypes { get; set; }
+        public virtual DbSet<ReferPersonDetail> ReferPersonDetails { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserClaim> UserClaims { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
-        public virtual DbSet<ReferePersonDetail> ReferePersonDetails { get; set; }
     }
 }

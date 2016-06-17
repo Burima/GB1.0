@@ -20,9 +20,9 @@ namespace GBAdmin.Web.Controllers
         [HttpPost]
         public ActionResult Add(DriverViewModel model)
         {
-            
+            int count = 0;            
             if (ModelState.IsValid)
-            {
+            {              
                 var User = SessionManager.GetSessionUser();
                 long UserID = 0;
                 //if (User == null)
@@ -48,7 +48,7 @@ namespace GBAdmin.Web.Controllers
                 driver.LastName = model.LastName;
                 driver.PhoneNumber = model.PhoneNumber;
                 driver.Pincode = model.Pincode;
-                driver.LicenceType = model.LicenceType;
+                driver.LicenceTypeID = model.LicenceType;
                 driver.LicenceNo = model.LicenceNo;
                 driver.ExperienceInKolkata = model.ExperienceInKolkata;
                 driver.Uber = model.Uber;
@@ -57,6 +57,16 @@ namespace GBAdmin.Web.Controllers
                 driver.IsReferred = model.IsReferred;
                 driver.UserID = UserID;
                 GBContext.DriverDetails.Add(driver);
+                count = GBContext.SaveChanges();
+               
+            }
+            if (count > 0)
+            {
+
+            }
+            else
+            {
+
             }
             return View();
         }        

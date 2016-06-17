@@ -15,7 +15,7 @@ namespace GBAdmin.Web.Models
         public string LastName { get; set; }
         [Display(Name = "Phone Number")]
         [Required]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [Display(Name = "Pincode")]
         [Required]
         public string Pincode { get; set; }

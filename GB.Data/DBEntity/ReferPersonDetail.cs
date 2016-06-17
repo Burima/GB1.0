@@ -12,8 +12,9 @@ namespace GB.Data.DBEntity
     using System;
     using System.Collections.Generic;
     
-    public partial class ReferePersonDetail
+    public partial class ReferPersonDetail
     {
+        [System.ComponentModel.DataAnnotations.Key]
         public long ReferPersonID { get; set; }
         public string EmailID { get; set; }
         public int PhoneNumber { get; set; }

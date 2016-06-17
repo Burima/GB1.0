@@ -18,8 +18,8 @@ namespace GB.Data.DBEntity
         {
             this.DriverDetails = new HashSet<DriverDetail>();
         }
-    
-        public int TypeID { get; set; }
+        [System.ComponentModel.DataAnnotations.Key]
+        public int LicenceTypeID { get; set; }
         public string Type { get; set; }
     
         public virtual ICollection<DriverDetail> DriverDetails { get; set; }

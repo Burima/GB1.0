@@ -14,11 +14,12 @@ namespace GB.Data.DBEntity
     
     public partial class DriverDetail
     {
-        public long DriverID { get; set; }
+        [System.ComponentModel.DataAnnotations.Key]
+        public long DriverDetailsID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int PhoneNumber { get; set; }
-        public int LicenceType { get; set; }
+        public string PhoneNumber { get; set; }
+        public int LicenceTypeID { get; set; }
         public string LicenceNo { get; set; }
         public int ExperienceInKolkata { get; set; }
         public string Pincode { get; set; }
@@ -28,6 +29,6 @@ namespace GB.Data.DBEntity
         public bool IsReferred { get; set; }
         public long UserID { get; set; }
     
-        public virtual LicenceType LicenceType1 { get; set; }
+        public virtual LicenceType LicenceType { get; set; }
     }
 }

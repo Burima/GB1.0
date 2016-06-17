@@ -49,67 +49,65 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBEntity\DriverDetail.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\GBEntityContext.Context.cs">
+    <Compile Include="DBEntity\GaddibabaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GBEntityContext.Context.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\GBEntityContext.cs">
+    <Compile Include="DBEntity\GaddibabaEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\GBEntityContext.Designer.cs">
+    <Compile Include="DBEntity\GaddibabaEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GBEntityContext.edmx</DependentUpon>
+      <DependentUpon>GaddibabaEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\LicenceType.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntity\ReferePersonDetail.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+    <Compile Include="DBEntity\ReferPersonDetail.cs">
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\Role.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\User.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\UserClaim.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\UserDetail.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntity\UserLogin.cs">
-      <DependentUpon>GBEntityContext.tt</DependentUpon>
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EntityDeploy Include="DBEntity\GBEntityContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GBEntityContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="DBEntity\GBEntityContext.Context.tt">
+    <EntityDeploy Include="DBEntity\GaddibabaEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GaddibabaEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBEntity\GaddibabaEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GBEntityContext.edmx</DependentUpon>
-      <LastGenOutput>GBEntityContext.Context.cs</LastGenOutput>
+      <DependentUpon>GaddibabaEntities.edmx</DependentUpon>
+      <LastGenOutput>GaddibabaEntities.Context.cs</LastGenOutput>
     </None>
-    <None Include="DBEntity\GBEntityContext.edmx.diagram">
-      <DependentUpon>GBEntityContext.edmx</DependentUpon>
+    <None Include="DBEntity\GaddibabaEntities.edmx.diagram">
+      <DependentUpon>GaddibabaEntities.edmx</DependentUpon>
     </None>
-    <None Include="DBEntity\GBEntityContext.tt">
+    <None Include="DBEntity\GaddibabaEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GBEntityContext.edmx</DependentUpon>
-      <LastGenOutput>GBEntityContext.cs</LastGenOutput>
+      <DependentUpon>GaddibabaEntities.edmx</DependentUpon>
+      <LastGenOutput>GaddibabaEntities.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

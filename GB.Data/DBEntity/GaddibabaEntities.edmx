@@ -4,16 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GB.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GaddibabaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DriverDetails">
           <Key>
-            <PropertyRef Name="DriverID" />
+            <PropertyRef Name="DriverDetailsID" />
           </Key>
-          <Property Name="DriverID" Type="bigint" Nullable="false" />
+          <Property Name="DriverDetailsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PhoneNumber" Type="int" Nullable="false" />
-          <Property Name="LicenceType" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="LicenceTypeID" Type="int" Nullable="false" />
           <Property Name="LicenceNo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ExperienceInKolkata" Type="int" Nullable="false" />
           <Property Name="Pincode" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -25,16 +25,16 @@
         </EntityType>
         <EntityType Name="LicenceTypes">
           <Key>
-            <PropertyRef Name="TypeID" />
+            <PropertyRef Name="LicenceTypeID" />
           </Key>
-          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="ReferePersonDetails">
+        <EntityType Name="ReferPersonDetails">
           <Key>
             <PropertyRef Name="ReferPersonID" />
           </Key>
-          <Property Name="ReferPersonID" Type="bigint" Nullable="false" />
+          <Property Name="ReferPersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNumber" Type="int" Nullable="false" />
         </EntityType>
@@ -174,15 +174,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DriverDetails_LicenceType">
+        <Association Name="FK_DriverDetails_LicenceTypeID">
           <End Role="LicenceTypes" Type="Self.LicenceTypes" Multiplicity="1" />
           <End Role="DriverDetails" Type="Self.DriverDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LicenceTypes">
-              <PropertyRef Name="TypeID" />
+              <PropertyRef Name="LicenceTypeID" />
             </Principal>
             <Dependent Role="DriverDetails">
-              <PropertyRef Name="LicenceType" />
+              <PropertyRef Name="LicenceTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -198,10 +198,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GBDataStoreContainer">
+        <EntityContainer Name="GaddibabaModelStoreContainer">
           <EntitySet Name="DriverDetails" EntityType="Self.DriverDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LicenceTypes" EntityType="Self.LicenceTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReferePersonDetails" EntityType="Self.ReferePersonDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferPersonDetails" EntityType="Self.ReferPersonDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
@@ -224,7 +224,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_DriverDetails_LicenceType" Association="Self.FK_DriverDetails_LicenceType">
+          <AssociationSet Name="FK_DriverDetails_LicenceTypeID" Association="Self.FK_DriverDetails_LicenceTypeID">
             <End Role="LicenceTypes" EntitySet="LicenceTypes" />
             <End Role="DriverDetails" EntitySet="DriverDetails" />
           </AssociationSet>
@@ -233,17 +233,45 @@
             <End Role="UserDetails" EntitySet="UserDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="GB.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="GaddibabaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DriverDetail">
+          <Key>
+            <PropertyRef Name="DriverDetailsID" />
+          </Key>
+          <Property Name="DriverDetailsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LicenceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExperienceInKolkata" Type="Int32" Nullable="false" />
+          <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Uber" Type="Boolean" />
+          <Property Name="Ola" Type="Boolean" />
+          <Property Name="Tfs" Type="Boolean" />
+          <Property Name="IsReferred" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="LicenceType" Relationship="Self.FK_DriverDetails_LicenceTypeID" FromRole="DriverDetails" ToRole="LicenceTypes" />
+        </EntityType>
         <EntityType Name="LicenceType">
           <Key>
-            <PropertyRef Name="TypeID" />
+            <PropertyRef Name="LicenceTypeID" />
           </Key>
-          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DriverDetails" Relationship="GB.Data.FK_DriverDetails_LicenceType" FromRole="LicenceType" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetails" Relationship="Self.FK_DriverDetails_LicenceTypeID" FromRole="LicenceTypes" ToRole="DriverDetails" />
+        </EntityType>
+        <EntityType Name="ReferPersonDetail">
+          <Key>
+            <PropertyRef Name="ReferPersonID" />
+          </Key>
+          <Property Name="ReferPersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -325,6 +353,18 @@
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
         </EntityType>
+        <Association Name="FK_DriverDetails_LicenceTypeID">
+          <End Role="LicenceTypes" Type="Self.LicenceType" Multiplicity="1" />
+          <End Role="DriverDetails" Type="Self.DriverDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenceTypes">
+              <PropertyRef Name="LicenceTypeID" />
+            </Principal>
+            <Dependent Role="DriverDetails">
+              <PropertyRef Name="LicenceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
           <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -370,12 +410,18 @@
           <End Role="Users" Type="Self.User" Multiplicity="*" />
         </Association>
         <EntityContainer Name="GaddibabaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DriverDetails" EntityType="Self.DriverDetail" />
           <EntitySet Name="LicenceTypes" EntityType="Self.LicenceType" />
+          <EntitySet Name="ReferPersonDetails" EntityType="Self.ReferPersonDetail" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_DriverDetails_LicenceTypeID" Association="Self.FK_DriverDetails_LicenceTypeID">
+            <End Role="LicenceTypes" EntitySet="LicenceTypes" />
+            <End Role="DriverDetails" EntitySet="DriverDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserClaim_dbo_User_UserID" Association="Self.FK_dbo_UserClaim_dbo_User_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserClaims" EntitySet="UserClaims" />
@@ -392,68 +438,51 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="DriverDetails" EntityType="GB.Data.DriverDetail" />
-          <AssociationSet Name="FK_DriverDetails_LicenceType" Association="GB.Data.FK_DriverDetails_LicenceType">
-            <End Role="LicenceType" EntitySet="LicenceTypes" />
-            <End Role="DriverDetail" EntitySet="DriverDetails" />
-          </AssociationSet>
-          <EntitySet Name="ReferePersonDetails" EntityType="GB.Data.ReferePersonDetail" />
         </EntityContainer>
-        <EntityType Name="DriverDetail">
-          <Key>
-            <PropertyRef Name="DriverID" />
-          </Key>
-          <Property Name="DriverID" Type="Int64" Nullable="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
-          <Property Name="LicenceType" Type="Int32" Nullable="false" />
-          <Property Name="LicenceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ExperienceInKolkata" Type="Int32" Nullable="false" />
-          <Property Name="Pincode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Uber" Type="Boolean" />
-          <Property Name="Ola" Type="Boolean" />
-          <Property Name="Tfs" Type="Boolean" />
-          <NavigationProperty Name="LicenceType1" Relationship="GB.Data.FK_DriverDetails_LicenceType" FromRole="DriverDetail" ToRole="LicenceType" />
-          <Property Name="IsReferred" Type="Boolean" Nullable="false" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_DriverDetails_LicenceType">
-          <End Type="GB.Data.LicenceType" Role="LicenceType" Multiplicity="1" />
-          <End Type="GB.Data.DriverDetail" Role="DriverDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LicenceType">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="DriverDetail">
-              <PropertyRef Name="LicenceType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ReferePersonDetail">
-          <Key>
-            <PropertyRef Name="ReferPersonID" />
-          </Key>
-          <Property Name="ReferPersonID" Type="Int64" Nullable="false" />
-          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GBDataStoreContainer" CdmEntityContainer="GaddibabaEntities">
+        <EntityContainerMapping StorageEntityContainer="GaddibabaModelStoreContainer" CdmEntityContainer="GaddibabaEntities">
+          <EntitySetMapping Name="DriverDetails">
+            <EntityTypeMapping TypeName="GaddibabaModel.DriverDetail">
+              <MappingFragment StoreEntitySet="DriverDetails">
+                <ScalarProperty Name="DriverDetailsID" ColumnName="DriverDetailsID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LicenceTypeID" ColumnName="LicenceTypeID" />
+                <ScalarProperty Name="LicenceNo" ColumnName="LicenceNo" />
+                <ScalarProperty Name="ExperienceInKolkata" ColumnName="ExperienceInKolkata" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Uber" ColumnName="Uber" />
+                <ScalarProperty Name="Ola" ColumnName="Ola" />
+                <ScalarProperty Name="Tfs" ColumnName="Tfs" />
+                <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LicenceTypes">
-            <EntityTypeMapping TypeName="GB.Data.LicenceType">
+            <EntityTypeMapping TypeName="GaddibabaModel.LicenceType">
               <MappingFragment StoreEntitySet="LicenceTypes">
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="LicenceTypeID" ColumnName="LicenceTypeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ReferPersonDetails">
+            <EntityTypeMapping TypeName="GaddibabaModel.ReferPersonDetail">
+              <MappingFragment StoreEntitySet="ReferPersonDetails">
+                <ScalarProperty Name="ReferPersonID" ColumnName="ReferPersonID" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="GB.Data.Role">
+            <EntityTypeMapping TypeName="GaddibabaModel.Role">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -461,7 +490,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserClaims">
-            <EntityTypeMapping TypeName="GB.Data.UserClaim">
+            <EntityTypeMapping TypeName="GaddibabaModel.UserClaim">
               <MappingFragment StoreEntitySet="UserClaims">
                 <ScalarProperty Name="UserClaimID" ColumnName="UserClaimID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -471,7 +500,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="GB.Data.UserDetail">
+            <EntityTypeMapping TypeName="GaddibabaModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">
                 <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -491,7 +520,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserLogins">
-            <EntityTypeMapping TypeName="GB.Data.UserLogin">
+            <EntityTypeMapping TypeName="GaddibabaModel.UserLogin">
               <MappingFragment StoreEntitySet="UserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -500,7 +529,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="GB.Data.User">
+            <EntityTypeMapping TypeName="GaddibabaModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -527,7 +556,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="UserRoles" TypeName="GB.Data.UserRoles" StoreEntitySet="UserRoles">
+          <AssociationSetMapping Name="UserRoles" TypeName="GaddibabaModel.UserRoles" StoreEntitySet="UserRoles">
             <EndProperty Name="Roles">
               <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
@@ -535,34 +564,6 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="DriverDetails">
-            <EntityTypeMapping TypeName="GB.Data.DriverDetail">
-              <MappingFragment StoreEntitySet="DriverDetails">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
-                <ScalarProperty Name="Tfs" ColumnName="Tfs" />
-                <ScalarProperty Name="Ola" ColumnName="Ola" />
-                <ScalarProperty Name="Uber" ColumnName="Uber" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="ExperienceInKolkata" ColumnName="ExperienceInKolkata" />
-                <ScalarProperty Name="LicenceNo" ColumnName="LicenceNo" />
-                <ScalarProperty Name="LicenceType" ColumnName="LicenceType" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReferePersonDetails">
-            <EntityTypeMapping TypeName="GB.Data.ReferePersonDetail">
-              <MappingFragment StoreEntitySet="ReferePersonDetails">
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="ReferPersonID" ColumnName="ReferPersonID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
