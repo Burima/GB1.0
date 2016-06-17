@@ -1,3 +1,84 @@
-﻿<div class="row  border-bottom white-bg dashboard-header">
-    hi
-</div>
+﻿@model List<GB.Data.DBEntity.DriverDetail> DriverDetailList
+@using Newtonsoft.Json;
+
+@{
+    ViewBag.Title = "Driver Details";
+   }
+
+<!-- Datatable Css-->
+@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+<!-- check whether city and area is selected or not to do operations in Estate-->
+
+
+    <!-- View Driver -->
+    <div class="wrapper wrapper-content animated fadeInRight" id="divHouses" style="display:none">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Drivers</h5>
+                        <button class="btn btn-primary pull-right btn-show-add-house" type="button" style="margin-top:-1%;">Add</button>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+                            <div id="tblRoomHeader" class="row">
+                                <div class="col-md-2"><h4>Driver Name</h4></div>
+                                <div class="col-md-2"><h4>Phone Number</h4></div>
+                                <div class="col-md-2"><h4>Pincode</h4></div>
+                                <div class="col-md-2"><h4>LicenceType</h4></div>
+                                <div class="col-md-2"><h4>Licence No</h4></div>
+                                <div class="col-md-2">Registered in Cab Companies</div>
+                            </div>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var driverDetails in Model)
+                                {
+                                    <div class="col-md-3">@driverDetails.FirstName @driverDetails.LastName</div>
+                                    <div class="col-md-2">@driverDetails.PhoneNumber</div>
+                                     <div class="col-md-2">@driverDetails.Pincode</div>
+                                     <div class="col-md-2">@driverDetails.LicenceType.Type</div>   
+                                <div class="col-md-2">@driverDetails.LicenceNo</div>  
+                                <div class="col-md-2">@driverDetails.Ola @driverDetails.Uber @driverDetails.Tfs</div>   
+                                    
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+  <!-- Add House-->
+    <div class="row  border-bottom white-bg dashboard-header" style="display:none;" id="divAddHouse">
+        @Html.Partial("_AddHouse", Model)
+    </div><!-- End Add House -->
+}
+@section Styles {
+    @Styles.Render("~/Content/plugins/dropzone/dropZoneStyles")
+}
+@section scripts{
+
+    <!-- variables -->
+    <script>
+        var AreaID = '@AreaID';
+        var Areas = '@Html.Raw(Json.Encode(Areas))';
+
+        //passing CityName and AreaName to Houses.js
+        var cityname = '@CityName';
+        var areaname = '@AreaName';
+
+        //reference url
+        var HousesUrl = '@Url.Action("Houses","Estate")';
+        var UpdateLocationUrl = '@Url.Action("UpdateLocation", "Estate")';
+        var GetPGsByOwnerIDandAreaIDUrl = '@Url.Action("GetPGsByOwnerIDandAreaID", "Estate")';
+        var ImageUploadUrl = '@Url.Action("HouseImageUpload", "Estate")';
+        var AddedHouseID = '@Model.AddedHouseID';
+    </script>
+    @Scripts.Render("~/plugins/dataTables")
+    <script src='@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.js")'></script>
+
+}

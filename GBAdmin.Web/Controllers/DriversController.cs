@@ -23,8 +23,8 @@ namespace GBAdmin.Web.Controllers
             int count = 0;            
             if (ModelState.IsValid)
             {              
-                var User = SessionManager.GetSessionUser();
-                long UserID = 0;
+                var UserID = SessionManager.GetSessionUser().Id;
+                //long UserID = 0;
                 //if (User == null)
                 //{
                     
@@ -41,23 +41,28 @@ namespace GBAdmin.Web.Controllers
                 //}
                 //else
                 //{
-                    UserID = User.Id;
+                    //UserID = User.Id;
                 //}
-                DriverDetail driver = new DriverDetail();
-                driver.FirstName = model.FirstName;
-                driver.LastName = model.LastName;
-                driver.PhoneNumber = model.PhoneNumber;
-                driver.Pincode = model.Pincode;
-                driver.LicenceTypeID = model.LicenceType;
-                driver.LicenceNo = model.LicenceNo;
-                driver.ExperienceInKolkata = model.ExperienceInKolkata;
-                driver.Uber = model.Uber;
-                driver.Ola = model.Ola;
-                driver.Tfs = model.Tfs;
-                driver.IsReferred = model.IsReferred;
-                driver.UserID = UserID;
-                GBContext.DriverDetails.Add(driver);
-                count = GBContext.SaveChanges();
+                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber).FirstOrDefault();
+                if (driverDetail == null)
+                {
+                    DriverDetail driver = new DriverDetail();
+                    driver.FirstName = model.FirstName;
+                    driver.LastName = model.LastName;
+                    driver.PhoneNumber = model.PhoneNumber;
+                    driver.Pincode = model.Pincode;
+                    driver.LicenceTypeID = model.LicenceType;
+                    driver.LicenceNo = model.LicenceNo;
+                    driver.ExperienceInKolkata = model.ExperienceInKolkata;
+                    driver.Uber = model.Uber;
+                    driver.Ola = model.Ola;
+                    driver.Tfs = model.Tfs;
+                    driver.IsReferred = model.IsReferred;
+                    driver.UserID = UserID;
+                    GBContext.DriverDetails.Add(driver);
+
+                    count = GBContext.SaveChanges();
+                }
                
             }
             if (count > 0)
@@ -69,10 +74,17 @@ namespace GBAdmin.Web.Controllers
 
             }
             return View();
-        }        
+        } 
+       
+        //GET
+        [HttpGet]
         public ActionResult List()
         {
-            return View();
+            DriverViewModel driverViewModel = new DriverViewModel();
+            var UserID = SessionManager.GetSessionUser().Id;
+            var driverDetailList = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
+            driverViewModel.DriverDetailsList = driverDetailList;
+            return View(driverViewModel);
         }
     }
 }

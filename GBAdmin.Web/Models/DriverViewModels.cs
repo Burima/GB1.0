@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GB.Data.DBEntity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace GBAdmin.Web.Models
         public long UserID { get; set; }
 
         //public ReferPersonViewModel ReferPersonViewModel { get; set; }
+        public List<DriverDetail> DriverDetailsList { get; set; }
     }
 
     public class ReferPersonViewModel

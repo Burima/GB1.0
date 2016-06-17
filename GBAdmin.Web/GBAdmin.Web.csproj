@@ -355,6 +355,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\gbadmin.css" />
+    <Content Include="Scripts\custom\Drivers.js" />
     <Content Include="Scripts\GBAdmin.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -803,9 +804,9 @@
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Drivers\Add.cshtml" />
-    <Content Include="Views\Drivers\List.cshtml" />
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Drivers\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -824,7 +825,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GB.Data\GB.Data.csproj">
-      <Project>{7da0b927-f9be-4bc3-bcaf-26488ded4c6e}</Project>
+      <Project>{10299095-5344-431b-96a2-9f8add69e295}</Project>
       <Name>GB.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\GB.Membership\GB.Membership.csproj">
