@@ -95,6 +95,7 @@ namespace GBAdmin.Web.Controllers
        
         //GET
         [HttpGet]
+        [Authorize]
         public ActionResult List()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
