@@ -132,18 +132,19 @@ namespace GBAdmin.Web.Controllers
                     
                     //Send Activation emai
                     await SendAccountActivationMail(user);
-
+                    TempData["Message"] = "User Added Successfully!!";
                     //return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     model.RegisterError = result.Errors.FirstOrDefault();
                     AddErrors(result);
+                    TempData["Message"] = "Error in adding user.Please try again later..";
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View("Login", new LoginViewModel());
+            return View();
         }
 
         //

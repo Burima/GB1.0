@@ -48,10 +48,10 @@
             <li class="@Html.IsSelected(controller: "Users")">
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Users")">Add</a></li>
-                    <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Users")">List</a></li>
+                    <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Register", "Account")">Add</a></li>
+                    @*<li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Users")">List</a></li>
                     <li class="@Html.IsSelected(action: "Edit")"><a href="@Url.Action("Edit", "Users")">Edit</a></li>
-                    <li class="@Html.IsSelected(action: "Delete")"><a href="@Url.Action("Delete", "Users")">Delete</a></li>
+                    <li class="@Html.IsSelected(action: "Delete")"><a href="@Url.Action("Delete", "Users")">Delete</a></li>*@
                 </ul>
             </li>
 
