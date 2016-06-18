@@ -541,6 +541,7 @@ namespace GBAdmin.Web.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("LogOff", Name = RouteNames.LogOff)]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();

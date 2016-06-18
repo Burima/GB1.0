@@ -10,3 +10,8 @@
 .has-error{
     border: 1px solid red;
 }
+
+.validation-summary-errors{
+
+    color:red !important;
+}

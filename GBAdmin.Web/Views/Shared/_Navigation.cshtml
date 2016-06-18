@@ -1,4 +1,5 @@
-﻿<nav class="navbar-default navbar-static-side" role="navigation">
+﻿@using Microsoft.AspNet.Identity
+<nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header">
@@ -14,18 +15,25 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
-                        <li><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
-                        <li><a href="@Url.Action("Inbox", "Mailbox")">Mailbox</a></li>
-                        <li class="divider"></li>
-                        <li><a href="@Url.Action("Login", "Pages")">Logout</a></li>
+                        @*<li><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
+                            <li><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
+                            <li><a href="@Url.Action("Inbox", "Mailbox")">Mailbox</a></li>
+                            <li class="divider"></li>*@
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1" }))
+                            {
+                                @Html.AntiForgeryToken();
+                                <li><a href="javascript:document.getElementById('logoutForm1').submit()">Logout</a></li>
+                            }
+                        }
                     </ul>
                 </div>
                 <div class="logo-element">
                     GB
                 </div>
             </li>
-          
+
             <li class="@Html.IsSelected(controller: "Dashboard")">
                 <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> <span class="label label-primary pull-right">NEW</span></a>
             </li>
@@ -33,21 +41,21 @@
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Drivers</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Drivers")">Add</a></li>
-                    <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Drivers")">List</a></li>                    
+                    <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Drivers")">List</a></li>
                 </ul>
             </li>
-           
+
             <li class="@Html.IsSelected(controller: "Users")">
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Users")">Add</a></li>
                     <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Users")">List</a></li>
                     <li class="@Html.IsSelected(action: "Edit")"><a href="@Url.Action("Edit", "Users")">Edit</a></li>
-                    <li class="@Html.IsSelected(action: "Delete")"><a href="@Url.Action("Delete", "Users")">Delete</a></li>                    
+                    <li class="@Html.IsSelected(action: "Delete")"><a href="@Url.Action("Delete", "Users")">Delete</a></li>
                 </ul>
             </li>
-           
-            
+
+
         </ul>
     </div>
 </nav>

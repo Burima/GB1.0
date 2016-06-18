@@ -21,6 +21,9 @@ $(document).ready(function () {
             }
         });
     });
+
+    //removed dots
+    $('.validation-summary-errors ul').addClass('unstyled');
 });
 
 
