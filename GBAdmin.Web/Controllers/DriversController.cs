@@ -18,6 +18,7 @@ namespace GBAdmin.Web.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize]
         public JsonResult Add(DriverViewModel model)
         {
             int count = 0;            

@@ -110,21 +110,21 @@
             //    }
             //}
 
-            var addDriverSuccess = function (data) {
-                alert(data.result);
-            };
-
-            var addDriverFailed = function (data) {
-                if (data = 'error duplicate value') {
-                    alert("Duplicate value");
-                } else {
-                    alert("Error")
-                }
-            };
+            
 
 
         });
+        var addDriverSuccess = function (data) {
+            alert(data.result);
+        };
 
+        var addDriverFailed = function (data) {
+            if (data = 'error duplicate value') {
+                alert("Duplicate value");
+            } else {
+                alert("Error")
+            }
+        };
     </script>
    
 }
