@@ -18,7 +18,7 @@ namespace GBAdmin.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Add(DriverViewModel model)
+        public JsonResult Add(DriverViewModel model)
         {
             int count = 0;            
             if (ModelState.IsValid)
@@ -63,17 +63,33 @@ namespace GBAdmin.Web.Controllers
 
                     count = GBContext.SaveChanges();
                 }
+                else
+                {
+                    return new JsonResult()
+                    {
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        Data = new { result = "error duplicate value" }
+                    };
+                }
                
             }
             if (count > 0)
             {
-
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = "success" }
+                };
             }
             else
             {
-
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = "error" }
+                };
             }
-            return View();
+           // return View();
         } 
        
         //GET
