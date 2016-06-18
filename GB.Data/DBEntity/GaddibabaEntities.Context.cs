@@ -22,7 +22,7 @@ namespace GB.Data.DBEntity
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           
+            
         }
     
         public virtual DbSet<DriverDetail> DriverDetails { get; set; }

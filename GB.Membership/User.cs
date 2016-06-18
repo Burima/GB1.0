@@ -103,7 +103,8 @@ namespace GB.Membership
         public Nullable<int> Gender { get; set; }
 
         public int Status { get; set; }
-        public Nullable<long> CreatedBy { get; set; }
+        public long CreatedBy { get; set; }
+        public long LastUpdatedBy { get; set; }
 
        public virtual ICollection<UserDetail> UserDetails { get; set; }
       

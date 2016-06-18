@@ -27,7 +27,10 @@ namespace GB.Data.DBEntity
         public Nullable<bool> Ola { get; set; }
         public Nullable<bool> Tfs { get; set; }
         public bool IsReferred { get; set; }
-        public long UserID { get; set; }
+        public long CreatedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public System.DateTime LastUpdatedOn { get; set; }
+        public long LastUpdatedBy { get; set; }
     
         public virtual LicenceType LicenceType { get; set; }
     }
