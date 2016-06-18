@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <h3 class="m-t-none m-b">Add new driver</h3>
-                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnBegin = "addDriverBegin", OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
+                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
                 {
 
                     @Html.AntiForgeryToken();
@@ -96,16 +96,35 @@
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
-        })
-        function addDriverBegin() {
 
-        }
-        function addDriverSuccess() {
+            //function addDriverBegin(data) {
+            //}
+            //function addDriverSuccess(data) {
+            //    alert("Success")
+            //}
+            //function addDriverFailed(data) {
+            //    if (data = 'error duplicate value') {
+            //        alert("Duplicate value");
+            //    } else {
+            //        alert("Error")
+            //    }
+            //}
 
-        }
-        function addDriverFailed() {
+            var addDriverSuccess = function (data) {
+                alert(data.result);
+            };
 
-        }
+            var addDriverFailed = function (data) {
+                if (data = 'error duplicate value') {
+                    alert("Duplicate value");
+                } else {
+                    alert("Error")
+                }
+            };
+
+
+        });
+
     </script>
-    
+   
 }
