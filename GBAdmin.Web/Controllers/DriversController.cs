@@ -69,7 +69,7 @@ namespace GBAdmin.Web.Controllers
                     return new JsonResult()
                     {
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new { result = "error duplicate value" }
+                        Data = new { result = "Duplicate driver details." }
                     };
                 }
                
@@ -79,7 +79,7 @@ namespace GBAdmin.Web.Controllers
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = "success" }
+                    Data = new { result = "New Driver Entry Added Successfully." }
                 };
             }
             else
@@ -87,7 +87,7 @@ namespace GBAdmin.Web.Controllers
                 return new JsonResult()
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = "error" }
+                    Data = new { result = "Error in adding driver.Please try again later." }
                 };
             }
            // return View();
