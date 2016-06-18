@@ -7,6 +7,7 @@
 <!-- Datatable Css-->
 <link href="~/Content/style.css" rel="stylesheet" />
 @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+
 <!-- check whether city and area is selected or not to do operations in Estate-->
 <!-- View Driver -->
 <div class="wrapper wrapper-content animated fadeInRight" id="divDrivers">
@@ -18,36 +19,51 @@
                     @*<button class="btn btn-primary pull-right btn-show-add-driver" type="button" style="margin-top:-1%;">Add</button>*@
                 </div>
                 <div class="ibox-content">
-                    <div>
-                        <div id="tblDriverDetailsHeader" class="row">
-                            <div class="col-md-2"><h4>Driver Name</h4></div>
-                            <div class="col-md-2"><h4>Phone Number</h4></div>
-                            <div class="col-md-2"><h4>Pincode</h4></div>
-                            <div class="col-md-2"><h4>LicenceType</h4></div>
-                            <div class="col-md-2"><h4>Licence No</h4></div>
-                            <div class="col-md-2"><h4>Registered in Cab Companies</h4></div>
-                        </div>
-                        @if (Model != null && Model.DriverDetailsList != null && Model.DriverDetailsList.Count > 0)
-                        {
-                            foreach (var driverDetails in Model.DriverDetailsList)
+                    <table class="table table-striped table-bordered table-hover dataTables-drivers">
+                        <thead>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>Phone Number</th>
+                                <th>Pincode</th>
+                                <th>LicenceType</th>
+                                <th>Licence No</th>
+                                <th>Registered in Cab Companies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.DriverDetailsList != null && Model.DriverDetailsList.Count > 0)
                             {
-                                <div class="row row-padding-top-1 border-bottom padding-left">
-                                    <div class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</div>
-                                    <div class="col-md-2">@driverDetails.PhoneNumber</div>
-                                    <div class="col-md-2">@driverDetails.Pincode</div>
-                                    <div class="col-md-2">@driverDetails.LicenceType.Type</div>
-                                    <div class="col-md-2">@driverDetails.LicenceNo</div>
-                                    <div class="col-md-2">@if (driverDetails.Ola == true) { <label style="font-weight:normal; padding-left:5%">Ola</label> }
-                                                          @if(driverDetails.Uber == true){<label style="font-weight:normal">Uber</label>}
-                                                          @if(driverDetails.Tfs == true){<label style="font-weight:normal">TFS</label>}
-                                    </div>
-                                </div>
-
+                                foreach (var driverDetails in Model.DriverDetailsList)
+                                {
+                                     <tr class="gradeX">
+                                         <td>@driverDetails.FirstName @driverDetails.LastName</td>
+                                         <td>@driverDetails.PhoneNumber</td>
+                                         <td>@driverDetails.Pincode</td>
+                                         <td>@driverDetails.LicenceType.Type</td>
+                                         <td>@driverDetails.LicenceNo</td>
+                                         <td>@if (driverDetails.Ola == true)
+                                         { <label style="font-weight:normal; padding-left:5%">Ola</label> }
+                                        @if (driverDetails.Uber == true)
+                                        {<label style="font-weight:normal">Uber</label>}
+                                        @if (driverDetails.Tfs == true)
+                                        {<label style="font-weight:normal">TFS</label>}</td>
+                                     </tr>
+                                }
                             }
-                        }
 
 
-                    </div>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>Phone Numbe</th>
+                                <th>Pincode</th>
+                                <th>LicenceType</th>
+                                <th>Licence No</th>
+                                <th>Registered in Cab Companies</th>
+                            </tr>
+                        </tfoot>
+                        </table>
                 </div>
             </div>
         </div>
@@ -62,6 +78,15 @@
     <!-- variables -->
     <script>
         var AddDriverDetailUrl = '@Url.Action("Add", "Drivers")';
+
+        $(document).ready(function () {
+            //Initialize data table
+            $('.dataTables-drivers').dataTable({
+                /* Disable initial sort */
+                "aaSorting": []
+            });
+        });
+
 
     </script>
    
