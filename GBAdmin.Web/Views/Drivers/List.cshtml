@@ -5,6 +5,7 @@
 }
 
 <!-- Datatable Css-->
+<link href="~/Content/style.css" rel="stylesheet" />
 @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 <!-- check whether city and area is selected or not to do operations in Estate-->
 <!-- View Driver -->
@@ -30,14 +31,16 @@
                         {
                             foreach (var driverDetails in Model.DriverDetailsList)
                             {
-                                <div class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</div>
-                                <div class="col-md-2">@driverDetails.PhoneNumber</div>
-                                <div class="col-md-2">@driverDetails.Pincode</div>
-                                <div class="col-md-2">@driverDetails.LicenceType.Type</div>
-                                <div class="col-md-2">@driverDetails.LicenceNo</div>
-                                <div class="col-md-2">@if (driverDetails.Ola == true) { <label>Ola</label> }
-                                                      @if(driverDetails.Uber == true){<label>Uber</label>}
-                                                      @if(driverDetails.Tfs == true){<label>TFS</label>}
+                                <div class="row row-padding-top-1 border-bottom padding-left">
+                                    <div class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</div>
+                                    <div class="col-md-2">@driverDetails.PhoneNumber</div>
+                                    <div class="col-md-2">@driverDetails.Pincode</div>
+                                    <div class="col-md-2">@driverDetails.LicenceType.Type</div>
+                                    <div class="col-md-2">@driverDetails.LicenceNo</div>
+                                    <div class="col-md-2">@if (driverDetails.Ola == true) { <label style="font-weight:normal; padding-left:5%">Ola</label> }
+                                                          @if(driverDetails.Uber == true){<label style="font-weight:normal">Uber</label>}
+                                                          @if(driverDetails.Tfs == true){<label style="font-weight:normal">TFS</label>}
+                                    </div>
                                 </div>
 
                             }
