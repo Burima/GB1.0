@@ -18,113 +18,76 @@
             margin-left: 2%;
         }
 </style>
-<div class="col-md-12">
-    <div class="ibox float-e-margins">
-        <div class="ibox-content">
-            <div class="panel-body">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title">
-                                <a class="collapse-link" href="#collapseOne" data-parent="#accordion">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                Personal Details
-                            </h5>
+@using (Ajax.BeginForm("Edit", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "editDriverSuccess", OnFailure = "editDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-EditDriver", autocomplete = "off" }))
+{
+
+    <div class="row  border-bottom white-bg dashboard-header">
+        <div class="col-sm-8">
+            <div class="ibox-content">
+                <div class="panel-body">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapsePersonalDetails">Personal Details</a>
+                                </h5>
+                            </div>
+                            <div id="collapsePersonalDetails" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />
-                                    @*@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })*@
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" readonly />
-                                    @*@Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })*@
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" readonly />
-                                    @*@Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })*@
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" readonly />
-                                    @*@Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })*@
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseProfessionalDetails">Professional Details</a>
+                                </h4>
+                            </div>
+                            <div id="collapseProfessionalDetails" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.LicenceType, new { @class = "form-control ", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
+                                    <div class="form-group">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title">
-                                <a class="collapse-link" href="#collapseTwo" data-parent="#accordion">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                Professional Details
-                            </h5>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <select class="form-control" name="model.LicenceTypeID" tabindex="5">
-                                        <option disabled selected="selected">Licence Type</option>
-                                        <option value="1">LMV</option>
-                                        <option value="2">LMV-NT</option>
-                                        <option value="3">LMV-TR</option>
-                                        <option value="4">HMV</option>
-                                        <option value="5">HPMV</option>
-                                        <option value="6">HGMV</option>
-                                        <option value="7">LMV-CAB</option>
-                                        <option value="8">NA</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
-                                        <option disabled selected="selected">Experience In Kolkata</option>
-                                        @for (int i = 0; i <= 30; i++)
-                                        {
-                                            <option value=@i>@i</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div class="form-group attached-with">
-                                    <div class="col-md-4">
-                                        <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="8" class="form-control">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="9" class="form-control">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="9" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="form-control" name="model.DriverStatusID" tabindex="10">
-                                        <option disabled selected="selected">Status</option>
-                                        <option value="1">New</option>
-                                        <option value="2">Approved</option>
-                                        <option value="3">Rejected</option>
-                                        <option value="4">Have Licence</option>
-                                        <option value="5">Applied for Licence</option>
-                                        <option value="6">Learner Received</option>
-                                        <option value="7">Licence Received</option>
-                                        <option value="8">Attached to UBER</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+
         </div>
     </div>
-</div>
+    
+}
 
 
 

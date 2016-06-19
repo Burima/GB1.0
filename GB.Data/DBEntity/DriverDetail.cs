@@ -15,7 +15,7 @@ namespace GB.Data.DBEntity
     public partial class DriverDetail
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public long DriverDetailsID { get; set; }
+        public long ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

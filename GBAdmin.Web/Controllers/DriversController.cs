@@ -9,18 +9,17 @@ using GBAdmin.Web.Services;
 using Newtonsoft.Json;
 namespace GBAdmin.Web.Controllers
 {
+    [Authorize]
     public class DriversController : Controller
     {
         GaddibabaEntities GBContext = new GaddibabaEntities();
         // GET: Drivers/Add
         [HttpGet]
-        [Authorize]
         public ActionResult Add()
         {
             return View();
         }
-        [HttpPost]
-        [Authorize]
+        [HttpPost]       
         public JsonResult Add(DriverViewModel model)
         {
             int count = 0;            
@@ -64,7 +63,7 @@ namespace GBAdmin.Web.Controllers
                     driver.CreatedBy = UserID;
                     driver.CreatedOn = DateTime.Now;
                     driver.LastUpdatedOn = DateTime.Now;
-                    driver.DriverStatusID = model.Status;
+                    driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
                     GBContext.DriverDetails.Add(driver);
 
@@ -100,8 +99,7 @@ namespace GBAdmin.Web.Controllers
         } 
        
         //GET
-        [HttpGet]
-        [Authorize]
+        [HttpGet] 
         public ActionResult List()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
@@ -112,12 +110,19 @@ namespace GBAdmin.Web.Controllers
         }
 
        // [HttpGet]
-        [Authorize]
-        public ActionResult Edit(string DriverDetailsID)
+        
+        [Route("Driver/Details/{ID}")]
+        public ActionResult Edit(string ID)
         {
-            int Id = JsonConvert.DeserializeObject<int>(DriverDetailsID);
-            DriverDetail DriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.DriverDetailsID == Id).FirstOrDefault();
+            int Id = JsonConvert.DeserializeObject<int>(ID);
+            DriverDetail DriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == Id).FirstOrDefault();
             return View(DriverDetail);
+        }
+        [HttpPost]
+        public ActionResult Edit(DriverDetail driverDetail)
+        {
+            //need to implement the functionality
+            return View();
         }
     }
 }
