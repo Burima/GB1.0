@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using GB.Data.DBEntity;
 using GBAdmin.Web.Services;
+using Newtonsoft.Json;
 namespace GBAdmin.Web.Controllers
 {
     public class DriversController : Controller
@@ -63,6 +64,8 @@ namespace GBAdmin.Web.Controllers
                     driver.CreatedBy = UserID;
                     driver.CreatedOn = DateTime.Now;
                     driver.LastUpdatedOn = DateTime.Now;
+                    driver.DriverStatusID = model.Status;
+                    driver.ExpectedSalary = model.ExpectedSalary;
                     GBContext.DriverDetails.Add(driver);
 
                     count = GBContext.SaveChanges();
@@ -106,6 +109,15 @@ namespace GBAdmin.Web.Controllers
             var driverDetailList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
             driverViewModel.DriverDetailsList = driverDetailList;
             return View(driverViewModel);
+        }
+
+       // [HttpGet]
+        [Authorize]
+        public ActionResult Edit(string DriverDetailsID)
+        {
+            int Id = JsonConvert.DeserializeObject<int>(DriverDetailsID);
+            DriverDetail DriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.DriverDetailsID == Id).FirstOrDefault();
+            return View(DriverDetail);
         }
     }
 }

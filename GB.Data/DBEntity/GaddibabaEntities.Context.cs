@@ -22,10 +22,9 @@ namespace GB.Data.DBEntity
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+           
         }
     
-        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
         public virtual DbSet<LicenceType> LicenceTypes { get; set; }
         public virtual DbSet<ReferPersonDetail> ReferPersonDetails { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -33,5 +32,7 @@ namespace GB.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<DriverStatus> DriverStatuses { get; set; }
+        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
     }
 }

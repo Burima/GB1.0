@@ -22,7 +22,7 @@ namespace GBAdmin.Web.Controllers
         [HttpPost]
         public ActionResult GetUserByID(string UserID)
         {
-            long userid = JsonConvert.DeserializeObject<int>(UserID);
+            long userid = JsonConvert.DeserializeObject<long>(UserID);
             var User = GBContext.Users.Where(m => m.UserID == userid).FirstOrDefault();
             TempData["user"] = User;
             return RedirectToAction("Edit", "Users");

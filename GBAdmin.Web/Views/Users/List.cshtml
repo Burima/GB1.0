@@ -34,7 +34,7 @@
                                 foreach (var userDetails in Model)
                                 {
                                     <tr class="gradeX" id="@userDetails.UserID">
-                                        <td><a onclick="fnGetUserByID(this)" style="cursor:pointer;">@userDetails.FirstName @userDetails.LastName</a></td>
+                                        <td>@userDetails.FirstName @userDetails.LastName</td>
                                         <td>@(userDetails.PhoneNumber != null ? userDetails.PhoneNumber:"NA")
                                         </td>
                                         <td>@userDetails.Email</td>

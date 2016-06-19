@@ -23,11 +23,11 @@
                         <thead>
                             <tr>
                                 <th>Driver Name</th>
-                                <th>Phone Number</th>
-                                <th>Pincode</th>
                                 <th>LicenceType</th>
                                 <th>Licence No</th>
                                 <th>Registered in Cab Companies</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,19 +35,25 @@
                             {
                                 foreach (var driverDetails in Model.DriverDetailsList)
                                 {
-                                     <tr class="gradeX">
-                                         <td>@driverDetails.FirstName @driverDetails.LastName</td>
-                                         <td>@driverDetails.PhoneNumber</td>
-                                         <td>@driverDetails.Pincode</td>
-                                         <td>@driverDetails.LicenceType.Type</td>
-                                         <td>@driverDetails.LicenceNo</td>
-                                         <td>@if (driverDetails.Ola == true)
-                                         { <label style="font-weight:normal; padding-left:5%">Ola</label> }
-                                        @if (driverDetails.Uber == true)
-                                        {<label style="font-weight:normal">Uber</label>}
-                                        @if (driverDetails.Tfs == true)
-                                        {<label style="font-weight:normal">TFS</label>}</td>
-                                     </tr>
+                                    <tr class="gradeX" id="@driverDetails.DriverDetailsID">
+                                        <td>@driverDetails.FirstName @driverDetails.LastName</td>
+                                        <td>@driverDetails.LicenceType.Type</td>
+                                        <td>@driverDetails.LicenceNo</td>
+                                        <td>
+                                            @if (driverDetails.Ola == true)
+                                            { <label style="font-weight:normal; padding-left:5%">Ola</label> }
+                                            @if (driverDetails.Uber == true)
+                                            {<label style="font-weight:normal">Uber</label>}
+                                            @if (driverDetails.Tfs == true)
+                                            {<label style="font-weight:normal">TFS</label>}
+                                         </td>
+                                        <td>
+                                           @driverDetails.DriverStatus.Status
+                                        </td>
+                                        <td>
+                                            <div class="col-md-2"><input type="button" class="btnViewDriverDetails" value="Details" onclick="fnGetDriverByID(this)"></div>
+                                        </td>
+                                </tr>
                                 }
                             }
 
@@ -56,11 +62,11 @@
                         <tfoot>
                             <tr>
                                 <th>Driver Name</th>
-                                <th>Phone Numbe</th>
-                                <th>Pincode</th>
                                 <th>LicenceType</th>
                                 <th>Licence No</th>
                                 <th>Registered in Cab Companies</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                         </table>
@@ -77,7 +83,7 @@
 
     <!-- variables -->
     <script>
-        var AddDriverDetailUrl = '@Url.Action("Add", "Drivers")';
+        var EditDriverDetailsbyIDUrl = '@Url.Action("Edit", "Drivers")';
 
         $(document).ready(function () {
             //Initialize data table
@@ -87,7 +93,19 @@
             });
         });
 
+        function fnGetDriverByID(element) {
+            var trId = $(element).closest('tr').attr('id');
+            var jmodel = { DriverDetailsID: JSON.stringify(trId) };
 
+            $.ajax({
+                url: EditDriverDetailsbyIDUrl,
+                type: 'POST',
+                data: jmodel,
+                dataType: 'JSON',
+               
+            });
+        }
+        
     </script>
    
     @Scripts.Render("~/plugins/dataTables")

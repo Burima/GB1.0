@@ -31,7 +31,10 @@ namespace GB.Data.DBEntity
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }
         public long LastUpdatedBy { get; set; }
+        public int DriverStatusID { get; set; }
+        public string ExpectedSalary { get; set; }
     
+        public virtual DriverStatus DriverStatus { get; set; }
         public virtual LicenceType LicenceType { get; set; }
     }
 }

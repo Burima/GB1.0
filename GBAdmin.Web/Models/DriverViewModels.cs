@@ -37,6 +37,11 @@ namespace GBAdmin.Web.Models
         public bool Tfs { get; set; }
         public bool IsReferred { get; set; }
         public long UserID { get; set; }
+         [Display(Name = "Expected Salary")]
+        public string ExpectedSalary { get; set; }
+        [Display(Name = "Driver Status")]
+        [Required]
+        public int Status { get; set; }
 
         //public ReferPersonViewModel ReferPersonViewModel { get; set; }
         public List<DriverDetail> DriverDetailsList { get; set; }

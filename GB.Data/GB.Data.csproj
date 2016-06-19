@@ -51,6 +51,9 @@
     <Compile Include="DBEntity\DriverDetail.cs">
       <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\DriverStatus.cs">
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\GaddibabaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
