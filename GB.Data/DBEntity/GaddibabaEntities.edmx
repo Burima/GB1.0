@@ -21,7 +21,10 @@
           <Property Name="Ola" Type="bit" />
           <Property Name="Tfs" Type="bit" />
           <Property Name="IsReferred" Type="bit" Nullable="false" />
-          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="LicenceTypes">
           <Key>
@@ -100,8 +103,8 @@
           <Property Name="FirstName" Type="nvarchar(max)" />
           <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="IsBackGroundVerified" Type="bit" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
           <Property Name="ProfilePicture" Type="nvarchar(max)" />
           <Property Name="Gender" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
@@ -115,7 +118,8 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
           <Property Name="PhoneVerificationCode" Type="nvarchar" MaxLength="6" />
         </EntityType>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
@@ -254,7 +258,10 @@
           <Property Name="Ola" Type="Boolean" />
           <Property Name="Tfs" Type="Boolean" />
           <Property Name="IsReferred" Type="Boolean" Nullable="false" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
           <NavigationProperty Name="LicenceType" Relationship="Self.FK_DriverDetails_LicenceTypeID" FromRole="DriverDetails" ToRole="LicenceTypes" />
         </EntityType>
         <EntityType Name="LicenceType">
@@ -331,8 +338,8 @@
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsBackGroundVerified" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -346,7 +353,8 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
           <Property Name="PhoneVerificationCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="Users" ToRole="UserClaims" />
           <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
@@ -460,7 +468,10 @@
                 <ScalarProperty Name="Ola" ColumnName="Ola" />
                 <ScalarProperty Name="Tfs" ColumnName="Tfs" />
                 <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -552,6 +563,7 @@
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="PhoneVerificationCode" ColumnName="PhoneVerificationCode" />
               </MappingFragment>
             </EntityTypeMapping>

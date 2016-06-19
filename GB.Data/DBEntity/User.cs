@@ -27,8 +27,8 @@ namespace GB.Data.DBEntity
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsBackGroundVerified { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
-        public Nullable<System.DateTime> LastUpdatedOn { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public System.DateTime LastUpdatedOn { get; set; }
         public string ProfilePicture { get; set; }
         public Nullable<int> Gender { get; set; }
         public string Email { get; set; }
@@ -42,7 +42,8 @@ namespace GB.Data.DBEntity
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public int Status { get; set; }
-        public Nullable<long> CreatedBy { get; set; }
+        public long CreatedBy { get; set; }
+        public long LastUpdatedBy { get; set; }
         public string PhoneVerificationCode { get; set; }
     
         public virtual ICollection<UserClaim> UserClaims { get; set; }

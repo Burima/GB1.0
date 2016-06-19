@@ -20,16 +20,15 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Message</h4>
             </div>
             <div class="modal-body">
                 <p id="addDriverMessage">
-                   
+
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary center-block" data-dismiss="modal">Done</button>
+                <button type="button" class="btn btn-primary center-block modalClose" data-dismiss="modal">Done</button>
             </div>
         </div>
     </div>
@@ -39,70 +38,71 @@
         <div class="row">
             <div class="col-sm-8">
                 <h3 class="m-t-none m-b">Add new driver</h3>
-                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off" }))
+                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off"}))
                 {
 
                     @Html.AntiForgeryToken();
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" />
-                        @*@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })*@
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" />
-                        @*@Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })*@
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" />
-                        @*@Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })*@
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />
-                        @*@Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })*@
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" name="model.LicenceType" tabindex="5">
-                            <option disabled selected="selected">Licence Type</option>
-                            <option value="1">LMV</option>
-                            <option value="2">LMV-NT</option>
-                            <option value="3">LMV-TR</option>
-                            <option value="4">HMV</option>
-                            <option value="5">HPMV</option>
-                            <option value="6">HGMV</option>
-                            <option value="7">LMV-CAB</option>
-                            <option value="8">NA</option>                            
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />
-                        @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
-                            <option disabled selected="selected">Experience In Kolkata</option>
-                            @for (int i = 0; i <= 30; i++)
+  
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" />
+            @*@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })*@
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" />
+            @*@Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })*@
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" />
+            @*@Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })*@
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />
+            @*@Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })*@
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="model.LicenceType" tabindex="5">
+                <option disabled selected="selected">Licence Type</option>
+                <option value="1">LMV</option>
+                <option value="2">LMV-NT</option>
+                <option value="3">LMV-TR</option>
+                <option value="4">HMV</option>
+                <option value="5">HPMV</option>
+                <option value="6">HGMV</option>
+                <option value="7">LMV-CAB</option>
+                <option value="8">NA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />
+            @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
+                <option disabled selected="selected">Experience In Kolkata</option>
+                @for (int i = 0; i <= 30; i++)
                             {
-                                <option value=@i>@i</option>
+                            <option value=@i>@i</option>
                             }
-                        </select>
-                    </div>
-                    <div class="form-group attached-with">
-                       <div class="col-md-4">
-                         <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="8" class="form-control">
-                       </div> 
-                        <div class="col-md-4">
-                          <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="9" class="form-control">
-                        </div> 
-                        <div class="col-md-4">
-                           <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="9" class="form-control">
-                        </div>                     
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="btn-group-justified">
-                            <input type="submit" class="btn btn-primary full-width" value="Add Driver">
-                        </div>
-                    </div>
+            </select>
+        </div>
+        <div class="form-group attached-with">
+            <div class="col-md-4">
+                <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="8" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="9" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="9" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="btn-group-justified">
+                <input type="submit" class="btn btn-primary full-width" value="Add Driver">
+            </div>
+        </div>
+    
                 }
             </div>
         </div>
@@ -115,23 +115,11 @@
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
-            //function addDriverBegin(data) {
-            //}
-            //function addDriverSuccess(data) {
-            //    alert("Success")
-            //}
-            //function addDriverFailed(data) {
-            //    if (data = 'error duplicate value') {
-            //        alert("Duplicate value");
-            //    } else {
-            //        alert("Error")
-            //    }
-            //}
-
-            
-
-
         });
+
+        $('.modalClose').click(function () {
+            $('#modalShowMessage').addClass("hidden");
+        })
         var addDriverSuccess = function (data) {
             $('#addDriverMessage').empty();
             $('#addDriverMessage').html(data.result);
@@ -144,5 +132,4 @@
             $('#modalShowMessage').removeClass("hidden");
         };
     </script>
-   
 }

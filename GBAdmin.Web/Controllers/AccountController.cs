@@ -120,7 +120,9 @@ namespace GBAdmin.Web.Controllers
                     LastUpdatedOn = DateTime.Now,
                     Status = 1,
                     LockoutEndDateUtc = DateTime.Now.AddDays(60),
-                    LockoutEnabled = true
+                    LockoutEnabled = true,
+                    CreatedBy = SessionManager.GetSessionUser().Id,
+                    LastUpdatedBy = SessionManager.GetSessionUser().Id
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -635,6 +637,8 @@ namespace GBAdmin.Web.Controllers
         //        return Content("Failed");
         //    }
         //}
+
+       
 
 
         #region Helpers

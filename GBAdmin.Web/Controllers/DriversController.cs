@@ -13,6 +13,7 @@ namespace GBAdmin.Web.Controllers
         GaddibabaEntities GBContext = new GaddibabaEntities();
         // GET: Drivers/Add
         [HttpGet]
+        [Authorize]
         public ActionResult Add()
         {
             return View();
@@ -59,7 +60,9 @@ namespace GBAdmin.Web.Controllers
                     driver.Ola = model.Ola;
                     driver.Tfs = model.Tfs;
                     driver.IsReferred = model.IsReferred;
-                    driver.UserID = UserID;
+                    driver.CreatedBy = UserID;
+                    driver.CreatedOn = DateTime.Now;
+                    driver.LastUpdatedOn = DateTime.Now;
                     GBContext.DriverDetails.Add(driver);
 
                     count = GBContext.SaveChanges();
@@ -100,7 +103,7 @@ namespace GBAdmin.Web.Controllers
         {
             DriverViewModel driverViewModel = new DriverViewModel();
             var UserID = SessionManager.GetSessionUser().Id;
-            var driverDetailList = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
+            var driverDetailList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
             driverViewModel.DriverDetailsList = driverDetailList;
             return View(driverViewModel);
         }
