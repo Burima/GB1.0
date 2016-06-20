@@ -97,10 +97,19 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.LicenceType, new { @class = "col-md-2 control-label" })
-                                        @Html.HiddenFor(model => model.LicenceType.LicenceTypeID)
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.HiddenFor(model => model.LicenceType.LicenceTypeID, new { @class = "licenceType"})
+                                      
                                         <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.LicenceType.Type, new { @class = "form-control ", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            <select class="form-control" id="LicenceTypeID" name="model.LicenceTypeID">
+                                                <option value="1">LMV</option>
+                                                <option value="2">LMV-NT</option>
+                                                <option value="3">LMV-TR</option>
+                                                <option value="4">HMV</option>
+                                                <option value="5">HPMV</option>
+                                                <option value="6">HGMV</option>
+                                                <option value="7">LMV-CAB</option>
+                                                <option value="8">NA</option>
+                                            </select>
                                         </div>
                                      </div>
                                     <div class="form-group">
@@ -126,9 +135,9 @@
                                     </div>
                                     <div class="form-group">
                                      @Html.LabelFor(m => m.DriverStatus, new { @class = "col-md-2 control-label" })
+                                        @Html.HiddenFor(model => model.DriverStatusID,new{@class = "driverStatus" })
                                         <div class="col-md-10">
-                                            <select class="form-control" name="model.Status" tabindex="9">
-                                                <option disabled selected="selected">Status</option>
+                                            <select class="form-control" name="model.DriverStatusID" tabindex="9" id="DriverStatusID">
                                                 <option value="1">New</option>
                                                 <option value="2">Approved</option>
                                                 <option value="3">Rejected</option>
@@ -138,19 +147,22 @@
                                                 <option value="7">Licence Received</option>
                                                 <option value="8">Attached to UBER</option>
                                             </select>
-                                            </div>
-                                        </div>
+                                         </div>
+                                     </div>
                                     <div class="form-group attached-with">
                                         @Html.Label("RegisteredIn",new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             <div class="col-md-4">
-                                                <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
+                                                @Html.HiddenFor(model => model.Uber, new { @class = "Uber" })
+                                                <label>Uber</label><input type="checkbox" name="model.Uber"  value =" true" tabindex="10" class="form-control" id="idUber">
                                             </div>
                                             <div class="col-md-4">
-                                                <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
+                                                @Html.HiddenFor(model => model.Uber, new { @class = "Ola" })
+                                                <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control" id="idOla">
                                             </div>
                                             <div class="col-md-4">
-                                                <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control">
+                                                @Html.HiddenFor(model => model.Uber, new { @class = "Tfs" })
+                                                <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control" id="idTfs">
                                             </div>
                                         </div>
                                         </div>
@@ -173,6 +185,26 @@
 
 @section Scripts{
 <script>
+    $('document').ready(function () {
+        var optionDriverStatus = $('.driverStatus').val();
+        $("#DriverStatusID").val(optionDriverStatus).find("option[value=" + optionDriverStatus + "]").attr('selected', true);
+
+        var optionLicenceType = $('.licenceType').val();
+        $("#LicenceTypeID").val(optionLicenceType).find("option[value=" + optionLicenceType + "]").attr('selected', true);
+
+        var Uber = $('.Uber').val();
+        var Ola = $('.Ola').val();
+        var Tfs = $('.Tfs').val();
+        if (Uber == 1) {
+            $('#idUber').attr('checked', 'checked');
+        }
+        if (Ola == 1) {
+            $('#idOla').attr('checked', 'checked');
+        }
+        if (Tfs == 1) {
+            $('#idTfs').attr('checked', 'checked');
+        }
+    });
     $('#btnNextPersonalDetails').click(function () {
         if ($('#form-EditDriver').valid()) {
             //hide BasicInformation upon valid data
