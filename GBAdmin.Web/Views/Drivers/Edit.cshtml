@@ -18,37 +18,71 @@
             margin-left: 2%;
         }
 </style>
-@using (Ajax.BeginForm("Edit", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "editDriverSuccess", OnFailure = "editDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-EditDriver", autocomplete = "off" }))
+<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Message</h4>
+            </div>
+            <div class="modal-body">
+                <p id="editDriverMessage">
+
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary center-block modalClose" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Ajax.BeginForm("Edit", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "editDriverSuccess", OnFailure = "editDriverFailed", HttpMethod = "Post" }, new { @class = "form-horizontal" ,role = "form", id = "form-EditDriver", autocomplete = "off" }))
 {
 
     <div class="row  border-bottom white-bg dashboard-header">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="ibox-content">
                 <div class="panel-body">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapsePersonalDetails">Personal Details</a>
+                                    <a id="linkCollapsePersonalDetails"  data-toggle="collapse" data-parent="#accordion" href="#collapsePersonalDetails">Personal Details</a>
                                 </h5>
                             </div>
                             <div id="collapsePersonalDetails" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
                                         @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        @Html.LabelFor(m => m.Pincode, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                            @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        </div>
+                                     </div>
+                                    <div class="form-group">
+                                        <div class="pull-right" style="padding-right:5%">
+                                            <button id="btnNextPersonalDetails" class="btn btn-primary" type="button" tabindex="5">Next</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -56,26 +90,74 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseProfessionalDetails">Professional Details</a>
+                                    <a id="linkCollapseProfessionalDetails" data-toggle="collapse" data-parent="#accordion" href="#">Professional Details</a>
                                 </h4>
                             </div>
                             <div id="collapseProfessionalDetails" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="form-group">
+                                        @Html.LabelFor(m => m.LicenceType, new { @class = "col-md-2 control-label" })
+                                        @Html.HiddenFor(model => model.LicenceType.LicenceTypeID)
                                         @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.LicenceType, new { @class = "form-control ", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.LicenceType.Type, new { @class = "form-control ", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        </div>
+                                     </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.LicenceNo, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.ExperienceInKolkata, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                            @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        @Html.LabelFor(m => m.ExpectedSalary, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                            @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
-                                    </div>
+                                     @Html.LabelFor(m => m.DriverStatus, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            <select class="form-control" name="model.Status" tabindex="9">
+                                                <option disabled selected="selected">Status</option>
+                                                <option value="1">New</option>
+                                                <option value="2">Approved</option>
+                                                <option value="3">Rejected</option>
+                                                <option value="4">Have Licence</option>
+                                                <option value="5">Applied for Licence</option>
+                                                <option value="6">Learner Received</option>
+                                                <option value="7">Licence Received</option>
+                                                <option value="8">Attached to UBER</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    <div class="form-group attached-with">
+                                        @Html.Label("RegisteredIn",new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            <div class="col-md-4">
+                                                <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control">
+                                            </div>
+                                        </div>
+                                        </div>
                                     <div class="form-group">
-                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                        @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                        <div class="pull-right" style="padding-right:5%">
+                                            <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="5">Done</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -89,6 +171,41 @@
     
 }
 
+@section Scripts{
+<script>
+    $('#btnNextPersonalDetails').click(function () {
+        if ($('#form-EditDriver').valid()) {
+            //hide BasicInformation upon valid data
+            $('#collapsePersonalDetails').removeClass('in');
+            //google api function
+
+            //initialization of the map based on area and city
+            // initialize();
+            $('#linkCollapseProfessionalDetails').attr('href', '#collapseProfessionalDetails'); //activate collapseable functionality through linking it with the target id 
+            $('#collapseProfessionalDetails').addClass('in');//open Locality panel
+        }
+    });
+
+    $('#linkCollapsePersonalDetails').click(function () {
+        $('#linkCollapseProfessionalDetails').removeAttr('href', '#collapseProfessionalDetails');
+        $('#collapseProfessionalDetails').removeClass('in');
+    });
+    $('.modalClose').click(function () {
+        $('#modalShowMessage').addClass("hidden");
+    })
+    var editDriverSuccess = function (data) {
+        $('#editDriverMessage').empty();
+        $('#addDriverMessage').html(data.result);
+        $('#modalShowMessage').removeClass("hidden");
+    };
+
+    var editDriverFailed = function (data) {
+        $('#editDriverMessage').empty();
+        $('#editDriverMessage').html(data.result);
+        $('#modalShowMessage').removeClass("hidden");
+    };
+</script>
+}
 
 
 

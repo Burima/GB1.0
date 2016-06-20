@@ -119,10 +119,40 @@ namespace GBAdmin.Web.Controllers
             return View(DriverDetail);
         }
         [HttpPost]
+        [Route("Driver/Details/{ID}")]
         public ActionResult Edit(DriverDetail driverDetail)
         {
-            //need to implement the functionality
-            return View();
+            DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
+            dbDriverDetail.FirstName = driverDetail.FirstName;
+            dbDriverDetail.LastName = driverDetail.LastName;
+            dbDriverDetail.PhoneNumber = driverDetail.PhoneNumber;
+            dbDriverDetail.Pincode = driverDetail.Pincode;
+            dbDriverDetail.LicenceTypeID = driverDetail.LicenceTypeID;
+            dbDriverDetail.LicenceNo = driverDetail.LicenceNo;
+            dbDriverDetail.ExperienceInKolkata = driverDetail.ExperienceInKolkata;
+            dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
+            dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
+            dbDriverDetail.LastUpdatedOn = DateTime.Now;
+            int count = GBContext.SaveChanges();
+            if (count > 0)
+            {
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = "Driver updated Successfully!!" }
+                };
+                              
+            }
+            else
+            {
+                return new JsonResult()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { result = "Error in updating driver.Please try again later." }
+                };              
+
+            }
+           // return View();
         }
     }
 }

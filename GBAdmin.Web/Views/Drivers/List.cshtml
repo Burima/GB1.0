@@ -40,10 +40,10 @@
                                         <td>@driverDetails.LicenceType.Type</td>
                                         <td>@driverDetails.LicenceNo</td>
                                         <td>
-                                            @if (driverDetails.Ola == true)
-                                            { <label style="font-weight:normal; padding-left:5%">Ola</label> }
                                             @if (driverDetails.Uber == true)
-                                            {<label style="font-weight:normal">Uber</label>}
+                                            { <label style="font-weight:normal; padding-left:5%">Uber</label> }
+                                            @if (driverDetails.Ola == true)
+                                            {<label style="font-weight:normal">Ola</label>}
                                             @if (driverDetails.Tfs == true)
                                             {<label style="font-weight:normal">TFS</label>}
                                          </td>
