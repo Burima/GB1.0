@@ -23,9 +23,9 @@ namespace GB.Data.DBEntity
         public string LicenceNo { get; set; }
         public int ExperienceInKolkata { get; set; }
         public string Pincode { get; set; }
-        public Nullable<bool> Uber { get; set; }
-        public Nullable<bool> Ola { get; set; }
-        public Nullable<bool> Tfs { get; set; }
+        public bool Uber { get; set; }
+        public bool Ola { get; set; }
+        public bool Tfs { get; set; }
         public bool IsReferred { get; set; }
         public long CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
@@ -34,7 +34,7 @@ namespace GB.Data.DBEntity
         public int DriverStatusID { get; set; }
         public string ExpectedSalary { get; set; }
     
-        public virtual DriverStatus DriverStatus { get; set; }
         public virtual LicenceType LicenceType { get; set; }
+        public virtual DriverStatus DriverStatus { get; set; }
     }
 }

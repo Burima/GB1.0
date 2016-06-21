@@ -16,10 +16,10 @@
         <AssociationConnector Association="GaddibabaModel.FK_UserDetails_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="GaddibabaModel.FK_dbo_UserLogin_dbo_User_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="GaddibabaModel.UserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GaddibabaModel.DriverStatus" Width="1.5" PointX="7.375" PointY="6.75" />
-        <EntityTypeShape EntityType="GaddibabaModel.DriverDetail" Width="1.5" PointX="10" PointY="3" />
-        <AssociationConnector Association="GaddibabaModel.FK_DriverDetails_DriverStatusID" />
+        <EntityTypeShape EntityType="GaddibabaModel.DriverDetail" Width="1.5" PointX="10" PointY="1.125" />
         <AssociationConnector Association="GaddibabaModel.FK_DriverDetails_LicenceTypeID" />
+        <EntityTypeShape EntityType="GaddibabaModel.DriverStatus" Width="1.5" PointX="7.375" PointY="6.875" />
+        <AssociationConnector Association="GaddibabaModel.FK_DriverDetails_DriverStatusID" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
