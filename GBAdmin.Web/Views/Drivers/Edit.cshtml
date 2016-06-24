@@ -100,7 +100,7 @@
                                         @Html.HiddenFor(model => model.LicenceType.LicenceTypeID, new { @class = "licenceType"})
                                       
                                         <div class="col-md-10">
-                                            <select class="form-control" id="LicenceTypeID" name="model.LicenceTypeID">
+                                            <select class="form-control" id="LicenceTypeID" name="LicenceTypeID">
                                                 <option value="1">LMV</option>
                                                 <option value="2">LMV-NT</option>
                                                 <option value="3">LMV-TR</option>
@@ -134,10 +134,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                     @Html.LabelFor(m => m.DriverStatus, new { @class = "col-md-2 control-label" })
-                                        @Html.HiddenFor(model => model.DriverStatusID,new{@class = "driverStatus" })
+                                     @Html.LabelFor(m => m.DriverStatusID, new { @class = "col-md-2 control-label" })
+                                        @Html.HiddenFor(model => model.DriverStatus.DriverStatusID,new{@class = "driverStatus" })
                                         <div class="col-md-10">
-                                            <select class="form-control" name="model.DriverStatusID" tabindex="9">
+                                            <select class="form-control" name="DriverStatusID" tabindex="9" id="DriverStatusID">
                                                 <option value="1">New</option>
                                                 <option value="2">Approved</option>
                                                 <option value="3">Rejected</option>
@@ -153,18 +153,16 @@
                                         @Html.Label("RegisteredIn",new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             <div class="col-md-4">
-                                                @Html.HiddenFor(model => model.Uber, new { @class = "Uber" })
                                                 <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new {@class = "form-control" })
                                             </div>
                                             <div class="col-md-4">
-                                                @Html.HiddenFor(model => model.Uber, new { @class = "Ola" })
-                                                <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })</div>
+                                                <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
+                                            </div>
                                             <div class="col-md-4">
-                                                @Html.HiddenFor(model => model.Uber, new { @class = "Tfs" })
                                                 <label>TFS</label>@Html.CheckBoxFor(model => model.Tfs, new { @class = "form-control" })
                                             </div>
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="pull-right" style="padding-right:5%">
                                             <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="5">Done</button>
@@ -226,7 +224,7 @@
     })
     var editDriverSuccess = function (data) {
         $('#editDriverMessage').empty();
-        $('#addDriverMessage').html(data.result);
+        $('#editDriverMessage').html(data.result);
         $('#modalShowMessage').removeClass("hidden");
     };
 

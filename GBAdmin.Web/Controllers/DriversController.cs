@@ -128,11 +128,15 @@ namespace GBAdmin.Web.Controllers
             dbDriverDetail.PhoneNumber = driverDetail.PhoneNumber;
             dbDriverDetail.Pincode = driverDetail.Pincode;
             dbDriverDetail.LicenceTypeID = driverDetail.LicenceTypeID;
+            dbDriverDetail.DriverStatusID = driverDetail.DriverStatusID;
             dbDriverDetail.LicenceNo = driverDetail.LicenceNo;
             dbDriverDetail.ExperienceInKolkata = driverDetail.ExperienceInKolkata;
             dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
             dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
             dbDriverDetail.LastUpdatedOn = DateTime.Now;
+            dbDriverDetail.Ola = driverDetail.Ola;
+            dbDriverDetail.Uber = driverDetail.Uber;
+            dbDriverDetail.Tfs = driverDetail.Tfs;
             int count = GBContext.SaveChanges();
             if (count > 0)
             {

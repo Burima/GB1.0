@@ -46,6 +46,10 @@
                                             {<label style="font-weight:normal">Ola</label>}
                                             @if (driverDetails.Tfs == true)
                                             {<label style="font-weight:normal">TFS</label>}
+                                            @if (driverDetails.Uber == false && driverDetails.Ola == false && driverDetails.Tfs == false)
+                                            {
+                                                <label style="font-weight:normal">NA</label>
+                                            }
                                          </td>
                                         <td>
                                            @driverDetails.DriverStatus.Status
