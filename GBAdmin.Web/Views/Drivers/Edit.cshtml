@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                                        @Html.Label("Phone Number", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                             @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
@@ -96,7 +96,7 @@
                             <div id="collapseProfessionalDetails" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.LicenceType, new { @class = "col-md-2 control-label" })
+                                        @Html.Label("Licence Type", new { @class = "col-md-2 control-label" })
                                         @Html.HiddenFor(model => model.LicenceType.LicenceTypeID, new { @class = "licenceType"})
                                       
                                         <div class="col-md-10">
@@ -113,28 +113,28 @@
                                         </div>
                                      </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.LicenceNo, new { @class = "col-md-2 control-label" })
+                                        @Html.Label("Licence No", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                             @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
                                             </div>
                                         </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.ExperienceInKolkata, new { @class = "col-md-2 control-label" })
+                                        @Html.Label("Experience In Kolkata", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                             @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.ExpectedSalary, new { @class = "col-md-2 control-label" })
+                                        @Html.Label("Expected Salary", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                             @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                     @Html.LabelFor(m => m.DriverStatusID, new { @class = "col-md-2 control-label" })
+                                     @Html.Label("Driver Status", new { @class = "col-md-2 control-label" })
                                         @Html.HiddenFor(model => model.DriverStatus.DriverStatusID,new{@class = "driverStatus" })
                                         <div class="col-md-10">
                                             <select class="form-control" name="DriverStatusID" tabindex="9" id="DriverStatusID">
@@ -149,17 +149,19 @@
                                             </select>
                                          </div>
                                      </div>
-                                    <div class="form-group attached-with">
-                                        @Html.Label("RegisteredIn",new { @class = "col-md-2 control-label" })
-                                        <div class="col-md-10">
-                                            <div class="col-md-4">
-                                                <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new {@class = "form-control" })
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>TFS</label>@Html.CheckBoxFor(model => model.Tfs, new { @class = "form-control" })
+                                    <div class="form-group">
+                                        @Html.Label("Registered In", new { @class = "col-md-2 control-label" })
+                                        <div class="attached-with">
+                                            <div class="col-md-10">
+                                                <div class="col-md-4">
+                                                    <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new {@class = "form-control" })
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>TFS</label>@Html.CheckBoxFor(model => model.Tfs, new { @class = "form-control" })
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
