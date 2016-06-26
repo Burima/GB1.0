@@ -15,6 +15,7 @@ using GBAdmin.Web.Models;
 using GBAdmin.Web.Services.Common;
 using GBAdmin.Web.Services;
 using GBAdmin.Web.Services.Security;
+using System.Web.UI;
 
 namespace GBAdmin.Web.Controllers
 {
@@ -70,6 +71,7 @@ namespace GBAdmin.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [Route("Login", Name = RouteNames.LoginPost)]
         public async Task<ActionResult> Login(AccountViewModel model, string returnUrl)
         {
@@ -81,6 +83,7 @@ namespace GBAdmin.Web.Controllers
                     await SignInAsync(user, model.LoginViewModel.RememberMe);
                     //sessionize user
                     SessionManager.SessionizeUser(user);
+                    Session["Role"] = UserManager.GetRoles(user.Id).FirstOrDefault();
                     return RedirectToRoute(RouteNames.Dashboard);
 
                 }
@@ -97,7 +100,7 @@ namespace GBAdmin.Web.Controllers
 
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin, Manager")]
         public ActionResult Register()
         {
             return View(new RegisterViewModel());
@@ -106,8 +109,10 @@ namespace GBAdmin.Web.Controllers
 
         // POST: /Account/Register
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin, Manager")]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -116,8 +121,8 @@ namespace GBAdmin.Web.Controllers
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    UserName = model.Email.ToUpper(),
-                    Email = model.Email.ToUpper(),
+                    UserName = model.Email.ToLower(),
+                    Email = model.Email.ToLower(),
                     CreatedOn = DateTime.Now,
                     LastUpdatedOn = DateTime.Now,
                     Status = 1,
@@ -132,11 +137,9 @@ namespace GBAdmin.Web.Controllers
                 {
                     await this.UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInAsync(user, isPersistent: false);
-                    //sessionize user
-                    SessionManager.SessionizeUser(user);
-                    
+                                       
                     //Send Activation emai
-                    await SendAccountActivationMail(user);
+                    //await SendAccountActivationMail(user);
                     TempData["Message"] = "User Added Successfully!!";
                    
                 }
@@ -145,11 +148,12 @@ namespace GBAdmin.Web.Controllers
                     model.RegisterError = result.Errors.FirstOrDefault();
                     AddErrors(result);
                     TempData["Message"] = "Error in adding user.Please try again later..";
+                    return View();
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View();
+            return RedirectToAction("List", "Users");
         }
 
         //
