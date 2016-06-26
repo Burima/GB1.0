@@ -23,9 +23,11 @@ namespace GBAdmin.Web.Controllers
     {
         private UserManager _userManager;
         AccountViewModel accountViewModel = new AccountViewModel();
-        TripleDES tripleDES = new TripleDES();       
+        TripleDES tripleDES = new TripleDES();
+        ApplicationDbContext context;
         public AccountController()
-        {           
+        {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(UserManager userManager)
@@ -95,7 +97,7 @@ namespace GBAdmin.Web.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult Register()
         {
             return View(new RegisterViewModel());
@@ -104,7 +106,7 @@ namespace GBAdmin.Web.Controllers
 
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -128,6 +130,7 @@ namespace GBAdmin.Web.Controllers
 
                 if (result.Succeeded)
                 {
+                    await this.UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInAsync(user, isPersistent: false);
                     //sessionize user
                     SessionManager.SessionizeUser(user);
@@ -135,7 +138,7 @@ namespace GBAdmin.Web.Controllers
                     //Send Activation emai
                     await SendAccountActivationMail(user);
                     TempData["Message"] = "User Added Successfully!!";
-                    //return RedirectToAction("Index", "Home");
+                   
                 }
                 else
                 {

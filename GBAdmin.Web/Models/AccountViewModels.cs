@@ -77,6 +77,9 @@ namespace GBAdmin.Web.Models
 
         public string LastName { get; set; }
         public string RegisterError { get; set; }
+        [Display(Name = "Role")]
+        [Required]
+        public string RoleName { get; set; }
     }
 
     public class ResetPasswordViewModel
