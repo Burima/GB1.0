@@ -19,6 +19,10 @@ namespace GBAdmin.Web.Controllers
             var UserID = SessionManager.GetSessionUser().Id;
             var UserList = GBContext.Users.Where(m => m.CreatedBy == UserID).ToList();
             DashboardViewModel DashboardViewModel = new DashboardViewModel();
+            DashboardViewModel.New = new Dictionary<string, int>();
+            DashboardViewModel.Approved = new Dictionary<string, int>();
+            DashboardViewModel.Rejected = new Dictionary<string, int>();
+            DashboardViewModel.AttachedToUber = new Dictionary<string, int>();
             foreach (var user in UserList)
             {
                 string UserName = user.FirstName + " " + user.LastName;
@@ -27,17 +31,22 @@ namespace GBAdmin.Web.Controllers
                 int rejectedCount = GBContext.DriverDetails.Count(m => m.CreatedBy == user.UserID && m.DriverStatusID == 3);
                 int attachedToUberCount = GBContext.DriverDetails.Count(m => m.CreatedBy == user.UserID && m.DriverStatusID == 8);
 
-                if(newCount > 0)
-                 DashboardViewModel.New.Add(new KeyValuePair<string,int>(UserName,newCount ));
-
-                if(approvedCount > 0)
+                if (newCount > 0)
+                {
+                    DashboardViewModel.New.Add(new KeyValuePair<string, int>(UserName, newCount));
+                }
+                if (approvedCount > 0)
+                {
                     DashboardViewModel.Approved.Add(new KeyValuePair<string, int>(UserName, approvedCount));
-
-                if(rejectedCount > 0)
+                }
+                if (rejectedCount > 0)
+                {
                     DashboardViewModel.Rejected.Add(new KeyValuePair<string, int>(UserName, rejectedCount));
-
-                if(attachedToUberCount > 0)
+                }
+                if (attachedToUberCount > 0)
+                {
                     DashboardViewModel.AttachedToUber.Add(new KeyValuePair<string, int>(UserName, attachedToUberCount));
+                }
             }
             return View(DashboardViewModel);
         }
