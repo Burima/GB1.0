@@ -173,7 +173,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\DriverViewModels.cs" />
@@ -191,7 +193,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom\ViewProfile.css" />
     <Content Include="Content\email.css" />
+    <Content Include="Content\jquery.Jcrop.css" />
+    <Content Include="Content\jquery.Jcrop.min.css" />
     <Content Include="Content\patterns\congruent_pentagon.png" />
     <Content Include="Content\patterns\header-profile-skin-1.png" />
     <Content Include="Content\patterns\header-profile-skin-2.png" />
@@ -358,6 +363,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\gbadmin.css" />
     <Content Include="Scripts\custom\Drivers.js" />
+    <Content Include="Scripts\custom\user\form-image-crop.js" />
+    <Content Include="Scripts\custom\user\jquery.Jcrop.js" />
+    <Content Include="Scripts\custom\user\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\custom\user\ViewProfile.js" />
     <Content Include="Scripts\GBAdmin.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -810,8 +819,12 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Drivers\List.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Profile.cshtml" />
     <Content Include="Views\Drivers\Edit.cshtml" />
+    <Content Include="Views\Users\_EditProfile.cshtml" />
+    <Content Include="Views\Users\_ProfilePicture.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

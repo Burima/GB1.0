@@ -8,26 +8,28 @@
                     <span>
                         <img alt="image" class="img-circle" src="~/Images/profile_small.jpg" />
                     </span>
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  
                         <span class="clear">
                             <span class="block m-t-xs">
+                                <a href="@Url.Action("Profile", "Users")">
                                 <strong class="font-bold">@SessionManager.GetSessionUser().FirstName @SessionManager.GetSessionUser().LastName</strong>
+                                </a>
                             </span> <span class="text-muted text-xs block">@Session["Role"].ToString()<b class="caret"></b></span>
                         </span>
-                    </a>
+                    
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         @*<li><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
                             <li><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
                             <li><a href="@Url.Action("Inbox", "Mailbox")">Mailbox</a></li>
                             <li class="divider"></li>*@
-                        @if (Request.IsAuthenticated)
+                        @*@if (Request.IsAuthenticated)
                         {
                             using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1" }))
                             {
                                 @Html.AntiForgeryToken();
                             <li><a href="javascript:document.getElementById('logoutForm1').submit()">Logout</a></li>
                             }
-                        }
+                        }*@
                     </ul>
                 </div>
                 <div class="logo-element">

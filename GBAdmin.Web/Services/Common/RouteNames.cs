@@ -14,6 +14,7 @@ namespace GBAdmin.Web.Services.Common
         public const string LoginPost = "LoginPost";
         public const string Dashboard = "Dashboard";
         public const string LogOff="LogOff";
+        public const string Profile = "Profile";
        
     }
 }
