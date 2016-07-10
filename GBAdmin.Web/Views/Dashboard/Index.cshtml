@@ -115,99 +115,8 @@
 
         </div>
         <div class="col-xs-4">
-            <h2>Total - 720</h2>
+            <h2>Total - @Model.Total</h2>
         </div>
-
-
-        @*<div class="row">
-                <div class="col-md-12">
-                    @if (Model.New != null && Model.New.Count > 0) {
-                    <div class="col-md-6">
-                        <div class="ibox">
-                            <div class="ibox-title">
-                                <h5>Newly Added</h5>
-
-                            </div>
-                            <div class="ibox-content no-padding">
-                                <ul class="list-group">
-                                    @foreach (var newCount in Model.New) {
-                                    <li class="list-group-item">
-                                        <p>@newCount.Key <span class="pull-right"><span class="label label-info">@newCount.Value</span></span></p>
-                                    </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    }
-                    @if (Model.AttachedToUber != null && Model.AttachedToUber.Count > 0)
-                    {
-                        <div class="col-md-6">
-                            <div class="ibox">
-                                <div class="ibox-title">
-                                    <h5>Attached To Uber</h5>
-
-                                </div>
-                                <div class="ibox-content no-padding">
-                                    <ul class="list-group">
-                                        @foreach (var attachedToUberCount in Model.AttachedToUber)
-                                        {
-                                            <li class="list-group-item">
-                                                <p>@attachedToUberCount.Key <span class="pull-right"><span class="label label-success">@attachedToUberCount.Value</span></span></p>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="col-md-12">
-                    @if (Model.Approved != null && Model.Approved.Count > 0)
-                    {
-                        <div class="col-md-6">
-                            <div class="ibox">
-                                <div class="ibox-title">
-                                    <h5>Approved</h5>
-
-                                </div>
-                                <div class="ibox-content no-padding">
-                                    <ul class="list-group">
-                                        @foreach (var approvedCount in Model.Approved)
-                                        {
-                                            <li class="list-group-item">
-                                                <p>@approvedCount.Key <span class="pull-right"><span class="label label-primary">@approvedCount.Value</span></span></p>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    @if (Model.Rejected != null && Model.Rejected.Count > 0)
-                    {
-                        <div class="col-md-6">
-                            <div class="ibox">
-                                <div class="ibox-title">
-                                    <h5>Rejected</h5>
-
-                                </div>
-                                <div class="ibox-content no-padding">
-                                    <ul class="list-group">
-                                        @foreach (var rejectedCount in Model.Rejected)
-                                        {
-                                            <li class="list-group-item">
-                                                <p>@rejectedCount.Key <span class="pull-right"><span class="label label-danger">@rejectedCount.Value</span></span></p>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>*@
-
     </div>
     <div class="row-spacer-small"></div>
    
@@ -223,7 +132,7 @@
             <div class="main-box infographic-box colored purple-bg">
                 <i class="fa fa-spinner"></i>
                 <span class="headline">In Progress</span>
-                <span class="value">13.298</span>
+                <span class="value">@Model.InProgress</span>
             </div>
         </div>        
         <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -272,7 +181,7 @@
                     label: "New"
                 },
                 {
-                    value: 100,
+                    value: '@Model.InProgress',
                     color: "#b5b8cf",
                     highlight: "#9c27b0",
                     label: "In Progress"

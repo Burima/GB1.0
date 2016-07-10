@@ -8,7 +8,6 @@ using GBAdmin.Web.Services;
 using GBAdmin.Web.Models;
 using GB.Data.DBEntity;
 using GBAdmin.Web.Helpers;
-using GBAdmin.Web.Services.C;
 
 namespace GBAdmin.Web.Controllers
 {

@@ -22,7 +22,13 @@ namespace GB.Data.DBEntity
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<User>().HasMany(i => i.Roles).WithMany(u => u.Users)
+           .Map(m =>
+           {
+               m.MapLeftKey("UserId");
+               m.MapRightKey("RoleId");
+           });
+
         }
     
         public virtual DbSet<LicenceType> LicenceTypes { get; set; }
