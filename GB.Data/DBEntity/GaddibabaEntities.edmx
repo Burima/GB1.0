@@ -11,7 +11,7 @@
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="LicenceTypeID" Type="int" Nullable="false" />
           <Property Name="LicenceNo" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -19,7 +19,6 @@
           <Property Name="Pincode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Uber" Type="bit" Nullable="false" />
           <Property Name="Ola" Type="bit" Nullable="false" />
-          <Property Name="Tfs" Type="bit" Nullable="false" />
           <Property Name="IsReferred" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
@@ -449,7 +448,7 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="LicenceTypeID" Type="Int32" Nullable="false" />
           <Property Name="LicenceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -457,7 +456,6 @@
           <Property Name="Pincode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Uber" Type="Boolean" Nullable="false" />
           <Property Name="Ola" Type="Boolean" Nullable="false" />
-          <Property Name="Tfs" Type="Boolean" Nullable="false" />
           <Property Name="IsReferred" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Int64" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
@@ -617,7 +615,6 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
-                <ScalarProperty Name="Tfs" ColumnName="Tfs" />
                 <ScalarProperty Name="Ola" ColumnName="Ola" />
                 <ScalarProperty Name="Uber" ColumnName="Uber" />
                 <ScalarProperty Name="Pincode" ColumnName="Pincode" />

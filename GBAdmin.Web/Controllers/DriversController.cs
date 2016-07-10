@@ -59,7 +59,7 @@ namespace GBAdmin.Web.Controllers
                     driver.LicenceNo = model.LicenceNo;
                     driver.ExperienceInKolkata = model.ExperienceInKolkata;
                     driver.Uber = model.Uber;
-                    driver.Ola = model.Ola;                    
+                    driver.Ola = model.Ola;
                     driver.IsReferred = model.IsReferred;
                     driver.CreatedBy = UserID;
                     driver.CreatedOn = DateTime.Now;
@@ -150,7 +150,6 @@ namespace GBAdmin.Web.Controllers
             dbDriverDetail.LastUpdatedOn = DateTime.Now;
             dbDriverDetail.Ola = driverDetail.Ola;
             dbDriverDetail.Uber = driverDetail.Uber;
-            dbDriverDetail.Tfs = driverDetail.Tfs;
             int count = GBContext.SaveChanges();
             if (count > 0)
             {

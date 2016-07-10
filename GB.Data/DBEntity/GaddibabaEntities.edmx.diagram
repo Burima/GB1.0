@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93a212d4f1854f248ddede7a8e084a85" Name="Diagram1" ZoomLevel="92">
+      <Diagram DiagramId="93a212d4f1854f248ddede7a8e084a85" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="GaddibabaModel.LicenceType" Width="1.5" PointX="7.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="GaddibabaModel.ReferPersonDetail" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GaddibabaModel.Role" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
