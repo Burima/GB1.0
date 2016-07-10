@@ -90,16 +90,21 @@
                                     @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
                                 </div>
                                 <div class="form-group attached-with">
-                                    <div class="col-md-4">
-                                        <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
+                                    @Html.Label("Registered in", new { @class = "col-md-2 control-label" })
+                                        <div class="attached-with">
+                                            <div class="col-md-10">
+                                                <div class="col-md-4">
+                                                    <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control">
-                                    </div>
-                                </div>
                                 
                                 <div class="form-group">
                                     <div class="btn-group-justified">
@@ -115,6 +120,7 @@
 
 @section scripts{
     <script>
+        var ListDrivers = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
@@ -123,6 +129,7 @@
 
         $('.modalClose').click(function () {
             $('#modalShowMessage').addClass("hidden");
+            window.location.href = ListDrivers;
         })
         var addDriverSuccess = function (data) {
             $('#addDriverMessage').empty();
