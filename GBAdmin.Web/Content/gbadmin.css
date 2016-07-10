@@ -15,3 +15,20 @@
 
     color:red !important;
 }
+
+/*------------- Row Spacer -------------*/
+
+.row-spacer-7 {
+    height: 7em;
+}
+.row-spacer {
+    height: 4.725em;
+}
+
+.row-spacer-small {
+    height: 2em;
+}
+
+.row-spacer-mini {
+    height: 1.25em;
+}
