@@ -16,10 +16,7 @@ namespace GBAdmin.Web
                       "~/Content/style.css",
                       "~/Content/GBAdmin.css"));
 
-            // Font Awesome icons
-            bundles.Add(new StyleBundle("~/font-awesome/css").Include(
-                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
-
+           
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-2.1.1.min.js"));
