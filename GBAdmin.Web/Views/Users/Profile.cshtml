@@ -20,19 +20,69 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <img id="demo3" alt="Jcrop Example" />
                     </div>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <input class="btn btn-green" id="btnSkipCropping" type="submit" aria-hidden="true" value="Skip Cropping" />
-                <input class="btn btn-green" id="btnCrop" type="submit" value="Crop" />
+                <input class="btn btn-primary" id="btnLeftRotation" type="button" aria-hidden="true" value="Left Rotation" />
+                <input class="btn btn-primary" id="btnRightRotation" type="button" aria-hidden="true" value="Right Rotation" />
+                <input class="btn btn-primary" id="btnSkipCropping" type="submit" aria-hidden="true" value="Skip Cropping" />
+                <input class="btn btn-primary" id="btnCrop" type="submit" value="Crop" />
             </div>
         </div>
     </div>
 </div>
-<div class="wrapper">
+@*modal for changing password*@
+<div class="modal inmodal" id="modalChangePassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input id="txtCurrentPassword" type="password" class="form-control" placeholder="Current Password" name="ManageUserViewModel.OldPassword" />
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input id="txtNewPassword" type="password" class="form-control" placeholder="New Password" name="ManageUserViewModel.NewPassword" />
+                    </div>
+                    <div class="form-group">
+                        <label>Retype Password</label>
+                        <input id="txtRetypePassword" type="password" class="form-control" placeholder="Retype Password" name="ManageUserViewModel.ConfirmPassword" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btnChangePassword">Save changes</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@*---Email Verification Modal---*@
+<div id="divEmailVerification" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bounceInRight">
+            <div class="modal-header">
+                <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Verify Email</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        Verification code has been sent to your provided Email ID.Please check you email id.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @using (Html.BeginForm("ViewProfile", "User", FormMethod.Post, new { role = "form", id = "view-profile-form", style = "min-height:420px" }))
 {
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -41,7 +91,7 @@
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li>
-                            <a data-toggle="tab" href="#tab-1">Pr ofile Information</a>
+                            <a data-toggle="tab" href="#tab-1">Profile Information</a>
                         </li>
                         <li>
                             <a data-toggle="tab" href="#tab-2">Photo</a>
@@ -82,7 +132,7 @@
                                     <div class="form-group">
                                         <label>GovernmentID Type</label>
                                         <select class="form-control input-sm" name="GovtIDType">
-                                            <option value="" disabled>Select ID Type</option>
+                                            <option disabled selected="selected">Select ID Type</option>
                                             <option @(Model.GovtIDType == 1 ? "selected" : "") value="1">PAN Card</option>
                                             <option @(Model.GovtIDType == 2 ? "selected" : "") value="2">Voter ID Card</option>
                                             <option @(Model.GovtIDType == 3 ? "selected" : "") value="3">Driving License</option>
@@ -97,7 +147,7 @@
                                     <div class="form-group">
                                         <label>Highest Education</label>
                                         <select class="form-control input-sm" name="HighestEducation">
-                                            <option value="" disabled>Select Highest Education</option>
+                                            <option disabled selected="selected">Select Highest Education</option>
                                             <option @(Model.HighestEducation == "PostGraduate" ? "selected" : "") value="PostGraduate">Post Graduate</option>
                                             <option @(Model.HighestEducation == "Graduate" ? "selected" : "") value="Graduate">Graduate</option>
                                             <option @(Model.HighestEducation == "UnderGraduate" ? "selected" : "") value="UnderGraduate">Under Graduate</option>
@@ -108,7 +158,7 @@
                                         <input type="text" class="form-control input-sm charAlone" placeholder="Institution Name" value="@Model.InstitutionName" name="InstitutionName">
                                     </div> 
                                </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="padding-top:3%;padding-left:3%">
                                     <div class="form-group">
                                         <div>
                                             <button id="btnSave" class="btn btn-primary" type="submit" tabindex="5">Save</button>
@@ -121,7 +171,7 @@
                         @*tab 2 content*@
                         <div id="tab-2" class="tab-pane">
                             <div class="row form-group" style="padding-top:3%;padding-bottom:3%">
-                                <div class="col-md-7">
+                                <div class="col-md-5">
                                     <img draggable="false" id="imgProfile" style="display:inline-block; height:250px; width:250px; margin: 0 5px 0 10px;" src="@Url.Action(Model.ProfilePicture)" alt="" />
                                 </div>
                                 <div class="col-md-5 row-padding-top-5">
@@ -143,14 +193,21 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding-top:3%;padding-left:3%">
                                         <div>
                                             <button id="btnSave" class="btn btn-primary" type="submit" tabindex="5">Save</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+                            <input type="hidden" id="hdnImageCropWidth" name="ImageCropWidth" />
+                            <input type="hidden" id="hdnImageCropHeight" name="ImageCropHeight" />
+                            <input type="hidden" id="hdnCropPointX" name="CropPointX" />
+                            <input type="hidden" id="hdnCropPointY" name="CropPointY" />
+                            <input type="hidden" id="hdnCropPointX2" name="CropPointX2" />
+                            <input type="hidden" id="hdnCropPointY2" name="CropPointY2" />
+                            <input type="hidden" id="hdnFileName" name="ImgFileName" />
+                            <input type="hidden" id="hdnImageSource" name="ImageSource" />
                         </div>
                         @*tab 3 content*@
                         <div id="tab-3" class="tab-pane">
@@ -222,7 +279,7 @@
                                 </div>
                                 @*Save button*@
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding-top:3%;">
                                         <div>
                                             <button id="btnSave" class="btn btn-primary" type="submit" tabindex="5">Save</button>
                                         </div>
@@ -239,11 +296,10 @@
     </div>
 }
 
-</div>
 <!--/wrapper-->
 @section scripts{
     <script>
-        var CropImageUrl = '@Url.Action("CropImage", "User")';
+        var CropImageUrl = '@Url.Action("CropImage", "Users")';
         document.getElementById("fileProfile").onchange = function () {
 
             $("#photoFilePath").html(this.value.split('\\').pop());
@@ -251,7 +307,18 @@
             $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
 
         };
+        $("#btnLeftRotation").click(function () {
+            alert("left");
+            $('#demo3').rotate({ angle: 90 });
+
+        });
+
+        $("#btnRightRotation").click(function () {
+            alert("right");
+            $('#demo3').rotate({ angle: 90 });
+        })
     </script>
+    <script src='@Url.Content("~/Scripts/jQueryRotate.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/ViewProfile.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/jquery.Jcrop.min.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/form-image-crop.js")'></script>

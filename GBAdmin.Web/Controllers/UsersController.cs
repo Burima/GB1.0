@@ -96,8 +96,7 @@ namespace GBAdmin.Web.Controllers
             return PartialView("_EditProfile", userViewModel);
         }
 
-
-        [HttpPost]
+        //[Route("CropImage", Name = RouteNames.CropImage)]
         public virtual ActionResult CropImage(string imagePath, decimal? cropPointX, decimal? cropPointY, decimal? imageCropWidth,
             decimal? imageCropHeight, string fileName)
         {

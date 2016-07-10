@@ -46,9 +46,8 @@ function readURL(input) {
             $("#divCropResizeImage .modal-body").append("</div></div></div></div>");
             $('#demo3').replaceWith('<img id="demo3" src="' + e.target.result + '"/>');
             FormImageCrop.init();
-
-            $("#imgPreview").attr("src", e.target.result);
             $("div.jcrop-holder img").attr("src", e.target.result);
+            $("div.jcrop-holder img").attr("id", "demo3");
 
         }
         reader.readAsDataURL(input.files[0]);

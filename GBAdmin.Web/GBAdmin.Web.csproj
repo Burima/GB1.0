@@ -173,6 +173,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
@@ -195,6 +196,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom\ViewProfile.css" />
     <Content Include="Content\email.css" />
+    <Content Include="Content\Jcrop.gif" />
     <Content Include="Content\jquery.Jcrop.css" />
     <Content Include="Content\jquery.Jcrop.min.css" />
     <Content Include="Content\patterns\congruent_pentagon.png" />
@@ -302,6 +304,7 @@
     <Content Include="Images\angular_logo.png" />
     <Content Include="Images\dashbard4_1.jpg" />
     <Content Include="Images\dashbard4_2.jpg" />
+    <Content Include="Images\default_profile_pic.jpg" />
     <Content Include="Images\email_1.jpg" />
     <Content Include="Images\email_2.jpg" />
     <Content Include="Images\email_3.jpg" />
@@ -378,6 +381,7 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jQueryRotate.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

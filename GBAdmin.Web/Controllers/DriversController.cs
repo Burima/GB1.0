@@ -7,12 +7,14 @@ using System.Web.Mvc;
 using GB.Data.DBEntity;
 using GBAdmin.Web.Services;
 using Newtonsoft.Json;
+using GBAdmin.Web.Helpers;
 namespace GBAdmin.Web.Controllers
 {
     [Authorize]
     public class DriversController : Controller
     {
         GaddibabaEntities GBContext = new GaddibabaEntities();
+        CommonHelper CommonHelper = new CommonHelper();
         // GET: Drivers/Add
         [HttpGet]
         public ActionResult Add()
@@ -103,9 +105,22 @@ namespace GBAdmin.Web.Controllers
         public ActionResult List()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            var UserID = SessionManager.GetSessionUser().Id;
-            var driverDetailList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
-            driverViewModel.DriverDetailsList = driverDetailList;
+            var UserID =  SessionManager.GetSessionUser().Id;
+          
+            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+            {
+                driverViewModel.DriverDetailsList = GBContext.DriverDetails.ToList();
+            }
+            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
+            {
+                driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
+            }
+            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
+                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+            {
+                driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
+            }
+            
             return View(driverViewModel);
         }
 
@@ -158,5 +173,7 @@ namespace GBAdmin.Web.Controllers
             }
            // return View();
         }
+
+      
     }
 }
