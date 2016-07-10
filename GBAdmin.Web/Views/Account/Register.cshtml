@@ -15,43 +15,43 @@
     <div class="form-group">
         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
-            <input name="model.FirstName" class="form-control" data-val="true" />
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @*<input name="model.FirstName" class="form-control" data-val="true" />*@
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
-            <input name="model.LastName" class="form-control" data-val="true" />
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @*<input name="model.LastName" class="form-control" data-val="true" />*@
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })*@
-            <input name="model.Email" class="form-control" data-val="true" />
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @*<input name="model.Email" class="form-control" data-val="true" />*@
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.PasswordFor(m => m.Password, new { @class = "form-control" })*@
-            <input name="model.Password" type="password" class="form-control" data-val="true" />
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password" })
+            @*<input name="model.Password" type="password" class="form-control" data-val="true" />*@
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
-            <input name="model.ConfirmPassword" type="password" class="form-control" data-val="true" />
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control"})
+            @*<input name="model.ConfirmPassword" type="password" class="form-control" data-val="true" />*@
         </div>
     </div>
      <div class="form-group">
         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
-            <input name="model.PhoneNumber" class="form-control" data-val="true" />
+            @Html.PasswordFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @*<input name="model.PhoneNumber" class="form-control" data-val="true" />*@
         </div>
     </div>
     <div class="form-group">
@@ -90,6 +90,7 @@
 <script>
     $(document).ready(function () {
         $('#modalShowMessage').modal('show');
+        $("#Password").attr('data-toggle', 'popover').attr('data-placement', 'bottom').attr('title', 'Your Password must have:').attr('data-content', '<span style="text-align:left;">Minimum 8 characters<br/>At least one capital letter,<br/>a number<br/>and a special character !@@#$%^&</span> ').popover({ trigger: 'hover', html: true });
     });
     </script>
 }
