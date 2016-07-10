@@ -17,5 +17,17 @@ namespace GBAdmin.Web.Services
             Telecaller=6,
             Sales=7
         }
+
+        public enum EnumDriverStatus
+        {
+            New = 1,
+            Approved = 2,
+            Rejected = 3,
+            HaveLicence = 4,
+            AppliedForLicence = 5,
+            LearnerReceived = 6,
+            LicenceReceived = 7,
+            AttachedtoUber = 8
+        }
     }
 }

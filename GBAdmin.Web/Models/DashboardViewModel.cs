@@ -7,10 +7,13 @@ namespace GBAdmin.Web.Models
 {
     public class DashboardViewModel
     {
-        public IDictionary<string, int> AttachedToUber { get; set; }
-        public IDictionary<string, int> New { get; set; }
-        public IDictionary<string, int> Approved { get; set; }
-        public IDictionary<string, int> Rejected { get; set; }
+        
+        public int New { get; set; }
+        public int InProgress { get; set; }
+        public int Rejected { get; set; }
+        public int AttachedToUber { get; set; }
+
+        public int Total { get; set; }
 
     }
 }
