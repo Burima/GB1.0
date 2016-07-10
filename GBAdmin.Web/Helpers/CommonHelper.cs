@@ -25,11 +25,15 @@ namespace GBAdmin.Web.Helpers
         {
             List<User> EmployeeList = new List<User>();
             EmployeeList = GBContext.Users.Where(m => m.CreatedBy == UserID).ToList();
-            foreach (var Employee in EmployeeList)
+
+            if (Role.ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
             {
-                if (Employee.Roles.FirstOrDefault().Name == Constants.Roles.Manager.ToString().ToUpper())
+                foreach (var Employee in EmployeeList)
                 {
-                    EmployeeList.AddRange(GetEmployeeByUserID(Employee.UserID, Employee.Roles.FirstOrDefault().Name));
+                    if (Employee.Roles.FirstOrDefault().Name == Constants.Roles.Manager.ToString().ToUpper())
+                    {
+                        EmployeeList.AddRange(GetEmployeeByUserID(Employee.UserID, Employee.Roles.FirstOrDefault().Name));
+                    }
                 }
             }
             return EmployeeList;
