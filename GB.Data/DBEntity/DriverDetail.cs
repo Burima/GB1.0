@@ -25,7 +25,6 @@ namespace GB.Data.DBEntity
         public string Pincode { get; set; }
         public bool Uber { get; set; }
         public bool Ola { get; set; }
-        public bool Tfs { get; set; }
         public bool IsReferred { get; set; }
         public long CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
