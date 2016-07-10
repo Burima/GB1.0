@@ -3,20 +3,37 @@
     ViewBag.Title = "Add Driver";
 }
 <style>
-    .attached-with{
-        font-size:15px;
-        padding-bottom:7%;
+    .attached-with {
+        font-size: 15px;
+        padding-bottom: 7%;
     }
-    .attached-with label{
-        font-weight:normal;
-    }
-    .attached-with input[type=checkbox]{
-        height:15px;
-        width:15px;
-        margin-left: 2%;
-    }
+
+        .attached-with label {
+            font-weight: normal;
+        }
+
+        .attached-with input[type=checkbox] {
+            height: 15px;
+            width: 15px;
+            margin-right: 8%;
+            float: left;
+        }
+        #Message {
+            margin-top: 2%;
+            background: #ff8400;
+            color: white;
+            padding: 1%;
+            margin-bottom: 2%;
+            display: none;
+            height: 36px;
+            /*height: 76px;*/
+        }
+
+            #Message .msg-close {
+                cursor: pointer;
+            }
 </style>
-<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+@*<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,86 +49,80 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="row  border-bottom white-bg dashboard-header">
     <div class="col-sm-9">
         <div class="row">
             <div class="col-sm-8">
                 <h3 class="m-t-none m-b">Add new driver</h3>
-                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-SignUp", autocomplete = "off"}))
+                @using (Ajax.BeginForm("Add", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "addDriverSuccess", OnFailure = "addDriverFailed", HttpMethod = "Post" }, new { role = "form", id = "form-addDriver", autocomplete = "off" }))
                 {
-
+                    <div class="form-group">
+                        <div id="Message"><span class="pull-left msg-text"></span><span class="pull-right msg-close">X</span></div>
+                    </div>
                     @Html.AntiForgeryToken();
-  
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })*@
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })*@
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })*@
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })*@
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" name="model.LicenceType" tabindex="5">
-                                        <option disabled selected="selected">Licence Type</option>
-                                        <option value="1">LMV</option>
-                                        <option value="2">LMV-NT</option>
-                                        <option value="3">LMV-TR</option>
-                                        <option value="4">HMV</option>
-                                        <option value="5">HPMV</option>
-                                        <option value="6">HGMV</option>
-                                        <option value="7">LMV-CAB</option>
-                                        <option value="8">NA</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
-                                        <option disabled selected="selected">Experience In Kolkata</option>
-                                        @for (int i = 0; i <= 30; i++)
-                                                    {
-                                                    <option value=@i>@i</option>
-                                                    }
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Expected Salary in INR" name="model.ExpectedSalary" maxlength="50" tabindex="8" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
-                                </div>
-                                <div class="form-group attached-with">
-                                    @Html.Label("Registered in", new { @class = "col-md-2 control-label" })
-                                        <div class="attached-with">
-                                            <div class="col-md-10">
-                                                <div class="col-md-4">
-                                                    <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                <div class="form-group">
-                                    <div class="btn-group-justified">
-                                        <input type="submit" class="btn btn-primary full-width" value="Add Driver">
-                                    </div>
-                                </div>
-    
+
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" />*@
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" />*@
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" />*@
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />*@
+                        @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="model.LicenceType" tabindex="5">
+                            <option disabled selected="selected">Licence Type</option>
+                            <option value="1">LMV</option>
+                            <option value="2">LMV-NT</option>
+                            <option value="3">LMV-TR</option>
+                            <option value="4">HMV</option>
+                            <option value="5">HPMV</option>
+                            <option value="6">HGMV</option>
+                            <option value="7">LMV-CAB</option>
+                            <option value="8">NA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />*@
+                        @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
+                            <option disabled selected="selected">Experience In Kolkata</option>
+                            @for (int i = 0; i <= 30; i++)
+                            {
+                                <option value=@i>@i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="Expected Salary in INR" name="model.ExpectedSalary" maxlength="50" tabindex="8" data-val="true" />*@
+                        @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "form-control", maxlength = "50", placeholder = "Expected Salary", tabIndex = "8" })
+                    </div>
+                    <div class="form-group attached-with">
+                        @Html.Label("Registered in", new { @class = "col-md-4 control-label pull-left" })
+                        <div class="col-md-4">
+                            <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group-justified">
+                            <input type="submit" class="btn btn-primary full-width" value="Add Driver">
+                        </div>
+                    </div>
+
                 }
             </div>
         </div>
@@ -132,9 +143,16 @@
             window.location.href = ListDrivers;
         })
         var addDriverSuccess = function (data) {
-            $('#addDriverMessage').empty();
-            $('#addDriverMessage').html(data.result);
-            $('#modalShowMessage').removeClass("hidden");
+            //$('#addDriverMessage').empty();
+            //$('#addDriverMessage').html(data.result);
+            //$('#modalShowMessage').removeClass("hidden");
+            $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
+                $(this).delay(5000).hide('slow');
+                if (data.Success) {
+                    window.location.href = "/Drivers/List";
+                }
+            })
+            
         };
 
         var addDriverFailed = function (data) {

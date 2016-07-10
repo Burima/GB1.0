@@ -21,3 +21,9 @@ GBAdmin.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 GB.Data/GB.Data.csproj
 GB.Web.v12.suo
 >>>>>>> 357b0d39dcacea04cc67806be0f51ce40bc0c8bd
+/GB.Data/bin
+/GB.Data/obj/Release
+/GB.Membership/bin
+/GB.Membership/obj/Release
+/GBAdmin.Web/bin
+/GBAdmin.Web/obj
