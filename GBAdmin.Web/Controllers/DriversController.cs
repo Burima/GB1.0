@@ -23,8 +23,7 @@ namespace GBAdmin.Web.Controllers
         }
         [HttpPost]       
         public JsonResult Add(DriverViewModel model)
-        {
-            int count = 0;            
+        {                  
             if (ModelState.IsValid)
             {              
                 var UserID = SessionManager.GetSessionUser().Id;
@@ -47,7 +46,7 @@ namespace GBAdmin.Web.Controllers
                 //{
                     //UserID = User.Id;
                 //}
-                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber).FirstOrDefault();
+                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber || m.LicenceNo==model.LicenceNo).FirstOrDefault();
                 if (driverDetail == null)
                 {
                     DriverDetail driver = new DriverDetail();
@@ -66,37 +65,24 @@ namespace GBAdmin.Web.Controllers
                     driver.LastUpdatedOn = DateTime.Now;
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
-                    GBContext.DriverDetails.Add(driver);
+                    GBContext.DriverDetails.Add(driver);                   
 
-                    count = GBContext.SaveChanges();
+                    if (GBContext.SaveChanges() > 0)
+                    {
+                        return Json(new { Success = true, Message = "New driver added successfully." }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { Success = false, Message = "Failed to add driver." }, JsonRequestBehavior.AllowGet);
+                    }
                 }
                 else
                 {
-                    return new JsonResult()
-                    {
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new { result = "Duplicate driver details." }
-                    };
+                    return Json(new { Success = false, Message = "Driver already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
                 }
                
             }
-            if (count > 0)
-            {
-                return new JsonResult()
-                {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = "New Driver Entry Added Successfully." }
-                };
-            }
-            else
-            {
-                return new JsonResult()
-                {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = "Error in adding driver.Please try again later." }
-                };
-            }
-           // return View();
+            return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
         } 
        
         //GET

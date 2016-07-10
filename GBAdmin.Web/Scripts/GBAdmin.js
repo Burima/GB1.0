@@ -1,5 +1,10 @@
 ﻿
 $(document).ready(function () {
+
+    $('.msg-close').click(function () {
+        $(this).parent('#Message').hide('slow');
+
+    });
     //required field validator for all elements in the application
     jQuery.extend(jQuery.validator.messages, {
         required: "Required"
