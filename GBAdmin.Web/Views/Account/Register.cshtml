@@ -47,6 +47,13 @@
             <input name="model.ConfirmPassword" type="password" class="form-control" data-val="true" />
         </div>
     </div>
+     <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
+            <input name="model.PhoneNumber" class="form-control" data-val="true" />
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

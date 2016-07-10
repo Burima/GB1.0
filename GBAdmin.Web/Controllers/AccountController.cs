@@ -123,6 +123,7 @@ namespace GBAdmin.Web.Controllers
                     LastName = model.LastName,
                     UserName = model.Email.ToLower(),
                     Email = model.Email.ToLower(),
+                    PhoneNumber = model.PhoneNumber,
                     CreatedOn = DateTime.Now,
                     LastUpdatedOn = DateTime.Now,
                     Status = 1,

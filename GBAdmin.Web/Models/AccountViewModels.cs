@@ -80,6 +80,7 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Role")]
         [Required]
         public string RoleName { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
     public class ResetPasswordViewModel
