@@ -59,8 +59,7 @@ namespace GBAdmin.Web.Controllers
                     driver.LicenceNo = model.LicenceNo;
                     driver.ExperienceInKolkata = model.ExperienceInKolkata;
                     driver.Uber = model.Uber;
-                    driver.Ola = model.Ola;
-                    driver.Tfs = model.Tfs;
+                    driver.Ola = model.Ola;                    
                     driver.IsReferred = model.IsReferred;
                     driver.CreatedBy = UserID;
                     driver.CreatedOn = DateTime.Now;

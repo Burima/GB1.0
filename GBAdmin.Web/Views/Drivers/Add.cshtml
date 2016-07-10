@@ -5,16 +5,20 @@
 <style>
     .attached-with{
         font-size:15px;
-        padding-bottom:7%;
+        padding-bottom:1%;
     }
     .attached-with label{
         font-weight:normal;
+        display:inline;
     }
     .attached-with input[type=checkbox]{
         height:15px;
         width:15px;
-        margin-left: 2%;
+        margin-right: 8%;
+        float:left;
+        display:inline;
     }
+    
 </style>
 <div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
     <div class="modal-dialog modal-sm">
@@ -44,20 +48,20 @@
                     @Html.AntiForgeryToken();
   
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })*@
+                                    @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" />*@
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })*@
+                                    @*<input type="text" class="form-control" placeholder="Last Name" name="model.LastName" maxlength="50" tabindex="2" data-val="true" />*@
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })*@
+                                    @*<input type="text" class="form-control" placeholder="Phone Number" name="model.PhoneNumber" maxlength="10" tabindex="3" data-val="true" />*@
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })*@
+                                    @*<input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />*@
+                                    @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control" name="model.LicenceType" tabindex="5">
@@ -73,8 +77,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
+                                    @*<input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />*@
+                                    @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
@@ -86,24 +90,22 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Expected Salary in INR" name="model.ExpectedSalary" maxlength="50" tabindex="8" data-val="true" />
-                                    @*@Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })*@
+                                    @*<input type="text" class="form-control" placeholder="Expected Salary in INR" name="model.ExpectedSalary" maxlength="50" tabindex="8" data-val="true" />*@
+                                    @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "8" })
                                 </div>
                                 <div class="form-group attached-with">
-                                    @Html.Label("Registered in", new { @class = "col-md-2 control-label" })
-                                        <div class="attached-with">
-                                            <div class="col-md-10">
+                                    @Html.Label("Registered in", new { @class = "col-md-4 control-label pull-left" })
+                                        @*<div class="attached-with">*@
+                                            @*<div class="col-md-8">*@
                                                 <div class="col-md-4">
                                                     <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <label>TFS</label><input type="checkbox" name="model.Tfs" value="true" tabindex="12" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
+                                                
+                                            @*</div>*@
+                                        @*</div>*@
                                     </div>
                                 
                                 <div class="form-group">

@@ -33,9 +33,7 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Uber")]
         public bool Uber { get; set; }
         [Display(Name = "Ola")]
-        public bool Ola { get; set; }
-        [Display(Name = "Tfs")]
-        public bool Tfs { get; set; }
+        public bool Ola { get; set; }       
         public bool IsReferred { get; set; }
         public long UserID { get; set; }
          [Display(Name = "Expected Salary")]
