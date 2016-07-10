@@ -14,6 +14,7 @@ namespace GBAdmin.Web.Controllers
         GB.Data.DBEntity.GaddibabaEntities GBContext = new GB.Data.DBEntity.GaddibabaEntities();
 
         [Route("Dashboard", Name = RouteNames.Dashboard)]
+        [Authorize]
         public ActionResult Index()
         {
             var UserID = SessionManager.GetSessionUser().Id;
