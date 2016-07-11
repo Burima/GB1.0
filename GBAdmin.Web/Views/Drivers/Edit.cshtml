@@ -20,7 +20,7 @@
         }
           #Message {
             margin-top: 2%;
-            background: #ff8400;
+            background: #1ab394;
             color: white;
             padding: 1%;
             margin-bottom: 2%;
@@ -131,7 +131,7 @@
                                         @Html.LabelFor(m=> m.LicenceNo, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Licence Number", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence Number", tabIndex = "1" })
                                             </div>
                                         </div>
                                     <div class="form-group">
@@ -216,12 +216,10 @@
         //    window.location.href = "/Drivers/List";
         //})
         var editDriverSuccess = function (data) {
-            //$('#editDriverMessage').empty();
-            //$('#editDriverMessage').html(data.result);
-            //$('#modalShowMessage').removeClass("hidden");
             $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
                 $(this).delay(5000).hide('slow');
                 if (data.Success) {
+                    $('#Message').css(" background", "#1ab394");
                     window.location.href = "/Drivers/List";
                 }
             })
