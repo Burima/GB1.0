@@ -80,21 +80,21 @@
                                         @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
                                         @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                         <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m=>m.PhoneNumber, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "Phone Number", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.Pincode, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "Pincode", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "7", placeholder = "Pincode", tabIndex = "4" })
                                         </div>
                                      </div>
                                     <div class="form-group">
@@ -139,7 +139,7 @@
                                         @Html.LabelFor(m=>m.ExpectedSalary, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "Expected Salary in INR", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "5", placeholder = "Expected Salary in INR", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">

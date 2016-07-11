@@ -131,7 +131,16 @@ namespace GBAdmin.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
+                if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber || dbDriverDetail.LicenceNo != driverDetail.LicenceNo)
+                {
+                    var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber || m.LicenceNo == driverDetail.LicenceNo);
+                    if (User != null)
+                    {
+                        return Json(new { Success = false, Message = "Driver already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
+                    }
+                }
                 dbDriverDetail.FirstName = driverDetail.FirstName;
                 dbDriverDetail.LastName = driverDetail.LastName;
                 dbDriverDetail.PhoneNumber = driverDetail.PhoneNumber;
@@ -144,6 +153,7 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.LastUpdatedOn = DateTime.Now;
                 dbDriverDetail.Ola = driverDetail.Ola;
                 dbDriverDetail.Uber = driverDetail.Uber;
+               
                 
                 if (GBContext.SaveChanges() > 0)
                 {
