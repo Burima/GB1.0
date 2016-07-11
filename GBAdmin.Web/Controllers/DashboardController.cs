@@ -21,6 +21,7 @@ namespace GBAdmin.Web.Controllers
         {
             DashboardViewModel DashboardViewModel = new DashboardViewModel();
             List<DriverDetail> DriverDetails = new List<DriverDetail>();
+            var UserID = SessionManager.GetSessionUser().Id;
             if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
             {
                 DriverDetails = GBContext.DriverDetails.ToList();
@@ -29,7 +30,7 @@ namespace GBAdmin.Web.Controllers
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
             {
-                DriverDetails = CommonHelper.GetDriverDetailsByUserID(SessionManager.GetSessionUser().Id, Session["Role"].ToString().ToUpper());
+                DriverDetails = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
             }
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Telecaller.ToString().ToUpper())
             {
@@ -39,7 +40,7 @@ namespace GBAdmin.Web.Controllers
             }
             else
             {
-                DriverDetails = GBContext.DriverDetails.Where(m => m.CreatedBy == SessionManager.GetSessionUser().Id).ToList();
+                DriverDetails = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
             }
            
             DashboardViewModel.New = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).Count();
