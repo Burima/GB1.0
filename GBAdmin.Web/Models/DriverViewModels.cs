@@ -20,10 +20,12 @@ namespace GBAdmin.Web.Models
 
         [Display(Name = "Phone Number")]
         [Required]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid phone number")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Pincode")]
         [Required]
+        [StringLength(6, MinimumLength = 6, ErrorMessage = "Invalid pincode")]
         public string Pincode { get; set; }
 
         [Display(Name = "Licence Type")]
