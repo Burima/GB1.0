@@ -79,30 +79,19 @@
                         @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "4" })
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="model.LicenceType" tabindex="5">
-                            <option disabled selected="selected">Licence Type</option>
-                            <option value="1">LMV</option>
-                            <option value="2">LMV-NT</option>
-                            <option value="3">LMV-TR</option>
-                            <option value="4">HMV</option>
-                            <option value="5">HPMV</option>
-                            <option value="6">HGMV</option>
-                            <option value="7">LMV-CAB</option>
-                            <option value="8">NA</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
+                            { new SelectListItem { Text = "LMV", Value = "1"},
+                            new SelectListItem { Text = "LMV-NT", Value = "2"},
+                            new SelectListItem { Text = "LMV-TR", Value = "3"},
+                            new SelectListItem { Text = "HMV", Value = "4"},
+                            new SelectListItem { Text = "HPMV", Value = "5"},
+                            new SelectListItem { Text = "HGMV", Value = "6"},
+                            new SelectListItem { Text = "LMV-CAB", Value = "7"},
+                     }, "Select Driver Status", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         @*<input type="text" class="form-control" placeholder="Licence No" name="model.LicenceNo" maxlength="50" tabindex="6" data-val="true" />*@
                         @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence No", tabIndex = "6" })
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" name="model.ExperienceInKolkata" tabindex="7">
-                            <option disabled selected="selected">Experience In Kolkata</option>
-                            @for (int i = 0; i <= 30; i++)
-                            {
-                                <option value=@i>@i</option>
-                            }
-                        </select>
                     </div>
                     <div class="form-group">
                         @*<input type="text" class="form-control" placeholder="Expected Salary in INR" name="model.ExpectedSalary" maxlength="50" tabindex="8" data-val="true" />*@
@@ -111,10 +100,10 @@
                     <div class="form-group attached-with">
                         @Html.Label("Registered in", new { @class = "col-md-4 control-label pull-left" })
                         <div class="col-md-4">
-                            <label>Uber</label><input type="checkbox" name="model.Uber" value="true" tabindex="10" class="form-control">
+                            <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new { @class = "form-control" })
                         </div>
                         <div class="col-md-4">
-                            <label>Ola</label><input type="checkbox" name="model.Ola" value="true" tabindex="11" class="form-control">
+                            <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">

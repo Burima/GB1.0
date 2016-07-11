@@ -21,7 +21,6 @@ namespace GB.Data.DBEntity
         public string PhoneNumber { get; set; }
         public int LicenceTypeID { get; set; }
         public string LicenceNo { get; set; }
-        public int ExperienceInKolkata { get; set; }
         public string Pincode { get; set; }
         public bool Uber { get; set; }
         public bool Ola { get; set; }

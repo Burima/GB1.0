@@ -33,10 +33,6 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Licence No")]       
         public string LicenceNo { get; set; }
 
-        [Display(Name = "Experience In Kolkata")]
-        [Required]
-        public int ExperienceInKolkata { get; set; }
-
         [Display(Name = "Uber")]
         public bool Uber { get; set; }
 

@@ -27,26 +27,8 @@ namespace GBAdmin.Web.Controllers
             if (ModelState.IsValid)
             {              
                 var UserID = SessionManager.GetSessionUser().Id;
-                //long UserID = 0;
-                //if (User == null)
-                //{
-                    
-                //    var Person = GBContext.ReferePersonDetails.FirstOrDefault(u => u.PhoneNumber == model.PhoneNumber);
-                //    UserID = Person.ReferPersonID;
-
-                //    if (Person == null)
-                //    {
-                //        ReferePersonDetail referPerson = new ReferePersonDetail();
-                //        referPerson.EmailID = model.ReferPersonViewModel.Email;
-                //        referPerson.PhoneNumber = model.ReferPersonViewModel.PhoneNumber;
-                //        UserID = GBContext.ReferePersonDetails.Add(referPerson).ReferPersonID;
-                //    }
-                //}
-                //else
-                //{
-                    //UserID = User.Id;
-                //}
-                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber || m.LicenceNo==model.LicenceNo).FirstOrDefault();
+               
+                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber ||(m.LicenceNo!=null && m.LicenceNo!=String.Empty && m.LicenceNo==model.LicenceNo)).FirstOrDefault();
                 if (driverDetail == null)
                 {
                     DriverDetail driver = new DriverDetail();
@@ -56,7 +38,6 @@ namespace GBAdmin.Web.Controllers
                     driver.Pincode = model.Pincode;
                     driver.LicenceTypeID = model.LicenceType;
                     driver.LicenceNo = model.LicenceNo;
-                    driver.ExperienceInKolkata = model.ExperienceInKolkata;
                     driver.Uber = model.Uber;
                     driver.Ola = model.Ola;
                     driver.IsReferred = model.IsReferred;
@@ -126,7 +107,6 @@ namespace GBAdmin.Web.Controllers
             driverDetail.LicenceType = dbDriverDetail.LicenceTypeID;
             driverDetail.Status = dbDriverDetail.DriverStatusID;
             driverDetail.LicenceNo = dbDriverDetail.LicenceNo;
-            driverDetail.ExperienceInKolkata = dbDriverDetail.ExperienceInKolkata;
             driverDetail.ExpectedSalary = dbDriverDetail.ExpectedSalary;
             driverDetail.Ola = dbDriverDetail.Ola;
             driverDetail.Uber = dbDriverDetail.Uber;
@@ -144,7 +124,6 @@ namespace GBAdmin.Web.Controllers
             dbDriverDetail.LicenceTypeID = driverDetail.LicenceType;
             dbDriverDetail.DriverStatusID = driverDetail.Status;
             dbDriverDetail.LicenceNo = driverDetail.LicenceNo;
-            dbDriverDetail.ExperienceInKolkata = driverDetail.ExperienceInKolkata;
             dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
             dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
             dbDriverDetail.LastUpdatedOn = DateTime.Now;

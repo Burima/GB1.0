@@ -98,19 +98,16 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         @Html.Label("Licence Type", new { @class = "col-md-2 control-label" })
-                                        @Html.HiddenFor(model => model.LicenceType, new { @class = "licenceType"})
-                                      
                                         <div class="col-md-10">
-                                            <select class="form-control" id="LicenceTypeID" name="LicenceType">
-                                                <option value="1">LMV</option>
-                                                <option value="2">LMV-NT</option>
-                                                <option value="3">LMV-TR</option>
-                                                <option value="4">HMV</option>
-                                                <option value="5">HPMV</option>
-                                                <option value="6">HGMV</option>
-                                                <option value="7">LMV-CAB</option>
-                                                <option value="8">NA</option>
-                                            </select>
+                                            @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
+                                                 { new SelectListItem { Text = "LMV", Value = "1"},
+                                                   new SelectListItem { Text = "LMV-NT", Value = "2"},
+                                                   new SelectListItem { Text = "LMV-TR", Value = "3"},
+                                                    new SelectListItem { Text = "HMV", Value = "4"},
+                                                    new SelectListItem { Text = "HPMV", Value = "5"},
+                                                    new SelectListItem { Text = "HGMV", Value = "6"},
+                                                    new SelectListItem { Text = "LMV-CAB", Value = "7"},
+                                              }, "Select Driver Status", new { @class = "form-control" })
                                         </div>
                                      </div>
                                     <div class="form-group">
@@ -121,13 +118,6 @@
                                             </div>
                                         </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(m=> m.ExperienceInKolkata, new { @class = "col-md-2 control-label" })
-                                        <div class="col-md-10">
-                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "Experience In Kolkata", tabIndex = "1" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         @Html.LabelFor(m=>m.ExpectedSalary, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
@@ -136,46 +126,36 @@
                                     </div>
                                     <div class="form-group">
                                      @Html.LabelFor(m=>m.Status, new { @class = "col-md-2 control-label" })
-                                        @*@Html.HiddenFor(model => model.Status,new{@class = "driverStatus" })*@
-                                        @*<div class="col-md-10">
-                                            <select class="form-control" name="Status" tabindex="9" id="DriverStatusID">
-                                                <option value="1">New</option>
-                                                <option value="2">Approved</option>
-                                                <option value="3">Rejected</option>
-                                                <option value="4">Have Licence</option>
-                                                <option value="5">Applied for Licence</option>
-                                                <option value="6">Learner Received</option>
-                                                <option value="7">Licence Received</option>
-                                                <option value="8">Attached to UBER</option>
-                                            </select>
-                                         </div>*@
-                                       @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
-                                             { new SelectListItem { Text = "New", Value = "1"},
-                                               new SelectListItem { Text = "Approved", Value = "2"},
-                                               new SelectListItem { Text = "Rejected", Value = "3"},
-                                                new SelectListItem { Text = "Have Licence", Value = "4"},
-                                                new SelectListItem { Text = "Applied For Licence", Value = "5"},
-                                                new SelectListItem { Text = "Learner Received", Value = "6"},
-                                                new SelectListItem { Text = "Licence Received", Value = "7"},
-                                                new SelectListItem { Text = "Attached to UBER", Value = "8"},
-                                               }, "Select Driver Status", new { @class = "form-control"}) 
-                                     </div>
-                                    <div class="form-group">
-                                        @Html.Label("Registered In", new { @class = "col-md-2 control-label" })
-                                        <div class="attached-with">
-                                            <div class="col-md-10">
-                                                <div class="col-md-4">
-                                                    <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new {@class = "form-control" })
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
+                                        <div class="col-md-10">
+                                           @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                                 { new SelectListItem { Text = "New", Value = "1"},
+                                                   new SelectListItem { Text = "Approved", Value = "2"},
+                                                   new SelectListItem { Text = "Rejected", Value = "3"},
+                                                    new SelectListItem { Text = "Have Licence", Value = "4"},
+                                                    new SelectListItem { Text = "Applied For Licence", Value = "5"},
+                                                    new SelectListItem { Text = "Learner Received", Value = "6"},
+                                                    new SelectListItem { Text = "Licence Received", Value = "7"},
+                                                    new SelectListItem { Text = "Attached to UBER", Value = "8"},
+                                                   }, "Select Licence Type", new { @class = "form-control"})
+                                            </div>
+                                         </div>
+                                        <div class="form-group">
+                                            @Html.Label("Registered In", new { @class = "col-md-2 control-label" })
+                                            <div class="attached-with">
+                                                <div class="col-md-10">
+                                                    <div class="col-md-4">
+                                                        <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new {@class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="pull-right" style="padding-right:5%">
-                                            <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="5">Done</button>
+                                        <div class="form-group">
+                                            <div class="pull-right" style="padding-right:5%">
+                                                <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="5">Done</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -183,55 +163,49 @@
                         </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
-    
-}
 
-@section Scripts{
-<script>
-    $('document').ready(function () {
-        //var optionDriverStatus = $('.driverStatus').val();
-        //$("#DriverStatusID").val(optionDriverStatus).find("option[value=" + optionDriverStatus + "]").attr('selected', true);
+    }
 
-        var optionLicenceType = $('.licenceType').val();
-        $("#LicenceTypeID").val(optionLicenceType).find("option[value=" + optionLicenceType + "]").attr('selected', true);
-    });
-    $('#btnNextPersonalDetails').click(function () {
-        if ($('#form-EditDriver').valid()) {
-            //hide BasicInformation upon valid data
-            $('#collapsePersonalDetails').removeClass('in');
-            //google api function
+    @section Scripts{
+    <script>
+       
+        $('#btnNextPersonalDetails').click(function () {
+            if ($('#form-EditDriver').valid()) {
+                //hide BasicInformation upon valid data
+                $('#collapsePersonalDetails').removeClass('in');
+                //google api function
 
-            //initialization of the map based on area and city
-            // initialize();
-            $('#linkCollapseProfessionalDetails').attr('href', '#collapseProfessionalDetails'); //activate collapseable functionality through linking it with the target id 
-            $('#collapseProfessionalDetails').addClass('in');//open Locality panel
-        }
-    });
+                //initialization of the map based on area and city
+                // initialize();
+                $('#linkCollapseProfessionalDetails').attr('href', '#collapseProfessionalDetails'); //activate collapseable functionality through linking it with the target id
+                $('#collapseProfessionalDetails').addClass('in');//open Locality panel
+            }
+        });
 
-    $('#linkCollapsePersonalDetails').click(function () {
-        $('#linkCollapseProfessionalDetails').removeAttr('href', '#collapseProfessionalDetails');
-        $('#collapseProfessionalDetails').removeClass('in');
-    });
-    $('.modalClose').click(function () {
-        $('#modalShowMessage').addClass("hidden");
-    })
-    var editDriverSuccess = function (data) {
-        $('#editDriverMessage').empty();
-        $('#editDriverMessage').html(data.result);
-        $('#modalShowMessage').removeClass("hidden");
-    };
+        $('#linkCollapsePersonalDetails').click(function () {
+            $('#linkCollapseProfessionalDetails').removeAttr('href', '#collapseProfessionalDetails');
+            $('#collapseProfessionalDetails').removeClass('in');
+        });
+        $('.modalClose').click(function () {
+            $('#modalShowMessage').addClass("hidden");
+            window.location.href = "/Drivers/List";
+        })
+        var editDriverSuccess = function (data) {
+            $('#editDriverMessage').empty();
+            $('#editDriverMessage').html(data.result);
+            $('#modalShowMessage').removeClass("hidden");
+        };
 
-    var editDriverFailed = function (data) {
-        $('#editDriverMessage').empty();
-        $('#editDriverMessage').html(data.result);
-        $('#modalShowMessage').removeClass("hidden");
-    };
-</script>
-}
+        var editDriverFailed = function (data) {
+            $('#editDriverMessage').empty();
+            $('#editDriverMessage').html(data.result);
+            $('#modalShowMessage').removeClass("hidden");
+        };
+    </script>
+    }
 
 
 

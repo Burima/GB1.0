@@ -14,8 +14,7 @@
           <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="LicenceTypeID" Type="int" Nullable="false" />
-          <Property Name="LicenceNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ExperienceInKolkata" Type="int" Nullable="false" />
+          <Property Name="LicenceNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Pincode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Uber" Type="bit" Nullable="false" />
           <Property Name="Ola" Type="bit" Nullable="false" />
@@ -451,8 +450,7 @@
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="LicenceTypeID" Type="Int32" Nullable="false" />
-          <Property Name="LicenceNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ExperienceInKolkata" Type="Int32" Nullable="false" />
+          <Property Name="LicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pincode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Uber" Type="Boolean" Nullable="false" />
           <Property Name="Ola" Type="Boolean" Nullable="false" />
@@ -618,7 +616,6 @@
                 <ScalarProperty Name="Ola" ColumnName="Ola" />
                 <ScalarProperty Name="Uber" ColumnName="Uber" />
                 <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="ExperienceInKolkata" ColumnName="ExperienceInKolkata" />
                 <ScalarProperty Name="LicenceNo" ColumnName="LicenceNo" />
                 <ScalarProperty Name="LicenceTypeID" ColumnName="LicenceTypeID" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
