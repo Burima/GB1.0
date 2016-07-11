@@ -20,8 +20,22 @@ namespace GBAdmin.Web.Controllers
         public ActionResult Index()
         {
             DashboardViewModel DashboardViewModel = new DashboardViewModel();
-            List<DriverDetail> DriverDetails = CommonHelper.GetDriverDetailsByUserID(
-                SessionManager.GetSessionUser().Id,Session["Role"].ToString() );
+            List<DriverDetail> DriverDetails = new List<DriverDetail>();
+            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+            {
+                DriverDetails = GBContext.DriverDetails.ToList();
+            }
+            
+            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
+                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+            {
+                DriverDetails = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
+            }
+            else
+            {
+                DriverDetails = GBContext.DriverDetails.Where(m => m.CreatedBy == SessionManager.GetSessionUser().Id).ToList();
+            }
+           
             DashboardViewModel.New = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).Count();
 
             DashboardViewModel.InProgress = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Approved).Count() + DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.HaveLicence).Count()

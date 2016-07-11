@@ -96,14 +96,15 @@ namespace GBAdmin.Web.Controllers
             {
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.ToList();
             }
-            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
-            {
-                driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
-            }
+           
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
             {
                 driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
+            }
+            else
+            {
+                driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
             }
             
             return View(driverViewModel);
