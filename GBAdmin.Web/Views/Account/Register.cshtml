@@ -15,14 +15,14 @@
     <div class="form-group">
         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control charAlone" })
             @*<input name="model.FirstName" class="form-control" data-val="true" />*@
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control charAlone" })
             @*<input name="model.LastName" class="form-control" data-val="true" />*@
         </div>
     </div>
@@ -50,7 +50,7 @@
      <div class="form-group">
         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10" })
             @*<input name="model.PhoneNumber" class="form-control" data-val="true" />*@
         </div>
     </div>
@@ -100,6 +100,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script>
     $(document).ready(function () {
+        $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+        $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
         $('#modalShowMessage').modal('show');
         $("#Password").attr('data-toggle', 'popover').attr('data-placement', 'bottom').attr('title', 'Your Password must have:').attr('data-content', '<span style="text-align:left;">Minimum 8 characters<br/>At least one capital letter,<br/>A number<br/>And a special character !@@#$%^&</span> ').popover({ trigger: 'hover', html: true });
     });

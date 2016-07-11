@@ -73,13 +73,19 @@ namespace GBAdmin.Web.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string RegisterError { get; set; }
+
         [Display(Name = "Role")]
-        [Required]
+        [Required]       
         public string RoleName { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid phone number")]
         public string PhoneNumber { get; set; }
     }
 

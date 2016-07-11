@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function () {
-
+    
     $('.msg-close').click(function () {
         $(this).parent('#Message').hide('slow');
 
