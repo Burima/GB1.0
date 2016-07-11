@@ -18,20 +18,7 @@
             margin-right: 8%;
             float: left;
         }
-        #Message {
-            margin-top: 2%;
-            background: #1ab394;
-            color: white;
-            padding: 1%;
-            margin-bottom: 2%;
-            display: none;
-            height: 36px;
-            /*height: 76px;*/
-        }
-
-            #Message .msg-close {
-                cursor: pointer;
-            }
+        
 </style>
 @*<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
     <div class="modal-dialog modal-sm">
@@ -109,7 +96,7 @@
                     </div>
                     <div class="form-group">
                         <div class="btn-group-justified">
-                            <input type="submit" class="btn btn-primary full-width" value="Add Driver">
+                            <input type="submit" class="btn btn-primary full-width" value="Add Driver" id="submit">
                         </div>
                     </div>
 
@@ -124,25 +111,26 @@
         var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
-            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
-
+            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });           
         });
 
         var addDriverSuccess = function (data) {
-            $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
-                $(this).delay(10000).hide('slow')
-                if (data.Success) {
-                    $('#Message').css(" background", "#1ab394");
+            if (data.Success) {
+                $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {
                     window.location.href = DriversListUrl;
-                }
-            })
+                });               
+            } else {
+                $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                    //$(this).prop('disabled', false);
+                });
+            }
             
         };
 
         var addDriverFailed = function (data) {
-            $('#addDriverMessage').empty();
-            $('#addDriverMessage').html(data.result);
-            $('#modalShowMessage').removeClass("hidden");
+            $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                //$(this).prop('disabled', false);
+            });
         };
     </script>
 }

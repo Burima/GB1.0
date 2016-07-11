@@ -1,19 +1,19 @@
 ﻿/*validation error*/
 .error {
-  /*color: #ff5a5f;*/
-  border: 1px solid red;
-}
-.input-validation-error{
+    /*color: #ff5a5f;*/
     border: 1px solid red;
 }
 
-.has-error{
+.input-validation-error {
     border: 1px solid red;
 }
 
-.validation-summary-errors{
+.has-error {
+    border: 1px solid red;
+}
 
-    color:red !important;
+.validation-summary-errors {
+    color: red !important;
 }
 
 /*------------- Row Spacer -------------*/
@@ -21,6 +21,7 @@
 .row-spacer-7 {
     height: 7em;
 }
+
 .row-spacer {
     height: 4.725em;
 }
@@ -32,3 +33,19 @@
 .row-spacer-mini {
     height: 1.25em;
 }
+
+/*--------------------- message box ---------------*/
+#Message {
+    margin-top: 2%;
+    background: #1ab394;
+    color: white;
+    padding: 1%;
+    margin-bottom: 2%;
+    display: none;
+    height: 36px;
+    /*height: 76px;*/
+}
+
+    #Message .msg-close {
+        cursor: pointer;
+    }

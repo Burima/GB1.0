@@ -16,6 +16,7 @@ using GBAdmin.Web.Services.Common;
 using GBAdmin.Web.Services;
 using GBAdmin.Web.Services.Security;
 using System.Web.UI;
+using System.Net;
 
 namespace GBAdmin.Web.Controllers
 {
@@ -111,8 +112,7 @@ namespace GBAdmin.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "SuperAdmin, Admin, Manager")]
         [ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]        
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -137,24 +137,31 @@ namespace GBAdmin.Web.Controllers
                 if (result.Succeeded)
                 {
                     await this.UserManager.AddToRoleAsync(user.Id, model.RoleName);
-                    await SignInAsync(user, isPersistent: false);
-                                       
+                                                           
                     //Send Activation emai
                     //await SendAccountActivationMail(user);
-                    TempData["Message"] = "User Added Successfully!!";
+                    //TempData["Message"] = "User Added Successfully!!";
+                    return Json(new { Success = true, Message = "User Added Successfully." }, JsonRequestBehavior.AllowGet);
                    
                 }
-                else
-                {
-                    model.RegisterError = result.Errors.FirstOrDefault();
-                    AddErrors(result);
-                    TempData["Message"] = "Error in adding user.Please try again later..";
-                    return View();
-                }
+                AddErrors(result);
+                var errors = ModelState
+                    .Keys
+                    .SelectMany(key => this.ModelState[key].Errors)
+                    .ToList()
+                    .Select(a => a.ErrorMessage)
+                    .ToList();
+
+                //Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { errors = errors, Success = false }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var errors = ModelState.Where(n => n.Value.Errors.Count > 0).ToList();
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { errors = errors, Success = false }, JsonRequestBehavior.AllowGet);
             }
 
-            // If we got this far, something failed, redisplay form
-            return RedirectToAction("List", "Users");
         }
 
         //
