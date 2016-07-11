@@ -29,7 +29,7 @@ namespace GBAdmin.Web.Controllers
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
             {
-                DriverDetails = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
+                DriverDetails = CommonHelper.GetDriverDetailsByUserID(SessionManager.GetSessionUser().Id, Session["Role"].ToString().ToUpper());
             }
             else
             {
