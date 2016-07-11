@@ -120,6 +120,7 @@
 
 @section scripts{
     <script>
+        var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
@@ -131,7 +132,7 @@
                 $(this).delay(5000).hide('slow')
                 if (data.Success) {
                     $('#Message').css(" background", "#1ab394");
-                    window.location.href = "/Drivers/List";
+                    window.location.href = DriversListUrl;
                 }
             })
             
