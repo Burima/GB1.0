@@ -217,21 +217,22 @@
         //    $('#modalShowMessage').addClass("hidden");
         //    window.location.href = "/Drivers/List";
         //})
-        var editDriverSuccess = function (data) {
-            $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
-                $(this).delay(5000).hide('slow');
-                if (data.Success) {
-                    $('#Message').css(" background", "#1ab394");
+        var editDriverSuccess = function (data) {            
+            if (data.Success) {
+                $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {
                     window.location.href = DriversListUrl;
-                }
-            })
-
+                });
+            } else {
+                $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                    //$(this).prop('disabled', false);
+                });
+            }
         };
 
         var editDriverFailed = function (data) {
-            $('#editDriverMessage').empty();
-            $('#editDriverMessage').html(data.result);
-            $('#modalShowMessage').removeClass("hidden");
+            $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                //$(this).prop('disabled', false);
+            });
         };
     </script>
     }
