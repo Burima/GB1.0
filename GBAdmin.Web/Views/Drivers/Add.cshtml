@@ -120,21 +120,13 @@
 
 @section scripts{
     <script>
-        var ListDrivers = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
         });
 
-        $('.modalClose').click(function () {
-            $('#modalShowMessage').addClass("hidden");
-            window.location.href = ListDrivers;
-        })
         var addDriverSuccess = function (data) {
-            //$('#addDriverMessage').empty();
-            //$('#addDriverMessage').html(data.result);
-            //$('#modalShowMessage').removeClass("hidden");
             $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
                 $(this).delay(5000).hide('slow');
                 if (data.Success) {

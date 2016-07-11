@@ -18,8 +18,22 @@
             width: 15px;
             margin-left: 2%;
         }
+          #Message {
+            margin-top: 2%;
+            background: #ff8400;
+            color: white;
+            padding: 1%;
+            margin-bottom: 2%;
+            display: none;
+            height: 36px;
+            /*height: 76px;*/
+        }
+
+            #Message .msg-close {
+                cursor: pointer;
+            }
 </style>
-<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+@*<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,11 +49,14 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 @using (Ajax.BeginForm("Edit", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "editDriverSuccess", OnFailure = "editDriverFailed", HttpMethod = "Post" }, new { @class = "form-horizontal" ,role = "form", id = "form-EditDriver", autocomplete = "off" }))
 {
-
+    <div class="form-group">
+            <div id="Message"><span class="pull-left msg-text"></span><span class="pull-right msg-close">X</span></div>
+        </div>
     <div class="row  border-bottom white-bg dashboard-header">
+        
         <div class="col-sm-12">
             <div class="ibox-content">
                 <div class="panel-body">
@@ -165,13 +182,18 @@
                 </div>
 
             </div>
-        </div>
+     </div>
 
     }
 
     @section Scripts{
     <script>
-       
+        $(document).ready(function () {
+            $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
+
+        });
+
         $('#btnNextPersonalDetails').click(function () {
             if ($('#form-EditDriver').valid()) {
                 //hide BasicInformation upon valid data
@@ -189,14 +211,21 @@
             $('#linkCollapseProfessionalDetails').removeAttr('href', '#collapseProfessionalDetails');
             $('#collapseProfessionalDetails').removeClass('in');
         });
-        $('.modalClose').click(function () {
-            $('#modalShowMessage').addClass("hidden");
-            window.location.href = "/Drivers/List";
-        })
+        //$('.modalClose').click(function () {
+        //    $('#modalShowMessage').addClass("hidden");
+        //    window.location.href = "/Drivers/List";
+        //})
         var editDriverSuccess = function (data) {
-            $('#editDriverMessage').empty();
-            $('#editDriverMessage').html(data.result);
-            $('#modalShowMessage').removeClass("hidden");
+            //$('#editDriverMessage').empty();
+            //$('#editDriverMessage').html(data.result);
+            //$('#modalShowMessage').removeClass("hidden");
+            $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
+                $(this).delay(5000).hide('slow');
+                if (data.Success) {
+                    window.location.href = "/Drivers/List";
+                }
+            })
+
         };
 
         var editDriverFailed = function (data) {

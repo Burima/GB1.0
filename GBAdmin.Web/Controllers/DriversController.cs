@@ -28,7 +28,8 @@ namespace GBAdmin.Web.Controllers
             {              
                 var UserID = SessionManager.GetSessionUser().Id;
                
-                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber ||(m.LicenceNo!=null && m.LicenceNo!=String.Empty && m.LicenceNo==model.LicenceNo)).FirstOrDefault();
+                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber 
+                    ||(m.LicenceNo!=null && m.LicenceNo!=String.Empty && m.LicenceNo==model.LicenceNo)).FirstOrDefault();
                 if (driverDetail == null)
                 {
                     DriverDetail driver = new DriverDetail();
@@ -116,39 +117,33 @@ namespace GBAdmin.Web.Controllers
         [Route("Driver/Details/{ID}")]
         public ActionResult Edit(DriverViewModel driverDetail)
         {
-            DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
-            dbDriverDetail.FirstName = driverDetail.FirstName;
-            dbDriverDetail.LastName = driverDetail.LastName;
-            dbDriverDetail.PhoneNumber = driverDetail.PhoneNumber;
-            dbDriverDetail.Pincode = driverDetail.Pincode;
-            dbDriverDetail.LicenceTypeID = driverDetail.LicenceType;
-            dbDriverDetail.DriverStatusID = driverDetail.Status;
-            dbDriverDetail.LicenceNo = driverDetail.LicenceNo;
-            dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
-            dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
-            dbDriverDetail.LastUpdatedOn = DateTime.Now;
-            dbDriverDetail.Ola = driverDetail.Ola;
-            dbDriverDetail.Uber = driverDetail.Uber;
-            int count = GBContext.SaveChanges();
-            if (count > 0)
+            if (ModelState.IsValid)
             {
-                return new JsonResult()
+                DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
+                dbDriverDetail.FirstName = driverDetail.FirstName;
+                dbDriverDetail.LastName = driverDetail.LastName;
+                dbDriverDetail.PhoneNumber = driverDetail.PhoneNumber;
+                dbDriverDetail.Pincode = driverDetail.Pincode;
+                dbDriverDetail.LicenceTypeID = driverDetail.LicenceType;
+                dbDriverDetail.DriverStatusID = driverDetail.Status;
+                dbDriverDetail.LicenceNo = driverDetail.LicenceNo;
+                dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
+                dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
+                dbDriverDetail.LastUpdatedOn = DateTime.Now;
+                dbDriverDetail.Ola = driverDetail.Ola;
+                dbDriverDetail.Uber = driverDetail.Uber;
+                
+                if (GBContext.SaveChanges() > 0)
                 {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = "Driver updated Successfully!!" }
-                };
-                              
+                   return Json(new { Success = true, Message = "Driver Details updated Successfully!!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                   return Json(new { Success = false, Message = "Error in updating driver details.Please try again later." }, JsonRequestBehavior.AllowGet);
+                }
             }
-            else
-            {
-                return new JsonResult()
-                {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new { result = "Error in updating driver.Please try again later." }
-                };              
 
-            }
-           // return View();
+            return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
         }
 
       
