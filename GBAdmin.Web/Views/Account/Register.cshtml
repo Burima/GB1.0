@@ -5,105 +5,82 @@
     var showMessage = TempData["Message"] != null ? true : false;
 }
 
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a local account.</h4>
-    <hr />
-    @*@Html.ValidationSummary()*@
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control charAlone" })
-            @*<input name="model.FirstName" class="form-control" data-val="true" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control charAlone" })
-            @*<input name="model.LastName" class="form-control" data-val="true" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @*<input name="model.Email" class="form-control" data-val="true" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password" })
-            @*<input name="model.Password" type="password" class="form-control" data-val="true" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control"})
-            @*<input name="model.ConfirmPassword" type="password" class="form-control" data-val="true" />*@
-        </div>
-    </div>
-     <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10" })
-            @*<input name="model.PhoneNumber" class="form-control" data-val="true" />*@
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-           @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
-           {
-            @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="m-t-none m-b">Add a local account</h3>
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()                   
+                    @*@Html.ValidationSummary()*@
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", tabIndex = "3" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password", placeholder = "Password", tabIndex = "4" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", tabIndex = "5" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "6" })
+                    </div>
+                    <div class="form-group">
+                        @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                        {
+                            @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>
                     { new SelectListItem { Text = "Admin", Value = "Admin"},
                     new SelectListItem { Text = "Manager", Value = "Manager"},
                     new SelectListItem { Text = "Employee", Value = "Employee"},
                     new SelectListItem { Text = "Marketing", Value = "Marketing"},
                     new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
                     new SelectListItem { Text = "Sales", Value = "Sales"},
-               }, "Select Roles", new { @class = "form-control" })
-           }
-           else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
-           {
-            @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
+               }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
+                        }
+                        else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
+                        {
+                            @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
                     new SelectListItem { Text = "Manager", Value = "Manager"},
                     new SelectListItem { Text = "Employee", Value = "Employee"},
                     new SelectListItem { Text = "Marketing", Value = "Marketing"},
                     new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
                     new SelectListItem { Text = "Sales", Value = "Sales"},
-               }, "Select Roles", new { @class = "form-control" })
-           }
-           else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
-           {
-            @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
+               }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
+                        }
+                        else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+                        {
+                            @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
                     new SelectListItem { Text = "Employee", Value = "Employee"},
                     new SelectListItem { Text = "Marketing", Value = "Marketing"},
                     new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
                     new SelectListItem { Text = "Sales", Value = "Sales"},
-               }, "Select Roles", new { @class = "form-control" })
-           }
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Register" />
-        </div>
-    </div>
-}
+               }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
+                        }
+                    </div>
 
+                    <div class="form-group">                       
+                            <input type="submit" class="btn btn-primary full-width" value="Register" tabindex="8" />                       
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(document).ready(function () {
-        $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
-        $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
-        $('#modalShowMessage').modal('show');
-        $("#Password").attr('data-toggle', 'popover').attr('data-placement', 'bottom').attr('title', 'Your Password must have:').attr('data-content', '<span style="text-align:left;">Minimum 8 characters<br/>At least one capital letter,<br/>A number<br/>And a special character !@@#$%^&</span> ').popover({ trigger: 'hover', html: true });
-    });
+    <script>
+        $(document).ready(function () {
+            $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
+            $('#modalShowMessage').modal('show');
+            $("#Password").attr('data-toggle', 'popover').attr('data-placement', 'bottom').attr('title', 'Your Password must have:').attr('data-content', '<span style="text-align:left;">Minimum 8 characters<br/>At least one capital letter,<br/>A number<br/>And a special character !@@#$%^&</span> ').popover({ trigger: 'hover', html: true });
+        });
     </script>
 }
