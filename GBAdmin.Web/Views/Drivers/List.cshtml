@@ -27,6 +27,7 @@
                                 <th>Licence No</th>
                                 <th>Registered in</th>
                                 <th>Status</th>
+                                <th>Added By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -36,25 +37,26 @@
                                 foreach (var driverDetails in Model.DriverDetailsList)
                                 {
                                     <tr class="gradeX" id="@driverDetails.ID">
-                                        <td>@driverDetails.FirstName @driverDetails.LastName</td>
-                                        <td>@driverDetails.LicenceType.Type</td>
-                                        <td>@driverDetails.LicenceNo</td>
-                                        <td>
+                                        <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
+                                        <td class="col-md-2">@driverDetails.LicenceType.Type</td>
+                                        <td class="col-md-2">@driverDetails.LicenceNo</td>
+                                        <td class="col-md-2">
                                             @if (driverDetails.Uber == true)
                                             { <label style="font-weight:normal">Uber</label> }
                                             @if (driverDetails.Ola == true)
                                             {<label style="font-weight:normal">Ola</label>}
                                             @*@if (driverDetails.Tfs == true)
-                                            {<label style="font-weight:normal">TFS</label>}*@
+            {<label style="font-weight:normal">TFS</label>}*@
                                             @if (driverDetails.Uber == false && driverDetails.Ola == false @*&& driverDetails.Tfs == false*@)
                                             {
                                                 <label style="font-weight:normal">NA</label>
                                             }
-                                         </td>
-                                        <td>
-                                           @driverDetails.DriverStatus.Status
                                         </td>
-                                        <td>
+                                        <td class="col-md-2">
+                                            @driverDetails.DriverStatus.Status
+                                        </td>
+                                        <td class="col-md-2">@driverDetails.CreatedBy</td>
+                                        <td class="col-md-2">
                                             @*<div class="col-md-2"><input type="button" class="btnViewDriverDetails" value="Details" onclick="fnGetDriverByID(this)"></div>*@
                                             <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { driverDetails.ID })" class="btnViewDriverDetails">Details</a></div>
                                         </td>
@@ -69,8 +71,9 @@
                                 <th>Driver Name</th>
                                 <th>LicenceType</th>
                                 <th>Licence No</th>
-                                <th>Registered in Cab Companies</th>
+                                <th>Registered in</th>
                                 <th>Status</th>
+                                <th>Added By</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>

@@ -16,13 +16,13 @@ namespace GBAdmin.Web.Controllers
         GaddibabaEntities GBContext = new GaddibabaEntities();
         CommonHelper CommonHelper = new CommonHelper();
         // GET: Drivers/Add
-        [HttpGet]
+        [HttpGet]        
         public ActionResult Add()
         {
             return View();
         }
-        [HttpPost]       
-        public JsonResult Add(DriverViewModel model)
+        [HttpPost]
+       public JsonResult Add(DriverViewModel model)
         {                  
             if (ModelState.IsValid)
             {              
@@ -68,7 +68,7 @@ namespace GBAdmin.Web.Controllers
         } 
        
         //GET
-        [HttpGet] 
+        [HttpGet]        
         public ActionResult List()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
@@ -126,7 +126,7 @@ namespace GBAdmin.Web.Controllers
             return View(driverDetail);
         }
         [HttpPost]
-        [Route("Driver/Details/{ID}")]
+        [Route("Driver/Details/{ID}")]       
         public ActionResult Edit(DriverViewModel driverDetail)
         {
             if (ModelState.IsValid)

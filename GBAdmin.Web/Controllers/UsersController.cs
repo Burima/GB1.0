@@ -13,6 +13,7 @@ using GBAdmin.Web.Services.Common;
 
 namespace GBAdmin.Web.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         GB.Data.DBEntity.GaddibabaEntities GBContext = new GB.Data.DBEntity.GaddibabaEntities();

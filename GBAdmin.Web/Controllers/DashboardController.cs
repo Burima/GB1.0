@@ -11,6 +11,7 @@ using GBAdmin.Web.Helpers;
 
 namespace GBAdmin.Web.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         GB.Data.DBEntity.GaddibabaEntities GBContext = new GB.Data.DBEntity.GaddibabaEntities();
