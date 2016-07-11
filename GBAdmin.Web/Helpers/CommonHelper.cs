@@ -45,6 +45,21 @@ namespace GBAdmin.Web.Helpers
             }
             return EmployeeList;
         }
+
+        public long GetAdminByID(long CreatedBy)
+        {
+            long AdminID = 0;
+            var User = GBContext.Users.FirstOrDefault(p => p.CreatedBy == CreatedBy);
+            if (User.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+            {
+                AdminID = GetAdminByID(User.CreatedBy);
+            }
+            else
+            {
+                AdminID = User.UserID;
+            }
+            return AdminID;
+        }
         
     }
 }

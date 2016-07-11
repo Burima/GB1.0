@@ -31,6 +31,12 @@ namespace GBAdmin.Web.Controllers
             {
                 DriverDetails = CommonHelper.GetDriverDetailsByUserID(SessionManager.GetSessionUser().Id, Session["Role"].ToString().ToUpper());
             }
+            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Telecaller.ToString().ToUpper())
+            {
+                long AdminID = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
+                DriverDetails = CommonHelper.GetDriverDetailsByUserID(AdminID, Constants.Roles.Admin.ToString().ToUpper())
+                    .Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).ToList();
+            }
             else
             {
                 DriverDetails = GBContext.DriverDetails.Where(m => m.CreatedBy == SessionManager.GetSessionUser().Id).ToList();
