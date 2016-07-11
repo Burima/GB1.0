@@ -27,3 +27,4 @@ GB.Web.v12.suo
 /GB.Membership/obj/Release
 /GBAdmin.Web/bin
 /GBAdmin.Web/obj
+*.suo
