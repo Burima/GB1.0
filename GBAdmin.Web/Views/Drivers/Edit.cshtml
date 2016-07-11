@@ -1,4 +1,5 @@
-﻿@model GB.Data.DBEntity.DriverDetail
+﻿@model GBAdmin.Web.Models.DriverViewModel
+@using GBAdmin.Web.Services
 @{
     ViewBag.Title = "Edit";
 }
@@ -62,21 +63,21 @@
                                         @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
                                         @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                         <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.Label("Phone Number", new { @class = "col-md-2 control-label" })
+                                        @Html.LabelFor(m=>m.PhoneNumber, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "Phone Number", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.Pincode, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "50", placeholder = "Pincode", tabIndex = "1" })
                                         </div>
                                      </div>
                                     <div class="form-group">
@@ -97,10 +98,10 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         @Html.Label("Licence Type", new { @class = "col-md-2 control-label" })
-                                        @Html.HiddenFor(model => model.LicenceType.LicenceTypeID, new { @class = "licenceType"})
+                                        @Html.HiddenFor(model => model.LicenceType, new { @class = "licenceType"})
                                       
                                         <div class="col-md-10">
-                                            <select class="form-control" id="LicenceTypeID" name="LicenceTypeID">
+                                            <select class="form-control" id="LicenceTypeID" name="LicenceType">
                                                 <option value="1">LMV</option>
                                                 <option value="2">LMV-NT</option>
                                                 <option value="3">LMV-TR</option>
@@ -113,31 +114,31 @@
                                         </div>
                                      </div>
                                     <div class="form-group">
-                                        @Html.Label("Licence No", new { @class = "col-md-2 control-label" })
+                                        @Html.LabelFor(m=> m.LicenceNo, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Licence Number", tabIndex = "1" })
                                             </div>
                                         </div>
                                     <div class="form-group">
-                                        @Html.Label("Experience In Kolkata", new { @class = "col-md-2 control-label" })
+                                        @Html.LabelFor(m=> m.ExperienceInKolkata, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.ExperienceInKolkata, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "Experience In Kolkata", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.Label("Expected Salary", new { @class = "col-md-2 control-label" })
+                                        @Html.LabelFor(m=>m.ExpectedSalary, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "50", placeholder = "Expected Salary in INR", tabIndex = "1" })
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                     @Html.Label("Driver Status", new { @class = "col-md-2 control-label" })
-                                        @Html.HiddenFor(model => model.DriverStatus.DriverStatusID,new{@class = "driverStatus" })
-                                        <div class="col-md-10">
-                                            <select class="form-control" name="DriverStatusID" tabindex="9" id="DriverStatusID">
+                                     @Html.LabelFor(m=>m.Status, new { @class = "col-md-2 control-label" })
+                                        @*@Html.HiddenFor(model => model.Status,new{@class = "driverStatus" })*@
+                                        @*<div class="col-md-10">
+                                            <select class="form-control" name="Status" tabindex="9" id="DriverStatusID">
                                                 <option value="1">New</option>
                                                 <option value="2">Approved</option>
                                                 <option value="3">Rejected</option>
@@ -147,7 +148,17 @@
                                                 <option value="7">Licence Received</option>
                                                 <option value="8">Attached to UBER</option>
                                             </select>
-                                         </div>
+                                         </div>*@
+                                       @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                             { new SelectListItem { Text = "New", Value = "1"},
+                                               new SelectListItem { Text = "Approved", Value = "2"},
+                                               new SelectListItem { Text = "Rejected", Value = "3"},
+                                                new SelectListItem { Text = "Have Licence", Value = "4"},
+                                                new SelectListItem { Text = "Applied For Licence", Value = "5"},
+                                                new SelectListItem { Text = "Learner Received", Value = "6"},
+                                                new SelectListItem { Text = "Licence Received", Value = "7"},
+                                                new SelectListItem { Text = "Attached to UBER", Value = "8"},
+                                               }, "Select Driver Status", new { @class = "form-control"}) 
                                      </div>
                                     <div class="form-group">
                                         @Html.Label("Registered In", new { @class = "col-md-2 control-label" })
@@ -158,9 +169,6 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label>TFS</label>@Html.CheckBoxFor(model => model.Tfs, new { @class = "form-control" })
                                                 </div>
                                             </div>
                                         </div>
@@ -185,8 +193,8 @@
 @section Scripts{
 <script>
     $('document').ready(function () {
-        var optionDriverStatus = $('.driverStatus').val();
-        $("#DriverStatusID").val(optionDriverStatus).find("option[value=" + optionDriverStatus + "]").attr('selected', true);
+        //var optionDriverStatus = $('.driverStatus').val();
+        //$("#DriverStatusID").val(optionDriverStatus).find("option[value=" + optionDriverStatus + "]").attr('selected', true);
 
         var optionLicenceType = $('.licenceType').val();
         $("#LicenceTypeID").val(optionLicenceType).find("option[value=" + optionLicenceType + "]").attr('selected', true);

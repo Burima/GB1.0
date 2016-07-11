@@ -114,21 +114,34 @@ namespace GBAdmin.Web.Controllers
         [Route("Driver/Details/{ID}")]
         public ActionResult Edit(string ID)
         {
+            DriverViewModel driverDetail = new DriverViewModel();
             int Id = JsonConvert.DeserializeObject<int>(ID);
-            DriverDetail DriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == Id).FirstOrDefault();
-            return View(DriverDetail);
+            var dbDriverDetail = GBContext.DriverDetails.Where(m => m.ID == Id).FirstOrDefault();
+            driverDetail.ID = dbDriverDetail.ID;
+            driverDetail.FirstName = dbDriverDetail.FirstName;
+            driverDetail.LastName = dbDriverDetail.LastName;
+            driverDetail.PhoneNumber = dbDriverDetail.PhoneNumber;
+            driverDetail.Pincode = dbDriverDetail.Pincode;
+            driverDetail.LicenceType = dbDriverDetail.LicenceTypeID;
+            driverDetail.Status = dbDriverDetail.DriverStatusID;
+            driverDetail.LicenceNo = dbDriverDetail.LicenceNo;
+            driverDetail.ExperienceInKolkata = dbDriverDetail.ExperienceInKolkata;
+            driverDetail.ExpectedSalary = dbDriverDetail.ExpectedSalary;
+            driverDetail.Ola = dbDriverDetail.Ola;
+            driverDetail.Uber = dbDriverDetail.Uber;
+            return View(driverDetail);
         }
         [HttpPost]
         [Route("Driver/Details/{ID}")]
-        public ActionResult Edit(DriverDetail driverDetail)
+        public ActionResult Edit(DriverViewModel driverDetail)
         {
             DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
             dbDriverDetail.FirstName = driverDetail.FirstName;
             dbDriverDetail.LastName = driverDetail.LastName;
             dbDriverDetail.PhoneNumber = driverDetail.PhoneNumber;
             dbDriverDetail.Pincode = driverDetail.Pincode;
-            dbDriverDetail.LicenceTypeID = driverDetail.LicenceTypeID;
-            dbDriverDetail.DriverStatusID = driverDetail.DriverStatusID;
+            dbDriverDetail.LicenceTypeID = driverDetail.LicenceType;
+            dbDriverDetail.DriverStatusID = driverDetail.Status;
             dbDriverDetail.LicenceNo = driverDetail.LicenceNo;
             dbDriverDetail.ExperienceInKolkata = driverDetail.ExperienceInKolkata;
             dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
