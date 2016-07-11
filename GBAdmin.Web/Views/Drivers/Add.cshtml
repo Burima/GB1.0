@@ -130,7 +130,7 @@
 
         var addDriverSuccess = function (data) {
             $('#form-addDriver #Message .msg-text').html(data.Message).parent('#Message').show('slow', function () {
-                $(this).delay(5000).hide('slow')
+                $(this).delay(10000).hide('slow')
                 if (data.Success) {
                     $('#Message').css(" background", "#1ab394");
                     window.location.href = DriversListUrl;
