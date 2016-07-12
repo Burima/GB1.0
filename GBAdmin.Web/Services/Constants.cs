@@ -29,5 +29,10 @@ namespace GBAdmin.Web.Services
             LicenceReceived = 7,
             AttachedtoUber = 8
         }
+        public enum Clients
+        {
+            Gaddibaba = 1,
+            Uber = 2,            
+        }
     }
 }

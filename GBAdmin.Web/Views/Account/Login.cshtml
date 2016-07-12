@@ -1,5 +1,6 @@
 ﻿@model GBAdmin.Web.Models.AccountViewModel
-
+@using GBAdmin.Web.Services.Common
+@using GBAdmin.Web.Services
 @{
     ViewBag.Title = "Log in";
     Layout = null;
@@ -10,8 +11,14 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gaddibaba | Login</title>
+    @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+    {
+        <title>Uber Milap | Login</title>
+    }
+    else
+    {
+        <title>Gaddibaba | Login</title>
+    }
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -26,11 +33,24 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-
-                <h1 class="logo-name">GB</h1>
+                @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+                {
+                    <h1 class="logo-name">UM</h1>
+                }
+                else
+                {
+                    <h1 class="logo-name">GB</h1>
+                }
 
             </div>
-            <h3>Welcome to Gaddibaba</h3>
+            @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+            {
+                <h3>Welcome to Uber Milap</h3>
+            }
+            else
+            {
+                <h3>Welcome to Gaddibaba</h3>
+            }            
             <p>Use a local account to log in.</p>
 
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "m-t", role = "form" }))
@@ -48,7 +68,16 @@
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
                 <a href="#"><small>Forgot password?</small></a>
             }
-            <p class="m-t"> <small>All rights reserved to Gaddibaba &copy; 2016</small> </p>
+            @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+            {
+                 <p class="m-t"> <small>All rights reserved to VS Team &copy; 2016</small> </p>
+            }
+            else
+            {
+                 <p class="m-t"> <small>All rights reserved to Gaddibaba &copy; 2016</small> </p>
+            }
+
+           
         </div>
     </div>
 
