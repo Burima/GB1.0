@@ -11,8 +11,8 @@ namespace GBAdmin.Web.Controllers
         public ActionResult Index(int status = 0, Exception error = null)
         {
             Response.StatusCode = status;
-            //return View(status);
-            return RedirectToAction("LogOff", "Account");
+            return View(status);
+            //return RedirectToAction("LogOff", "Account");
         }
 
         protected override void Dispose(bool disposing)
