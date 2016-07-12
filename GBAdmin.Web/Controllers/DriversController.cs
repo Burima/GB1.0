@@ -92,9 +92,16 @@ namespace GBAdmin.Web.Controllers
             }
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Telecaller.ToString().ToUpper())
             {
-                long AdminID = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
-                driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(AdminID, Constants.Roles.Admin.ToString().ToUpper())
+                User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
+                if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                {
+                    driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).ToList();
+                }
+                else
+                {
+                    driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
                     .Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).ToList();
+                }
             }
             else
             {
