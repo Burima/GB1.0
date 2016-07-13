@@ -42,7 +42,7 @@ namespace GBAdmin.Web.Controllers
                     driver.Uber = model.Uber;
                     driver.Ola = model.Ola;
                     driver.IsReferred = model.IsReferred;
-                    driver.CreatedBy = UserID;
+                    driver.UserID = UserID;
                     driver.CreatedOn = DateTime.Now;
                     driver.LastUpdatedOn = DateTime.Now;
                     driver.DriverStatusID = 1;//for new entry its always 1
@@ -105,7 +105,7 @@ namespace GBAdmin.Web.Controllers
             }
             else
             {
-                driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
+                driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
             }
             
             return View(driverViewModel);

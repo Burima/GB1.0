@@ -48,7 +48,7 @@ namespace GBAdmin.Web.Controllers
             }
             else
             {
-                DriverDetails = GBContext.DriverDetails.Where(m => m.CreatedBy == UserID).ToList();
+                DriverDetails = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
             }
            
             DashboardViewModel.New = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).Count();

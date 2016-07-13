@@ -51,6 +51,7 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Driver Status")]
         public int Status { get; set; }
 
+        public User User { get; set; }
         //public ReferPersonViewModel ReferPersonViewModel { get; set; }
         public List<DriverDetail> DriverDetailsList { get; set; }
     }

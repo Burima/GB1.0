@@ -17,7 +17,7 @@ namespace GBAdmin.Web.Helpers
             GetEmployeeByUserID(UserID, Role);
             foreach (var EmployeeID in EmployeeIDList.Distinct())
             {
-                driverDetailsList.AddRange(GBContext.DriverDetails.Where(m => m.CreatedBy == EmployeeID).ToList());
+                driverDetailsList.AddRange(GBContext.DriverDetails.Where(m => m.UserID == EmployeeID).ToList());
             }
             return driverDetailsList;
         }

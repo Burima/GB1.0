@@ -20,6 +20,7 @@ namespace GB.Data.DBEntity
             this.UserDetails = new HashSet<UserDetail>();
             this.UserLogins = new HashSet<UserLogin>();
             this.Roles = new HashSet<Role>();
+            this.DriverDetails = new HashSet<DriverDetail>();
         }
     
         public long UserID { get; set; }
@@ -50,5 +51,6 @@ namespace GB.Data.DBEntity
         public virtual ICollection<UserDetail> UserDetails { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<DriverDetail> DriverDetails { get; set; }
     }
 }

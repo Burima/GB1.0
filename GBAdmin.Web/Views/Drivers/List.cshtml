@@ -55,7 +55,7 @@
                                         <td class="col-md-2">
                                             @driverDetails.DriverStatus.Status
                                         </td>
-                                        <td class="col-md-2">@driverDetails.CreatedBy</td>
+                                        <td class="col-md-2">@driverDetails.User.FirstName @driverDetails.User.LastName</td>
                                         <td class="col-md-2">
                                             @*<div class="col-md-2"><input type="button" class="btnViewDriverDetails" value="Details" onclick="fnGetDriverByID(this)"></div>*@
                                             <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { driverDetails.ID })" class="btnViewDriverDetails">Details</a></div>

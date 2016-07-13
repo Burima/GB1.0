@@ -25,13 +25,14 @@ namespace GB.Data.DBEntity
         public bool Uber { get; set; }
         public bool Ola { get; set; }
         public bool IsReferred { get; set; }
-        public long CreatedBy { get; set; }
+        public long UserID { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }
         public long LastUpdatedBy { get; set; }
         public int DriverStatusID { get; set; }
         public string ExpectedSalary { get; set; }
     
+        public virtual User User { get; set; }
         public virtual LicenceType LicenceType { get; set; }
         public virtual DriverStatus DriverStatus { get; set; }
     }

@@ -19,7 +19,7 @@
           <Property Name="Uber" Type="bit" Nullable="false" />
           <Property Name="Ola" Type="bit" Nullable="false" />
           <Property Name="IsReferred" Type="bit" Nullable="false" />
-          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
           <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
@@ -185,6 +185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DriverDetails_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="DriverDetails" Type="Self.DriverDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DriverDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DriverDetails_DriverStatusID">
           <End Role="DriverStatus" Type="Self.DriverStatus" Multiplicity="1" />
           <End Role="DriverDetails" Type="Self.DriverDetails" Multiplicity="*" />
@@ -247,6 +259,10 @@
           <AssociationSet Name="FK_dbo_UserRole_dbo_User_UserID" Association="Self.FK_dbo_UserRole_dbo_User_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetails_CreatedBy" Association="Self.FK_DriverDetails_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DriverDetails" EntitySet="DriverDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_DriverDetails_DriverStatusID" Association="Self.FK_DriverDetails_DriverStatusID">
             <End Role="DriverStatus" EntitySet="DriverStatus" />
@@ -361,6 +377,7 @@
           <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="DriverDetails" Relationship="GaddibabaModel.FK_DriverDetails_CreatedBy" FromRole="User" ToRole="DriverDetail" />
         </EntityType>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
           <End Role="Users" Type="Self.User" Multiplicity="1">
@@ -431,6 +448,10 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="DriverDetails" EntityType="GaddibabaModel.DriverDetail" />
+          <AssociationSet Name="FK_DriverDetails_CreatedBy" Association="GaddibabaModel.FK_DriverDetails_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DriverDetail" EntitySet="DriverDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_DriverDetails_LicenceTypeID" Association="GaddibabaModel.FK_DriverDetails_LicenceTypeID">
             <End Role="LicenceType" EntitySet="LicenceTypes" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
@@ -455,15 +476,28 @@
           <Property Name="Uber" Type="Boolean" Nullable="false" />
           <Property Name="Ola" Type="Boolean" Nullable="false" />
           <Property Name="IsReferred" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
           <Property Name="DriverStatusID" Type="Int32" Nullable="false" />
           <Property Name="ExpectedSalary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="GaddibabaModel.FK_DriverDetails_CreatedBy" FromRole="DriverDetail" ToRole="User" />
           <NavigationProperty Name="LicenceType" Relationship="GaddibabaModel.FK_DriverDetails_LicenceTypeID" FromRole="DriverDetail" ToRole="LicenceType" />
           <NavigationProperty Name="DriverStatus" Relationship="GaddibabaModel.FK_DriverDetails_DriverStatusID" FromRole="DriverDetail" ToRole="DriverStatus" />
         </EntityType>
+        <Association Name="FK_DriverDetails_CreatedBy">
+          <End Type="GaddibabaModel.User" Role="User" Multiplicity="1" />
+          <End Type="GaddibabaModel.DriverDetail" Role="DriverDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DriverDetail">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DriverDetails_LicenceTypeID">
           <End Type="GaddibabaModel.LicenceType" Role="LicenceType" Multiplicity="1" />
           <End Type="GaddibabaModel.DriverDetail" Role="DriverDetail" Multiplicity="*" />
@@ -611,7 +645,7 @@
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
                 <ScalarProperty Name="Ola" ColumnName="Ola" />
                 <ScalarProperty Name="Uber" ColumnName="Uber" />
