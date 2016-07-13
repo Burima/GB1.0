@@ -114,7 +114,7 @@
                             <div id="collapseProfessionalDetails" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        @Html.Label("Licence Type", new { @class = "col-md-2 control-label" })
+                                        @Html.Label("License Type", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
                                                  { new SelectListItem { Text = "LMV", Value = "1"},
@@ -125,14 +125,14 @@
                                                     new SelectListItem { Text = "HGMV", Value = "6"},
                                                     new SelectListItem { Text = "LMV-CAB", Value = "7"},
                                                     new SelectListItem { Text = "Others", Value = "8"},
-                                              }, "Licence Type", new { @class = "form-control" })
+                                              }, "License Type", new { @class = "form-control" })
                                         </div>
                                      </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m=> m.LicenceNo, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "Licence Number", tabIndex = "1" })
+                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "License Number", tabIndex = "1" })
                                             </div>
                                         </div>
                                     <div class="form-group">

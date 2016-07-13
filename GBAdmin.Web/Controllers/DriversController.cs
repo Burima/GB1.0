@@ -60,7 +60,7 @@ namespace GBAdmin.Web.Controllers
                 }
                 else
                 {
-                    return Json(new { Success = false, Message = "Driver already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = false, Message = "Driver details(message or license number) already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
                 }
                
             }
@@ -145,7 +145,7 @@ namespace GBAdmin.Web.Controllers
                     var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber || m.LicenceNo == driverDetail.LicenceNo);
                     if (User != null)
                     {
-                        return Json(new { Success = false, Message = "Driver already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Success = false, Message = "Driver details(message or license number) already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
                     }
                 }
                 dbDriverDetail.FirstName = driverDetail.FirstName;

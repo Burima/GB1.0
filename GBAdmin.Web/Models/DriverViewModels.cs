@@ -28,11 +28,11 @@ namespace GBAdmin.Web.Models
         [StringLength(6, MinimumLength = 6, ErrorMessage = "Invalid pincode")]
         public string Pincode { get; set; }
 
-        [Display(Name = "Licence Type")]
+        [Display(Name = "License Type")]
         [Required]
         public int LicenceType { get; set; }
 
-        [Display(Name = "Licence No")]       
+        [Display(Name = "License No")]       
         public string LicenceNo { get; set; }
 
         [Display(Name = "Uber")]
