@@ -135,7 +135,8 @@
                                               }, "License Type", new { @class = "form-control", tabIndex = "1" })
                                         </div>
                                     </div>
-                                    <div class="form-group">                                       
+                                    <div class="form-group">   
+                                        @Html.LabelFor(m => m.LicenceNo, new { @class = "col-md-2 control-label" })                                    
                                             <div class="col-md-10">                                                
                                                 @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "License Number", tabIndex = "2" })
                                             </div>
@@ -241,7 +242,7 @@
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
-            $(".ddlDriverStatus").find("option[value=1]").attr('disabled', true);
+            $(".ddlDriverStatus").find("option:first,option[value=1]").attr('disabled', true);
         });
 
         $('#btnNextPersonalDetails').click(function () {
