@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @using GBAdmin.Web.Services;
+@using GBAdmin.Web.Services.Common
+
 @{
     var user = @SessionManager.GetSessionUser();
 }
@@ -36,7 +38,16 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    GB
+                    @if (GBAdminConfig.Client.ToUpper() == GBAdmin.Web.Services.Constants.Clients.Uber.ToString().ToUpper())
+                    {
+                        <text>UM</text>
+
+                    }
+                    else
+                    {
+                        <text>GB</text>
+
+                    }
                 </div>
             </li>
 
