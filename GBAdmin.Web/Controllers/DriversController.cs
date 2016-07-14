@@ -177,6 +177,7 @@ namespace GBAdmin.Web.Controllers
             return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
         }
 
+         [Authorize(Roles = "SuperAdmin, Admin, Manager")]
         public ActionResult AttachedByVS()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
