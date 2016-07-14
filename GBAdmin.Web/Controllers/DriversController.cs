@@ -8,6 +8,8 @@ using GB.Data.DBEntity;
 using GBAdmin.Web.Services;
 using Newtonsoft.Json;
 using GBAdmin.Web.Helpers;
+using GBAdmin.Web.Services.Common;
+
 namespace GBAdmin.Web.Controllers
 {
     [Authorize]
@@ -175,6 +177,12 @@ namespace GBAdmin.Web.Controllers
             return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
         }
 
-      
+        public ActionResult AttachedByVS()
+        {
+            DriverViewModel driverViewModel = new DriverViewModel();
+            driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Convert.ToInt32(GBAdminConfig.VSID), GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID == (int)Constants.EnumDriverStatus.AttachedtoUber).ToList();
+            return View(driverViewModel);
+        }
+ 
     }
 }

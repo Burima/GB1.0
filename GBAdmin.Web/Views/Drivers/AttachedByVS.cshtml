@@ -1,0 +1,85 @@
+﻿@model GBAdmin.Web.Models.DriverViewModel
+
+@{
+    ViewBag.Title = "Driver Details";
+}
+
+<!-- Datatable Css-->
+<link href="~/Content/style.css" rel="stylesheet" />
+@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+
+<!-- check whether city and area is selected or not to do operations in Estate-->
+<!-- View Driver -->
+<div class="wrapper wrapper-content animated fadeInRight" id="divDrivers">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Drivers Attached by VS Team</h5>
+                    @*<button class="btn btn-primary pull-right btn-show-add-driver" type="button" style="margin-top:-1%;">Add</button>*@
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-drivers">
+                        <thead>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>LicenceType</th>
+                                <th>Licence No</th>
+                                <th>Attached On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.DriverDetailsList != null && Model.DriverDetailsList.Count > 0)
+                            {
+                                foreach (var driverDetails in Model.DriverDetailsList)
+                                {
+                                    <tr class="gradeX" id="@driverDetails.ID">
+                                        <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
+                                        <td class="col-md-2">@driverDetails.LicenceType.Type</td>
+                                        <td class="col-md-2">@driverDetails.LicenceNo</td>
+                                        <td class="col-md-2">@driverDetails.LastUpdatedOn</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>LicenceType</th>
+                                <th>Licence No</th>
+                                <th>Attached On</th>                           
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section scripts{
+
+    <!-- variables -->
+    <script>
+        var EditDriverDetailsbyIDUrl = '@Url.Action("Edit", "Drivers")';
+
+        $(document).ready(function () {
+            //Initialize data table
+            $('.dataTables-drivers').dataTable({
+                /* Disable initial sort */
+                "aaSorting": []
+            });
+        });
+
+        
+    </script>
+
+    @Scripts.Render("~/plugins/dataTables")
+    <script src='@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.js")'></script>
+
+}
+
+

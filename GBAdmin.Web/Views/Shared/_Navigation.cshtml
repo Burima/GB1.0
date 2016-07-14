@@ -48,6 +48,7 @@
                 <ul class="nav nav-second-level">
                     <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Drivers")">Add</a></li>
                     <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Drivers")">List</a></li>
+                    <li class="@Html.IsSelected(action: "AttachedByVS")"><a href="@Url.Action("AttachedByVS", "Drivers")">Attached By VS</a></li>
                 </ul>
             </li>
             @if (Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Manager.ToString().ToUpper())

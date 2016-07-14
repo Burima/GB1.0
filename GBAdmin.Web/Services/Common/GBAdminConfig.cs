@@ -32,5 +32,8 @@ namespace GBAdmin.Web.Services.Common
         //public static string FacebookAppSecret = ConfigurationManager.AppSettings.Get("FacebookAppSecret").ToString();
 
         public static string Client = ConfigurationManager.AppSettings.Get("Client").ToString();
+
+        public static string VSID = ConfigurationManager.AppSettings.Get("VSID").ToString();
+        public static string VSRole = ConfigurationManager.AppSettings.Get("VSRole").ToString();
     }
 }
