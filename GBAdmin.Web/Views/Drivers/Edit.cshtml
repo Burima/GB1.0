@@ -18,45 +18,46 @@
             width: 15px;
             margin-left: 2%;
         }
-          #Message {
-            margin-top: 2%;
-            background: #1ab394;
-            color: white;
-            padding: 1%;
-            margin-bottom: 2%;
-            display: none;
-            height: 36px;
-            /*height: 76px;*/
-        }
 
-            #Message .msg-close {
-                cursor: pointer;
-            }
+    #Message {
+        margin-top: 2%;
+        background: #1ab394;
+        color: white;
+        padding: 1%;
+        margin-bottom: 2%;
+        display: none;
+        height: 36px;
+        /*height: 76px;*/
+    }
+
+        #Message .msg-close {
+            cursor: pointer;
+        }
 </style>
 @*<div class="modal inmodal fade in hidden" id="modalShowMessage" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Message</h4>
-            </div>
-            <div class="modal-body">
-                <p id="editDriverMessage">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Message</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="editDriverMessage">
 
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary center-block modalClose" data-dismiss="modal">Done</button>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary center-block modalClose" data-dismiss="modal">Done</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
-@using (Ajax.BeginForm("Edit", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "editDriverSuccess", OnFailure = "editDriverFailed", HttpMethod = "Post" }, new { @class = "form-horizontal" ,role = "form", id = "form-EditDriver", autocomplete = "off" }))
+    </div>*@
+@using (Ajax.BeginForm("Edit", "Drivers", new { ReturnUrl = ViewBag.ReturnUrl }, new AjaxOptions() { OnSuccess = "editDriverSuccess", OnFailure = "editDriverFailed", HttpMethod = "Post" }, new { @class = "form-horizontal", role = "form", id = "form-EditDriver", autocomplete = "off" }))
 {
     <div class="form-group">
-            <div id="Message"><span class="pull-left msg-text"></span><span class="pull-right msg-close">X</span></div>
-        </div>
+        <div id="Message"><span class="pull-left msg-text"></span><span class="pull-right msg-close">X</span></div>
+    </div>
     <div class="row  border-bottom white-bg dashboard-header">
-        
+
         <div class="col-sm-12">
             <div class="ibox-content">
                 <div class="panel-body">
@@ -64,7 +65,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h5 class="panel-title">
-                                    <a id="linkCollapsePersonalDetails"  data-toggle="collapse" data-parent="#accordion" href="#collapsePersonalDetails">Personal Details</a>
+                                    <a id="linkCollapsePersonalDetails" data-toggle="collapse" data-parent="#accordion" href="#collapsePersonalDetails">Personal Details</a>
                                 </h5>
                             </div>
                             <div id="collapsePersonalDetails" class="panel-collapse collapse in">
@@ -74,7 +75,7 @@
                                         <div class="col-md-10">
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                             @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
-                                         </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
@@ -84,10 +85,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.LabelFor(m=>m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
-                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })
+                                            @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
+                                                || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
+                                                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+                                            {
+                                                @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })
+                                            }
+                                            else
+                                            {
+                                                @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", disabled = "disabled", placeholder = "Phone Number", tabIndex = "3" })
+                                            }
+
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -96,7 +108,7 @@
                                             @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
                                             @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "7", placeholder = "Pincode", tabIndex = "4" })
                                         </div>
-                                     </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="pull-right" style="padding-right:5%">
                                             <button id="btnNextPersonalDetails" class="btn btn-primary" type="button" tabindex="5">Next</button>
@@ -116,7 +128,7 @@
                                     <div class="form-group">
                                         @Html.Label("License Type", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
+                                           @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
                                                  { new SelectListItem { Text = "LMV", Value = "1"},
                                                    new SelectListItem { Text = "LMV-NT", Value = "2"},
                                                    new SelectListItem { Text = "LMV-TR", Value = "3"},
@@ -125,27 +137,47 @@
                                                     new SelectListItem { Text = "HGMV", Value = "6"},
                                                     new SelectListItem { Text = "LMV-CAB", Value = "7"},
                                                     new SelectListItem { Text = "Others", Value = "8"},
-                                              }, "License Type", new { @class = "form-control" })
-                                        </div>
-                                     </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(m=> m.LicenceNo, new { @class = "col-md-2 control-label" })
-                                        <div class="col-md-10">
-                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "License Number", tabIndex = "1" })
-                                            </div>
-                                        </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(m=>m.ExpectedSalary, new { @class = "col-md-2 control-label" })
-                                        <div class="col-md-10">
-                                            @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
-                                            @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "5", placeholder = "Expected Salary in INR", tabIndex = "1" })
+                                              }, "License Type", new { @class = "form-control",tabIndex = "1"})
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                     @Html.LabelFor(m=>m.Status, new { @class = "col-md-2 control-label" })
-                                        <div class="col-md-10">
-                                           @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                        @Html.LabelFor(m => m.LicenceNo, new { @class = "col-md-2 control-label" })
+                                        @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
+                                            || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
+                                                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+                                        {
+                                            <div class="col-md-10">
+                                                @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                                @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "License Number", tabIndex = "2" })
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-10">
+                                                @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                                @Html.TextBoxFor(model => model.LicenceNo, new { @class = "form-control", maxlength = "50", placeholder = "License Number", tabIndex = "3", disabled = "disabled" })
+                                            </div>
+
+                                        }
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ExpectedSalary, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @*<input type="text" class="form-control" placeholder="First Name" name="model.FirstName" maxlength="50" tabindex="1" data-val="true" readonly />*@
+                                        @Html.TextBoxFor(model => model.ExpectedSalary, new { @class = "col-md-6 form-control numbersAlone", maxlength = "5", placeholder = "Expected Salary in INR", tabIndex = "4" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+
+                                        @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
+                                                || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
+                                        {
+                                            @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
                                                  { new SelectListItem { Text = "New", Value = "1"},
                                                    new SelectListItem { Text = "Approved", Value = "2"},
                                                    new SelectListItem { Text = "Rejected", Value = "3"},
@@ -154,46 +186,82 @@
                                                     new SelectListItem { Text = "Learner Received", Value = "6"},
                                                     new SelectListItem { Text = "Licence Received", Value = "7"},
                                                     new SelectListItem { Text = "Attached to UBER", Value = "8"},
-                                                   }, "Select Licence Type", new { @class = "form-control"})
+                                                   }, "Select Status", new { @class = "form-control ddlDriverStatus", tabIndex = "5" })
+                                        }
+                                        else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper()
+                                       || Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
+                                        {
+                                            @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                                 {  new SelectListItem { Text = "New", Value = "1"},
+                                                    new SelectListItem { Text = "Have Licence", Value = "4"},
+                                                    new SelectListItem { Text = "Applied For Licence", Value = "5"},
+                                                    new SelectListItem { Text = "Learner Received", Value = "6"},
+                                                    new SelectListItem { Text = "Licence Received", Value = "7"},
+                                                    new SelectListItem { Text = "Attached to UBER", Value = "8"},
+                                                   }, "Select Status", new { @class = "form-control ddlDriverStatus", tabIndex = "5" })
+                                        }
+                                        else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Telecaller.ToString().ToUpper())
+                                        {
+                                            @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                                 {
+                                                   new SelectListItem { Text = "Approved", Value = "2"},
+                                                   new SelectListItem { Text = "Rejected", Value = "3"},
+                                                 }, "Select Status", new { @class = "form-control ddlDriverStatus", tabIndex = "5" })
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                                 { new SelectListItem { Text = "New", Value = "1"},
+                                                   new SelectListItem { Text = "Approved", Value = "2"},
+                                                   new SelectListItem { Text = "Rejected", Value = "3"},
+                                                    new SelectListItem { Text = "Have Licence", Value = "4"},
+                                                    new SelectListItem { Text = "Applied For Licence", Value = "5"},
+                                                    new SelectListItem { Text = "Learner Received", Value = "6"},
+                                                    new SelectListItem { Text = "Licence Received", Value = "7"},
+                                                    new SelectListItem { Text = "Attached to UBER", Value = "8"},
+                                                   }, "Select Status", new { @class = "form-control ddlDriverStatus", disabled = "disabled", tabIndex = "5" })
+                                        }
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Registered In", new { @class = "col-md-2 control-label" })
+                                    <div class="attached-with">
+                                        <div class="col-md-10">
+                                            <div class="col-md-4">
+                                                <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new { @class = "form-control", tabIndex = "6" })
                                             </div>
-                                         </div>
-                                        <div class="form-group">
-                                            @Html.Label("Registered In", new { @class = "col-md-2 control-label" })
-                                            <div class="attached-with">
-                                                <div class="col-md-10">
-                                                    <div class="col-md-4">
-                                                        <label>Uber</label>@Html.CheckBoxFor(model => model.Uber, new {@class = "form-control" })
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-4">
+                                                <label>Ola</label>@Html.CheckBoxFor(model => model.Ola, new { @class = "form-control", tabIndex = "7" })
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="pull-right" style="padding-right:5%">
-                                                <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="5">Done</button>
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="pull-right" style="padding-right:5%">
+                                        <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="8">Done</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-     </div>
+        </div>
 
-    }
+    </div>
+            </div>
 
-    @section Scripts{
+}
+
+@section Scripts{
     <script>
         var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
+            $(".ddlDriverStatus").find("option[value=New]").attr('disabled', true);
         });
 
         $('#btnNextPersonalDetails').click(function () {
@@ -217,7 +285,7 @@
         //    $('#modalShowMessage').addClass("hidden");
         //    window.location.href = "/Drivers/List";
         //})
-        var editDriverSuccess = function (data) {            
+        var editDriverSuccess = function (data) {
             if (data.Success) {
                 $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {
                     window.location.href = DriversListUrl;
@@ -235,7 +303,7 @@
             });
         };
     </script>
-    }
+}
 
 
 
