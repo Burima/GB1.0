@@ -21,6 +21,7 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Phone Number")]
         [Required]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid phone number")]
+        [RegularExpression(@"[789][0-9]{9}", ErrorMessage = "Entered Mobile No is not valid.")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Pincode")]
