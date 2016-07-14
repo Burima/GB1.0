@@ -140,7 +140,7 @@ namespace GBAdmin.Web.Controllers
             {
 
                 DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
-                if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber || dbDriverDetail.LicenceNo != driverDetail.LicenceNo)
+                if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber || (driverDetail.LicenceNo != null && driverDetail.LicenceNo != String.Empty && dbDriverDetail.LicenceNo != driverDetail.LicenceNo))
                 {
                     var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber || m.LicenceNo == driverDetail.LicenceNo);
                     if (User != null)
