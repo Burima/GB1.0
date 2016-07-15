@@ -242,7 +242,7 @@
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
 
-            $(".ddlDriverStatus").find("option:first,option[value=1]").attr('disabled', true);
+            $(".ddlDriverStatus").find("option:first").attr('disabled', true);
         });
 
         $('#btnNextPersonalDetails').click(function () {

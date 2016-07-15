@@ -62,7 +62,7 @@ namespace GBAdmin.Web.Controllers
                 }
                 else
                 {
-                    return Json(new { Success = false, Message = "Driver details(message or license number) already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = false, Message = "Driver details(phone number or license number) already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
                 }
                
             }
@@ -75,13 +75,14 @@ namespace GBAdmin.Web.Controllers
         {
             DriverViewModel driverViewModel = new DriverViewModel();
             var UserID =  SessionManager.GetSessionUser().Id;
-               /**
-                * Rule:
-                * 1.Super Admin can view All
-                * 2.Admin and Manager can view data entered by him and his subordinates
-                * 3.Telecaller can view on;y the newly entered data entered by his/her admin and its subordinates
-                * 4.Other people can view data entered only by him
-                * */
+            /**
+             * Rule:
+             * 1.Super Admin can view All
+             * 2.Admin and Manager can view data entered by him and his subordinates
+             * 3.Telecaller can view only the newly entered data which are entered by his/her admin and its subordinates
+             * 4.Employee can view only apart from newly entered and rejected data which are entered by his/her admin and its subordinates
+             * 5.Sales people can view data entered only by him
+             * */
             if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
             {
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.ToList();
@@ -103,6 +104,20 @@ namespace GBAdmin.Web.Controllers
                 {
                     driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
                     .Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).ToList();
+                }
+            }
+            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
+            {
+                User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
+                if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                {
+                    driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New
+                        || m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+                }
+                else
+                {
+                    driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
+                    .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New || m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
                 }
             }
             else
@@ -142,12 +157,18 @@ namespace GBAdmin.Web.Controllers
             {
 
                 DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
-                if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber || (driverDetail.LicenceNo != null && driverDetail.LicenceNo != String.Empty && dbDriverDetail.LicenceNo != driverDetail.LicenceNo))
+                if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber)
                 {
-                    var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber || m.LicenceNo == driverDetail.LicenceNo);
+                    var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber);
                     if (User != null)
                     {
-                        return Json(new { Success = false, Message = "Driver details(message or license number) already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Success = false, Message = "Phone number already exists!" }, JsonRequestBehavior.AllowGet);
+                    }
+                }if(driverDetail.LicenceNo != null && driverDetail.LicenceNo != String.Empty && dbDriverDetail.LicenceNo != driverDetail.LicenceNo){
+                    var User = GBContext.DriverDetails.Where(m => m.LicenceNo == driverDetail.LicenceNo);
+                    if (User != null)
+                    {
+                        return Json(new { Success = false, Message = "License number already exists!" }, JsonRequestBehavior.AllowGet);
                     }
                 }
                 dbDriverDetail.FirstName = driverDetail.FirstName;
