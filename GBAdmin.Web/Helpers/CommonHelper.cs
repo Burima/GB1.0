@@ -22,7 +22,7 @@ namespace GBAdmin.Web.Helpers
             return driverDetailsList;
         }
 
-        private List<User> GetEmployeeByUserID(long UserID, string Role)
+        public List<User> GetEmployeeByUserID(long UserID, string Role)
         {
             List<User> EmployeeList = new List<User>();
             EmployeeList = GBContext.Users.Where(m => m.CreatedBy == UserID).ToList();

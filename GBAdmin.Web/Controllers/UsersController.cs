@@ -18,10 +18,19 @@ namespace GBAdmin.Web.Controllers
     {
         GB.Data.DBEntity.GaddibabaEntities GBContext = new GB.Data.DBEntity.GaddibabaEntities();
         UserViewModel userViewModel = new UserViewModel();
+        CommonHelper CommonHelper = new CommonHelper();
         public ActionResult List()
         {
             var UserID = SessionManager.GetSessionUser().Id;
-            var UserList = GBContext.Users.Where(m => m.CreatedBy == UserID).ToList();
+            var UserList = new List<User>();
+            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+            {
+                UserList = GBContext.Users.ToList();
+            }
+            else
+            {
+                UserList = CommonHelper.GetEmployeeByUserID(UserID, Session["Role"].ToString().ToUpper());
+            }
             return View(UserList);
             
         }
