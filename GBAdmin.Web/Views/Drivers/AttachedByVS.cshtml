@@ -26,6 +26,7 @@
                                 <th>LicenceType</th>
                                 <th>Licence No</th>
                                 <th>Attached On</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +39,9 @@
                                         <td class="col-md-2">@driverDetails.LicenceType.Type</td>
                                         <td class="col-md-2">@driverDetails.LicenceNo</td>
                                         <td class="col-md-2">@driverDetails.LastUpdatedOn</td>
+                                        <td class="col-md-2">
+                                            <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { driverDetails.ID })" class="btnViewDriverDetails">Details</a></div>
+                                        </td>
                                     </tr>
                                 }
                             }
@@ -47,7 +51,8 @@
                                 <th>Driver Name</th>
                                 <th>LicenceType</th>
                                 <th>Licence No</th>
-                                <th>Attached On</th>                           
+                                <th>Attached On</th>  
+                                <th>Action</th>                         
                             </tr>
                         </tfoot>
                     </table>

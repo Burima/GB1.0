@@ -156,15 +156,17 @@
                                                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
                                             {
                                                 @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
-                                                 { new SelectListItem { Text = "New", Value = "1"},
-                                                   new SelectListItem { Text = "Approved", Value = "2"},
-                                                   new SelectListItem { Text = "Rejected", Value = "3"},
+                                                 {  new SelectListItem { Text = "New", Value = "1"},
+                                                    new SelectListItem { Text = "Approved", Value = "2"},
+                                                    new SelectListItem { Text = "Rejected", Value = "3"},
                                                     new SelectListItem { Text = "Have Licence", Value = "4"},
                                                     new SelectListItem { Text = "Applied For Licence", Value = "5"},
                                                     new SelectListItem { Text = "Learner Received", Value = "6"},
                                                     new SelectListItem { Text = "Licence Received", Value = "7"},
                                                     new SelectListItem { Text = "Attached to UBER", Value = "8"},
                                                     new SelectListItem { Text = "Dormant", Value = "9"},
+                                                    new SelectListItem { Text = "Partner Matched", Value = "10"},
+                                                    new SelectListItem { Text = "Completed First Trip", Value = "11"},
                                                    }, "Select Status", new { @class = "form-control ddlDriverStatus", tabIndex = "5" })
                                             }
                                             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper()

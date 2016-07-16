@@ -44,7 +44,7 @@ function readURL(input) {
             $("#divCropResizeImage .modal-body").empty();
             $("#divCropResizeImage .modal-body").append("<div class=\"row\" style=\"margin:5%;\">  <div class=\"col-lg-4\"><img id=\"demo3\" alt=\"Jcrop Example\" /></div>");
             $("#divCropResizeImage .modal-body").append("</div></div></div></div>");
-            $('#demo3').replaceWith('<img id="demo3" src="' + e.target.result + '"/>');
+            $('#demo3').replaceWith('<img src="' + e.target.result + '"/>');
             FormImageCrop.init();
             $("div.jcrop-holder img").attr("src", e.target.result);
             $("div.jcrop-holder img").attr("id", "demo3");

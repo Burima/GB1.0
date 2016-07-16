@@ -202,7 +202,9 @@ namespace GBAdmin.Web.Controllers
         public ActionResult AttachedByVS()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Convert.ToInt32(GBAdminConfig.VSID), GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID == (int)Constants.EnumDriverStatus.AttachedtoUber).ToList();
+            driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Convert.ToInt32(GBAdminConfig.VSID), 
+                GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID != (int)Constants.EnumDriverStatus.New ||
+                x.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
             return View(driverViewModel);
         }
  
