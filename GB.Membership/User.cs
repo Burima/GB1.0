@@ -105,6 +105,7 @@ namespace GB.Membership
         public int Status { get; set; }
         public long CreatedBy { get; set; }
         public long LastUpdatedBy { get; set; }
+        public bool IsVSEmployee { get; set; }
 
        public virtual ICollection<UserDetail> UserDetails { get; set; }
       

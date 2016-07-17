@@ -142,6 +142,7 @@ namespace GBAdmin.Web.Models
         public bool EmailConfirmed { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
+        public string IsVSEmployee { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
         public int GovtIDType { get; set; }
@@ -155,6 +156,8 @@ namespace GBAdmin.Web.Models
         public int Status { get; set; }
 
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
+
+        public bool AttachedByVS { get; set; }
 
         public ManageUserViewModel ManageUserViewModel { get; set; }
 

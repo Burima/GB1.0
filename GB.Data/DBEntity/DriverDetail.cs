@@ -31,6 +31,7 @@ namespace GB.Data.DBEntity
         public long LastUpdatedBy { get; set; }
         public int DriverStatusID { get; set; }
         public string ExpectedSalary { get; set; }
+        public bool AttachedByVS { get; set; }
     
         public virtual User User { get; set; }
         public virtual LicenceType LicenceType { get; set; }

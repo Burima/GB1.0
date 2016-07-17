@@ -19,7 +19,7 @@ namespace GB.Membership
         #region constructors and destructors
 
         public ApplicationDbContext()
-            : base("GaddibabaEntities")
+            : base("Gaddibaba_DevEntities")
         {
         }
 

@@ -46,6 +46,7 @@ namespace GB.Data.DBEntity
         public long CreatedBy { get; set; }
         public long LastUpdatedBy { get; set; }
         public string PhoneVerificationCode { get; set; }
+        public bool IsVSEmployee { get; set; }
     
         public virtual ICollection<UserClaim> UserClaims { get; set; }
         public virtual ICollection<UserDetail> UserDetails { get; set; }

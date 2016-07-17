@@ -49,6 +49,7 @@ namespace GBAdmin.Web.Controllers
                     driver.LastUpdatedOn = DateTime.Now;
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
+                    driver.AttachedByVS = SessionManager.GetSessionUser().IsVSEmployee;
                     GBContext.DriverDetails.Add(driver);                   
 
                     if (GBContext.SaveChanges() > 0)
@@ -138,7 +139,7 @@ namespace GBAdmin.Web.Controllers
             var dbDriverDetail = GBContext.DriverDetails.Where(m => m.ID == Id).FirstOrDefault();
             driverDetail.ID = dbDriverDetail.ID;
             driverDetail.FirstName = dbDriverDetail.FirstName;
-            driverDetail.LastName = dbDriverDetail.LastName;
+            driverDetail.LastName = dbDriverDetail.LastName;    
             driverDetail.PhoneNumber = dbDriverDetail.PhoneNumber;
             driverDetail.Pincode = dbDriverDetail.Pincode;
             driverDetail.LicenceType = dbDriverDetail.LicenceTypeID;
@@ -147,6 +148,7 @@ namespace GBAdmin.Web.Controllers
             driverDetail.ExpectedSalary = dbDriverDetail.ExpectedSalary;
             driverDetail.Ola = dbDriverDetail.Ola;
             driverDetail.Uber = dbDriverDetail.Uber;
+            driverDetail.AttachedByVS = dbDriverDetail.AttachedByVS;
             return View(driverDetail);
         }
         [HttpPost]
@@ -198,13 +200,17 @@ namespace GBAdmin.Web.Controllers
             return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
         }
 
-         [Authorize(Roles = "SuperAdmin, Admin, Manager")]
+         [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult AttachedByVS()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Convert.ToInt32(GBAdminConfig.VSID), 
-                GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID != (int)Constants.EnumDriverStatus.New ||
-                x.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+            //driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Convert.ToInt32(GBAdminConfig.VSID), 
+            //    GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID != (int)Constants.EnumDriverStatus.New ||
+            //    x.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+
+            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.AttachedByVS == true).Where(m=>m.DriverStatusID
+                != (int)Constants.EnumDriverStatus.New).Where(y => y.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+
             return View(driverViewModel);
         }
  

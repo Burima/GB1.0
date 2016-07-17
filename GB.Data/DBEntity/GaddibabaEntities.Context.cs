@@ -16,19 +16,19 @@ namespace GB.Data.DBEntity
     public partial class GaddibabaEntities : DbContext
     {
         public GaddibabaEntities()
-            : base("name=GaddibabaEntities")
+            : base("name=Gaddibaba_DevEntities")
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasMany(i => i.Roles).WithMany(u => u.Users)
-           .Map(m =>
-           {
-               m.ToTable("UserRoles");
-               m.MapLeftKey("UserId");
-               m.MapRightKey("RoleId");
-           });
+          .Map(m =>
+          {
+              m.ToTable("UserRoles");
+              m.MapLeftKey("UserId");
+              m.MapRightKey("RoleId");
+          });
         }
     
         public virtual DbSet<LicenceType> LicenceTypes { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GaddibabaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GB.Data.DBEntity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DriverDetails">
           <Key>
             <PropertyRef Name="ID" />
@@ -25,6 +25,7 @@
           <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
           <Property Name="DriverStatusID" Type="int" Nullable="false" />
           <Property Name="ExpectedSalary" Type="nvarchar(max)" />
+          <Property Name="AttachedByVS" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DriverStatus">
           <Key>
@@ -128,6 +129,7 @@
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
           <Property Name="PhoneVerificationCode" Type="nvarchar" MaxLength="6" />
+          <Property Name="IsVSEmployee" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
           <End Role="Users" Type="Self.Users" Multiplicity="1">
@@ -233,7 +235,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GaddibabaModelStoreContainer">
+        <EntityContainer Name="GBDataDBEntityStoreContainer">
           <EntitySet Name="DriverDetails" EntityType="Self.DriverDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DriverStatus" EntityType="Self.DriverStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LicenceTypes" EntityType="Self.LicenceTypes" Schema="dbo" store:Type="Tables" />
@@ -280,14 +282,14 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="GaddibabaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="GB.Data.DBEntity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="LicenceType">
           <Key>
             <PropertyRef Name="LicenceTypeID" />
           </Key>
           <Property Name="LicenceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DriverDetails" Relationship="GaddibabaModel.FK_DriverDetails_LicenceTypeID" FromRole="LicenceType" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID" FromRole="LicenceType" ToRole="DriverDetail" />
         </EntityType>
         <EntityType Name="ReferPersonDetail">
           <Key>
@@ -373,11 +375,12 @@
           <Property Name="CreatedBy" Type="Int64" Nullable="false" />
           <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
           <Property Name="PhoneVerificationCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="IsVSEmployee" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="Users" ToRole="UserClaims" />
           <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
-          <NavigationProperty Name="DriverDetails" Relationship="GaddibabaModel.FK_DriverDetails_CreatedBy" FromRole="User" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_CreatedBy" FromRole="User" ToRole="DriverDetail" />
         </EntityType>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
           <End Role="Users" Type="Self.User" Multiplicity="1">
@@ -447,21 +450,21 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="DriverDetails" EntityType="GaddibabaModel.DriverDetail" />
-          <AssociationSet Name="FK_DriverDetails_CreatedBy" Association="GaddibabaModel.FK_DriverDetails_CreatedBy">
+          <EntitySet Name="DriverDetails" EntityType="GB.Data.DBEntity.DriverDetail" />
+          <AssociationSet Name="FK_DriverDetails_CreatedBy" Association="GB.Data.DBEntity.FK_DriverDetails_CreatedBy">
             <End Role="User" EntitySet="Users" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_DriverDetails_LicenceTypeID" Association="GaddibabaModel.FK_DriverDetails_LicenceTypeID">
+          <AssociationSet Name="FK_DriverDetails_LicenceTypeID" Association="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID">
             <End Role="LicenceType" EntitySet="LicenceTypes" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
           </AssociationSet>
-          <EntitySet Name="DriverStatus" EntityType="GaddibabaModel.DriverStatus" />
-          <AssociationSet Name="FK_DriverDetails_DriverStatusID" Association="GaddibabaModel.FK_DriverDetails_DriverStatusID">
+          <EntitySet Name="DriverStatus" EntityType="GB.Data.DBEntity.DriverStatus" />
+          <AssociationSet Name="FK_DriverDetails_DriverStatusID" Association="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID">
             <End Role="DriverStatus" EntitySet="DriverStatus" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="DriverDetail">
           <Key>
             <PropertyRef Name="ID" />
@@ -482,13 +485,14 @@
           <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
           <Property Name="DriverStatusID" Type="Int32" Nullable="false" />
           <Property Name="ExpectedSalary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="GaddibabaModel.FK_DriverDetails_CreatedBy" FromRole="DriverDetail" ToRole="User" />
-          <NavigationProperty Name="LicenceType" Relationship="GaddibabaModel.FK_DriverDetails_LicenceTypeID" FromRole="DriverDetail" ToRole="LicenceType" />
-          <NavigationProperty Name="DriverStatus" Relationship="GaddibabaModel.FK_DriverDetails_DriverStatusID" FromRole="DriverDetail" ToRole="DriverStatus" />
+          <Property Name="AttachedByVS" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="GB.Data.DBEntity.FK_DriverDetails_CreatedBy" FromRole="DriverDetail" ToRole="User" />
+          <NavigationProperty Name="LicenceType" Relationship="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID" FromRole="DriverDetail" ToRole="LicenceType" />
+          <NavigationProperty Name="DriverStatus" Relationship="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" FromRole="DriverDetail" ToRole="DriverStatus" />
         </EntityType>
         <Association Name="FK_DriverDetails_CreatedBy">
-          <End Type="GaddibabaModel.User" Role="User" Multiplicity="1" />
-          <End Type="GaddibabaModel.DriverDetail" Role="DriverDetail" Multiplicity="*" />
+          <End Type="GB.Data.DBEntity.User" Role="User" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetail" Role="DriverDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
@@ -499,8 +503,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DriverDetails_LicenceTypeID">
-          <End Type="GaddibabaModel.LicenceType" Role="LicenceType" Multiplicity="1" />
-          <End Type="GaddibabaModel.DriverDetail" Role="DriverDetail" Multiplicity="*" />
+          <End Type="GB.Data.DBEntity.LicenceType" Role="LicenceType" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetail" Role="DriverDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LicenceType">
               <PropertyRef Name="LicenceTypeID" />
@@ -516,11 +520,11 @@
           </Key>
           <Property Name="DriverStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DriverDetails" Relationship="GaddibabaModel.FK_DriverDetails_DriverStatusID" FromRole="DriverStatus" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" FromRole="DriverStatus" ToRole="DriverDetail" />
         </EntityType>
         <Association Name="FK_DriverDetails_DriverStatusID">
-          <End Type="GaddibabaModel.DriverStatus" Role="DriverStatus" Multiplicity="1" />
-          <End Type="GaddibabaModel.DriverDetail" Role="DriverDetail" Multiplicity="*" />
+          <End Type="GB.Data.DBEntity.DriverStatus" Role="DriverStatus" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetail" Role="DriverDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DriverStatus">
               <PropertyRef Name="DriverStatusID" />
@@ -530,14 +534,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GaddibabaModelStoreContainer" CdmEntityContainer="GaddibabaEntities">
+        <EntityContainerMapping StorageEntityContainer="GBDataDBEntityStoreContainer" CdmEntityContainer="GaddibabaEntities">
           <EntitySetMapping Name="LicenceTypes">
-            <EntityTypeMapping TypeName="GaddibabaModel.LicenceType">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.LicenceType">
               <MappingFragment StoreEntitySet="LicenceTypes">
                 <ScalarProperty Name="LicenceTypeID" ColumnName="LicenceTypeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -545,7 +549,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReferPersonDetails">
-            <EntityTypeMapping TypeName="GaddibabaModel.ReferPersonDetail">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.ReferPersonDetail">
               <MappingFragment StoreEntitySet="ReferPersonDetails">
                 <ScalarProperty Name="ReferPersonID" ColumnName="ReferPersonID" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
@@ -554,7 +558,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="GaddibabaModel.Role">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.Role">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -562,7 +566,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserClaims">
-            <EntityTypeMapping TypeName="GaddibabaModel.UserClaim">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.UserClaim">
               <MappingFragment StoreEntitySet="UserClaims">
                 <ScalarProperty Name="UserClaimID" ColumnName="UserClaimID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -572,7 +576,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="GaddibabaModel.UserDetail">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">
                 <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -592,7 +596,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserLogins">
-            <EntityTypeMapping TypeName="GaddibabaModel.UserLogin">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.UserLogin">
               <MappingFragment StoreEntitySet="UserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -601,7 +605,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="GaddibabaModel.User">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -626,10 +630,11 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="PhoneVerificationCode" ColumnName="PhoneVerificationCode" />
+                <ScalarProperty Name="IsVSEmployee" ColumnName="IsVSEmployee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="UserRoles" TypeName="GaddibabaModel.UserRoles" StoreEntitySet="UserRoles">
+          <AssociationSetMapping Name="UserRoles" TypeName="GB.Data.DBEntity.UserRoles" StoreEntitySet="UserRoles">
             <EndProperty Name="Roles">
               <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
@@ -638,8 +643,9 @@
             </EndProperty>
           </AssociationSetMapping>
           <EntitySetMapping Name="DriverDetails">
-            <EntityTypeMapping TypeName="GaddibabaModel.DriverDetail">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.DriverDetail">
               <MappingFragment StoreEntitySet="DriverDetails">
+                <ScalarProperty Name="AttachedByVS" ColumnName="AttachedByVS" />
                 <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
                 <ScalarProperty Name="DriverStatusID" ColumnName="DriverStatusID" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
@@ -660,7 +666,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DriverStatus">
-            <EntityTypeMapping TypeName="GaddibabaModel.DriverStatus">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.DriverStatus">
               <MappingFragment StoreEntitySet="DriverStatus">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DriverStatusID" ColumnName="DriverStatusID" />

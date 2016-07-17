@@ -23,9 +23,10 @@
                         <thead>
                             <tr>
                                 <th>Driver Name</th>
-                                <th>LicenceType</th>
-                                <th>Licence No</th>
-                                <th>Attached On</th>
+                                <th>LicenseType</th>
+                                <th>License No</th>
+                                <th>Status</th>
+                                @*<th>Attached On</th>*@
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,7 +39,8 @@
                                         <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
                                         <td class="col-md-2">@driverDetails.LicenceType.Type</td>
                                         <td class="col-md-2">@driverDetails.LicenceNo</td>
-                                        <td class="col-md-2">@driverDetails.LastUpdatedOn</td>
+                                        <td class="col-md-2">@driverDetails.DriverStatus.Status</td>
+                                        @*<td class="col-md-2">@driverDetails.LastUpdatedOn</td>*@
                                         <td class="col-md-2">
                                             <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { driverDetails.ID })" class="btnViewDriverDetails">Details</a></div>
                                         </td>
@@ -49,9 +51,10 @@
                         <tfoot>
                             <tr>
                                 <th>Driver Name</th>
-                                <th>LicenceType</th>
-                                <th>Licence No</th>
-                                <th>Attached On</th>  
+                                <th>LicenseType</th>
+                                <th>License No</th>
+                                <th>Status</th>
+                                @*<th>Attached On</th>*@  
                                 <th>Action</th>                         
                             </tr>
                         </tfoot>
@@ -70,7 +73,7 @@
     <!-- variables -->
     <script>
         var EditDriverDetailsbyIDUrl = '@Url.Action("Edit", "Drivers")';
-
+        var AttachedByVS = false;
         $(document).ready(function () {
             //Initialize data table
             $('.dataTables-drivers').dataTable({

@@ -130,7 +130,8 @@ namespace GBAdmin.Web.Controllers
                     LockoutEndDateUtc = DateTime.Now.AddDays(60),
                     LockoutEnabled = true,
                     CreatedBy = SessionManager.GetSessionUser().Id,
-                    LastUpdatedBy = SessionManager.GetSessionUser().Id
+                    LastUpdatedBy = SessionManager.GetSessionUser().Id,
+                    IsVSEmployee = SessionManager.GetSessionUser().IsVSEmployee
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
