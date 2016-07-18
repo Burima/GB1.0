@@ -50,6 +50,7 @@ namespace GBAdmin.Web.Controllers
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.AttachedByVS = SessionManager.GetSessionUser().IsVSEmployee;
+                    driver.CityID = model.CityID;
                     GBContext.DriverDetails.Add(driver);                   
 
                     if (GBContext.SaveChanges() > 0)
