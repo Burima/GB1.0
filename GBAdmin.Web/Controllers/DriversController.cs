@@ -18,20 +18,20 @@ namespace GBAdmin.Web.Controllers
         GaddibabaEntities GBContext = new GaddibabaEntities();
         CommonHelper CommonHelper = new CommonHelper();
         // GET: Drivers/Add
-        [HttpGet]        
+        [HttpGet]
         public ActionResult Add()
         {
             return View();
         }
         [HttpPost]
-       public JsonResult Add(DriverViewModel model)
-        {                  
+        public JsonResult Add(DriverViewModel model)
+        {
             if (ModelState.IsValid)
-            {              
+            {
                 var UserID = SessionManager.GetSessionUser().Id;
-               
-                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber 
-                    ||(m.LicenceNo!=null && m.LicenceNo!=String.Empty && m.LicenceNo==model.LicenceNo)).FirstOrDefault();
+
+                var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber
+                    || (m.LicenceNo != null && m.LicenceNo != String.Empty && m.LicenceNo == model.LicenceNo)).FirstOrDefault();
                 if (driverDetail == null)
                 {
                     DriverDetail driver = new DriverDetail();
@@ -51,7 +51,7 @@ namespace GBAdmin.Web.Controllers
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.AttachedByVS = SessionManager.GetSessionUser().IsVSEmployee;
                     driver.CityID = model.CityID;
-                    GBContext.DriverDetails.Add(driver);                   
+                    GBContext.DriverDetails.Add(driver);
 
                     if (GBContext.SaveChanges() > 0)
                     {
@@ -66,17 +66,17 @@ namespace GBAdmin.Web.Controllers
                 {
                     return Json(new { Success = false, Message = "Driver details(phone number or license number) already exists! Please try with some other driver." }, JsonRequestBehavior.AllowGet);
                 }
-               
+
             }
             return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
-        } 
-       
+        }
+
         //GET
-        [HttpGet]        
+        [HttpGet]
         public ActionResult List()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            var UserID =  SessionManager.GetSessionUser().Id;
+            var UserID = SessionManager.GetSessionUser().Id;
             /**
              * Rule:
              * 1.Super Admin can view All
@@ -89,7 +89,7 @@ namespace GBAdmin.Web.Controllers
             {
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.ToList();
             }
-           
+
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
             {
@@ -126,12 +126,12 @@ namespace GBAdmin.Web.Controllers
             {
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
             }
-            
+
             return View(driverViewModel);
         }
 
-       // [HttpGet]
-        
+        // [HttpGet]
+
         [Route("Driver/Details/{ID}")]
         public ActionResult Edit(string ID)
         {
@@ -140,7 +140,7 @@ namespace GBAdmin.Web.Controllers
             var dbDriverDetail = GBContext.DriverDetails.Where(m => m.ID == Id).FirstOrDefault();
             driverDetail.ID = dbDriverDetail.ID;
             driverDetail.FirstName = dbDriverDetail.FirstName;
-            driverDetail.LastName = dbDriverDetail.LastName;    
+            driverDetail.LastName = dbDriverDetail.LastName;
             driverDetail.PhoneNumber = dbDriverDetail.PhoneNumber;
             driverDetail.Pincode = dbDriverDetail.Pincode;
             driverDetail.LicenceType = dbDriverDetail.LicenceTypeID;
@@ -153,22 +153,26 @@ namespace GBAdmin.Web.Controllers
             return View(driverDetail);
         }
         [HttpPost]
-        [Route("Driver/Details/{ID}")]       
+        [Route("Driver/Details/{ID}")]
         public ActionResult Edit(DriverViewModel driverDetail)
         {
             if (ModelState.IsValid)
             {
 
                 DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
+                //check ph number
                 if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber)
                 {
-                    var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber);
+                    var User = GBContext.DriverDetails.Where(m => m.PhoneNumber == driverDetail.PhoneNumber).FirstOrDefault();
                     if (User != null)
                     {
                         return Json(new { Success = false, Message = "Phone number already exists!" }, JsonRequestBehavior.AllowGet);
                     }
-                }if(driverDetail.LicenceNo != null && driverDetail.LicenceNo != String.Empty && dbDriverDetail.LicenceNo != driverDetail.LicenceNo){
-                    var User = GBContext.DriverDetails.Where(m => m.LicenceNo == driverDetail.LicenceNo);
+                } 
+                //check license number
+                if (driverDetail.LicenceNo != null && driverDetail.LicenceNo != String.Empty && dbDriverDetail.LicenceNo != driverDetail.LicenceNo)
+                {
+                    var User = GBContext.DriverDetails.Where(m => m.LicenceNo == driverDetail.LicenceNo).FirstOrDefault();
                     if (User != null)
                     {
                         return Json(new { Success = false, Message = "License number already exists!" }, JsonRequestBehavior.AllowGet);
@@ -187,7 +191,9 @@ namespace GBAdmin.Web.Controllers
                 if (driverDetail.Status == (int)Constants.EnumDriverStatus.AttachedtoUber)
                 {
                     dbDriverDetail.AttachedOn = DateTime.Now;
-                }else if(driverDetail.Status == (int)Constants.EnumDriverStatus.PartnerMatched){
+                }
+                else if (driverDetail.Status == (int)Constants.EnumDriverStatus.PartnerMatched)
+                {
 
                     dbDriverDetail.PartnerMatchedOn = DateTime.Now;
                 }
@@ -197,22 +203,22 @@ namespace GBAdmin.Web.Controllers
                 }
                 dbDriverDetail.Ola = driverDetail.Ola;
                 dbDriverDetail.Uber = driverDetail.Uber;
-               
-                
+
+
                 if (GBContext.SaveChanges() > 0)
                 {
-                   return Json(new { Success = true, Message = "Driver Details updated Successfully!!" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = true, Message = "Driver Details updated Successfully!!" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                   return Json(new { Success = false, Message = "Error in updating driver details.Please try again later." }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Success = false, Message = "Error in updating driver details.Please try again later." }, JsonRequestBehavior.AllowGet);
                 }
             }
 
             return Json(new { Success = false, Message = "Please check your inputs and try again." }, JsonRequestBehavior.AllowGet);
         }
 
-         [Authorize(Roles = "SuperAdmin, Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult AttachedByVS()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
@@ -220,11 +226,11 @@ namespace GBAdmin.Web.Controllers
             //    GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID != (int)Constants.EnumDriverStatus.New ||
             //    x.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
 
-            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.AttachedByVS == true).Where(m=>m.DriverStatusID
+            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.AttachedByVS == true).Where(m => m.DriverStatusID
                 != (int)Constants.EnumDriverStatus.New).Where(y => y.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
 
             return View(driverViewModel);
         }
- 
+
     }
 }
