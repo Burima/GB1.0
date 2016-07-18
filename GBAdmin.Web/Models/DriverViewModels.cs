@@ -27,7 +27,7 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Pincode")]
         [Required]
         [StringLength(6, MinimumLength = 6, ErrorMessage = "Invalid pincode")]
-        [RegularExpression(@"[7][0-9]{5}", ErrorMessage = "Entered pincode is not valid.")]
+        //[RegularExpression(@"[47][0-9]{5}", ErrorMessage = "Entered pincode is not valid.")]
         public string Pincode { get; set; }
 
         [Display(Name = "License Type")]

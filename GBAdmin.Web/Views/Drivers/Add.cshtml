@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         @*<input type="text" class="form-control" placeholder="Pincode" name="model.Pincode" maxlength="6" tabindex="4" data-val="true" />*@
-                        @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone", maxlength = "6", placeholder = "Pincode", tabIndex = "5" })
+                        @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone pincode", maxlength = "6", placeholder = "Pincode", tabIndex = "5" })
                     </div>
                     <div class="form-group">
                         @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
@@ -117,7 +117,7 @@
         var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
-            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });           
+            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
         });
 
         var addDriverSuccess = function (data) {
