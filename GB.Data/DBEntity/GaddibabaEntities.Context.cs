@@ -16,7 +16,7 @@ namespace GB.Data.DBEntity
     public partial class GaddibabaEntities : DbContext
     {
         public GaddibabaEntities()
-            : base("name=Gaddibaba_DevEntities")
+            : base("name=GaddibabaEntities")
         {
         }
     

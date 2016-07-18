@@ -56,6 +56,8 @@ namespace GBAdmin.Web.Models
         public User User { get; set; }
         public bool AttachedByVS { get; set; }
 
+        [Display(Name = "City")]
+        [Required]
         public int CityID { get; set; }
         public Nullable<System.DateTime> AttachedOn { get; set; }
         public Nullable<System.DateTime> PartnerMatchedOn { get; set; }
