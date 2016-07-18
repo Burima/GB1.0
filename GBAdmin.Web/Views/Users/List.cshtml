@@ -45,6 +45,7 @@
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Email</th>
+                                <th>City</th>
                                 <th>Last Updated On</th>
                                 @*<th>Last Updated By</th>*@
                             </tr>
@@ -59,6 +60,7 @@
                                         <td>@(userDetails.PhoneNumber != null ? userDetails.PhoneNumber:"NA")
                                         </td>
                                         <td>@userDetails.Email</td>
+                                        <td>@userDetails.City.Name</td>
                                         <td>@userDetails.LastUpdatedOn</td>
                                         @*<td>@userDetails.LastUpdatedBy</td>*@
                                     </tr>

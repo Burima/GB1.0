@@ -9,6 +9,28 @@
 <link href='@Url.Content("~/Content/custom/ViewProfile.css")' rel="stylesheet" />
 <link href='@Url.Content("~/Content/jquery.Jcrop.css")' rel="stylesheet" />
 <link href='@Url.Content("~/Content/jquery.Jcrop.min.css")' rel="stylesheet" />
+<style>
+     div.jcrop-holder{
+         background-color:white !important;
+         height:500px !important;
+         width:400px !important;
+     }
+
+     #Message {
+        margin-top: 2%;
+        background: #1ab394;
+        color: white;
+        padding: 1%;
+        margin-bottom: 2%;
+        display: none;
+        height: 36px;
+        /*height: 76px;*/
+    }
+
+        #Message .msg-close {
+            cursor: pointer;
+        }
+</style>
 @**---Modal for Image Cropping---*@
 <div id="divCropResizeImage" class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
@@ -40,7 +62,7 @@
                 <h4 class="modal-title">Change Password</h4>
                 <button type="button" id="btnVerificationClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
-            @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { HttpMethod = "POST" }))
+            @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post,new AjaxOptions { OnSuccess = "OnPasswordChangeSuccess", OnFailure = "OnPasswordChangeFailure" }, new { role = "form", id = "form-ChangePassword" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="modal-body">
@@ -84,6 +106,12 @@
 </div>
 @using (Html.BeginForm("ViewProfile", "User", FormMethod.Post, new { role = "form", id = "view-profile-form", style = "min-height:420px" }))
 {
+    <div class="form-group">
+        <div id="Message">
+            <span class="pull-left msg-text"></span>
+            <span class="pull-right msg-close">X</span>
+        </div>
+    </div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row  border-bottom white-bg dashboard-header">
             <div class="col-md-10">
@@ -241,7 +269,7 @@
 
                             </div>*@
                                 @*---Email ID---*@
-                                <div class="row row-padding-top-5">
+                                @*<div class="row row-padding-top-5">
                                     <div class="col-md-12">
                                         Email Address
                                     </div>
@@ -266,24 +294,24 @@
 
                                     </div>
 
-                                </div>
+                                </div>*@
                                 @*---Change Password---*@
                                 <div class="row row-padding-top-5">
                                     <div class="col-md-12">
                                         Password
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-9 row-padding-top-5">
                                         To change your current password please click <a id="linkChangePassword">here</a>
                                     </div>
                                 </div>
                                 @*Save button*@
-                                <div class="col-md-12">
+                                @*<div class="col-md-12">
                                     <div class="form-group" style="padding-top:3%;">
                                         <div>
                                             <button id="btnSave" class="btn btn-primary" type="submit" tabindex="5">Save</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                             
                         </div>
@@ -299,20 +327,46 @@
 @section scripts{
     <script>
         var CropImageUrl = '@Url.Action("CropImage", "Users")';
-        document.getElementById("fileProfile").onchange = function () {
-            $("#photoFilePath").html(this.value.split('\\').pop());
-            $("#photoFilePath").attr("title", this.value.split('\\').pop());
-            $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
+        //var ProfileUrl = '@Url.Action("Profile","Users")';
+    document.getElementById("fileProfile").onchange = function () {
+        $("#photoFilePath").html(this.value.split('\\').pop());
+        $("#photoFilePath").attr("title", this.value.split('\\').pop());
+        $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
         };
         $("#btnRotation").click(function () {
             $('div.jcrop-holder').rotate({ animateTo: 90 });
 
         });
+
+        $('#linkChangePassword').click(function () {
+            $("#modalChangePassword").modal('show');
+        });
+
+
+        var OnPasswordChangeSuccess = function (data) {
+            $("#modalChangePassword").modal('hide');
+            if (data.Success) {
+                $('#view-profile-form #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {
+                    location.reload();
+                });
+            } else {
+                $('#view-profile-form #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                    location.reload();
+                });
+            }
+        }
+
+        var OnPasswordChangeFailure = function (data) {
+            $("#modalChangePassword").modal('hide');
+            $('#view-profile-form #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                location.reload();
+            });
+         }
     </script>
     <script src='@Url.Content("~/Scripts/jQueryRotate.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/ViewProfile.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/jquery.Jcrop.min.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/form-image-crop.js")'></script>
-    <script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")'></script>
+    @*<script src='@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")'></script>*@
 }
 

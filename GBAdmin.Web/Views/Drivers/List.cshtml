@@ -25,7 +25,8 @@
                                 <th>Driver Name</th>
                                 <th>LicenseType</th>
                                 <th>License No</th>
-                                <th>Registered in</th>
+                                @*<th>Registered in</th>*@
+                                <th>City</th>
                                 <th>Status</th>
                                 <th>Added By</th>
                                 <th>Action</th>
@@ -40,18 +41,18 @@
                                         <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
                                         <td class="col-md-2">@driverDetails.LicenceType.Type</td>
                                         <td class="col-md-2">@driverDetails.LicenceNo</td>
-                                        <td class="col-md-2">
+                                        @*<td class="col-md-2">
                                             @if (driverDetails.Uber == true)
                                             { <label style="font-weight:normal">Uber</label> }
                                             @if (driverDetails.Ola == true)
                                             {<label style="font-weight:normal">Ola</label>}
-                                            @*@if (driverDetails.Tfs == true)
-            {<label style="font-weight:normal">TFS</label>}*@
-                                            @if (driverDetails.Uber == false && driverDetails.Ola == false @*&& driverDetails.Tfs == false*@)
+                                           
+                                            @if (driverDetails.Uber == false && driverDetails.Ola == false)
                                             {
                                                 <label style="font-weight:normal">NA</label>
                                             }
-                                        </td>
+                                        </td>*@
+                                        <td class="col-md-2">@driverDetails.City.Name</td>
                                         <td class="col-md-2">
                                             @driverDetails.DriverStatus.Status
                                         </td>

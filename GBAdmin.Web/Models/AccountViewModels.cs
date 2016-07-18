@@ -89,6 +89,8 @@ namespace GBAdmin.Web.Models
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid phone number")]
         [RegularExpression(@"[789][0-9]{9}", ErrorMessage = "Entered Mobile No is not valid.")]
         public string PhoneNumber { get; set; }
+
+        public int CityID { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -154,6 +156,8 @@ namespace GBAdmin.Web.Models
         public string HighestEducation { get; set; }
         public string InstitutionName { get; set; }
         public int Status { get; set; }
+        public int CityID { get; set; }
+    
 
         public Nullable<System.DateTime> LastUpdatedOn { get; set; }
 

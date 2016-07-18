@@ -17,9 +17,9 @@
                         <span class="clear">
                             <span class="block m-t-xs">
 
-                                <a href="@Url.Action("Profile", "Users")"><strong class="font-bold">
+                                @*<a href="@Url.Action("Profile", "Users")">*@<strong class="font-bold">
                                     @SessionManager.GetSessionUser().FirstName @SessionManager.GetSessionUser().LastName</strong>
-                                </a>
+                                @*</a>*@
 
                             </span> <span class="text-muted text-xs block">@Session["Role"].ToString()<b class="caret"></b></span>
                         </span>

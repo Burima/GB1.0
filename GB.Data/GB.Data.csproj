@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBEntity\City.cs">
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\DriverDetail.cs">
       <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>

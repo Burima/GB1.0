@@ -55,6 +55,12 @@ namespace GBAdmin.Web.Models
 
         public User User { get; set; }
         public bool AttachedByVS { get; set; }
+
+        public int CityID { get; set; }
+        public Nullable<System.DateTime> AttachedOn { get; set; }
+        public Nullable<System.DateTime> PartnerMatchedOn { get; set; }
+        public Nullable<System.DateTime> CompletedFirstTripOn { get; set; }
+    
         //public ReferPersonViewModel ReferPersonViewModel { get; set; }
         public List<DriverDetail> DriverDetailsList { get; set; }
     }

@@ -1,0 +1,4 @@
+Alter table Users
+Add CityID int NOT NULL DEFAULT(1)
+CONSTRAINT FK_Users_CityID FOREIGN KEY (CityID)
+REFERENCES Cities(CityID)

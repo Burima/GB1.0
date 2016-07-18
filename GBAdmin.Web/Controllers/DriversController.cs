@@ -183,6 +183,17 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
                 dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
                 dbDriverDetail.LastUpdatedOn = DateTime.Now;
+                if (driverDetail.Status == (int)Constants.EnumDriverStatus.AttachedtoUber)
+                {
+                    dbDriverDetail.AttachedOn = DateTime.Now;
+                }else if(driverDetail.Status == (int)Constants.EnumDriverStatus.PartnerMatched){
+
+                    dbDriverDetail.PartnerMatchedOn = DateTime.Now;
+                }
+                else if (driverDetail.Status == (int)Constants.EnumDriverStatus.CompletedFirstTrip)
+                {
+                    dbDriverDetail.CompletedFirstTripOn = DateTime.Now;
+                }
                 dbDriverDetail.Ola = driverDetail.Ola;
                 dbDriverDetail.Uber = driverDetail.Uber;
                

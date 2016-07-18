@@ -131,7 +131,8 @@ namespace GBAdmin.Web.Controllers
                     LockoutEnabled = true,
                     CreatedBy = SessionManager.GetSessionUser().Id,
                     LastUpdatedBy = SessionManager.GetSessionUser().Id,
-                    IsVSEmployee = SessionManager.GetSessionUser().IsVSEmployee
+                    IsVSEmployee = SessionManager.GetSessionUser().IsVSEmployee,
+                    CityID = model.CityID
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -397,32 +398,31 @@ namespace GBAdmin.Web.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ChangePassword(UserViewModel userViewModel)
-        //{
-        //    bool hasPassword = HasPassword();
-        //    ViewBag.HasLocalPassword = hasPassword;
-        //    ViewBag.StatusMessage = "An error has occurred.";
-        //    if (hasPassword)
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var result = await UserManager.ChangePasswordAsync(long.Parse(User.Identity.GetUserId()),
-        //                userViewModel.ManageUserViewModel.OldPassword, userViewModel.ManageUserViewModel.NewPassword);
-        //            if (result.Succeeded)
-        //            {
-        //                var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
-        //                await SignInAsync(user, isPersistent: false);
-        //                ViewBag.StatusMessage = "Your password has been changed.";
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(UserViewModel userViewModel)
+        {
+            bool hasPassword = HasPassword();
+            ViewBag.HasLocalPassword = hasPassword;
+           // ViewBag.StatusMessage = "An error has occurred.";
+            if (hasPassword)
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await UserManager.ChangePasswordAsync(long.Parse(User.Identity.GetUserId()),
+                        userViewModel.ManageUserViewModel.OldPassword, userViewModel.ManageUserViewModel.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
+                        await SignInAsync(user, isPersistent: false);
+                        return Json(new { Success = true, Message = "Password Changed Successfully!!" }, JsonRequestBehavior.AllowGet);
+                    }
 
-        //            }
+                }
+            }
 
-        //        }
-        //    }
-
-        //    return RedirectToAction("ViewProfile", "User");
-        //}
+            return Json(new { Success = false, Message = "Error Changing Password." }, JsonRequestBehavior.AllowGet);
+        }
 
         //
         // POST: /Account/ExternalLogin
