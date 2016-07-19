@@ -28,9 +28,10 @@ namespace GBAdmin.Web.Services
             LearnerReceived = 6,
             LicenceReceived = 7,
             AttachedtoUber = 8,
-            Dormant = 9,
-            PartnerMatched = 10,
-            CompletedFirstTrip = 11
+            PartnerMatched = 9,
+            CompletedFirstTrip = 10,
+            Dormant = 11,
+            
         }
         public enum Clients
         {
