@@ -3,7 +3,7 @@
 @using GBAdmin.Web.Services.Common
 
 @{
-    var user = @SessionManager.GetSessionUser();
+    var user = SessionManager.GetSessionUser();
 }
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
@@ -18,7 +18,7 @@
                             <span class="block m-t-xs">
 
                                 @*<a href="@Url.Action("Profile", "Users")">*@<strong class="font-bold">
-                                    @SessionManager.GetSessionUser().FirstName @SessionManager.GetSessionUser().LastName</strong>
+                                    @user.FirstName @user.LastName</strong>
                                 @*</a>*@
 
                             </span> <span class="text-muted text-xs block">@Session["Role"].ToString()<b class="caret"></b></span>
