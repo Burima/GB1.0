@@ -113,13 +113,13 @@ namespace GBAdmin.Web.Controllers
                 User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
                 if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
                 {
-                    driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New
-                        || m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+                    driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).
+                        Where(m=>m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
                 }
                 else
                 {
                     driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
-                    .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New || m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+                    .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
                 }
             }
             else
@@ -150,6 +150,8 @@ namespace GBAdmin.Web.Controllers
             driverDetail.Ola = dbDriverDetail.Ola;
             driverDetail.Uber = dbDriverDetail.Uber;
             driverDetail.AttachedByVS = dbDriverDetail.AttachedByVS;
+            driverDetail.CityID = dbDriverDetail.CityID;
+            driverDetail.User = dbDriverDetail.User;
             return View(driverDetail);
         }
         [HttpPost]

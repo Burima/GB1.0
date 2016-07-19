@@ -87,6 +87,7 @@
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                                       
                                         <div class="col-md-10">
                                             @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
                                                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
@@ -97,6 +98,7 @@
                                             }
                                             else
                                             {
+                                                @Html.HiddenFor(m=>m.PhoneNumber)
                                                 @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", disabled = "disabled", placeholder = "Phone Number", tabIndex = "3" })
                                             }
 
@@ -154,6 +156,7 @@
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
+                                       
                                         <div class="col-md-10">
 
                                             @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
@@ -239,6 +242,7 @@
                                             }
                                             else
                                             {
+                                                 @Html.HiddenFor(m=>m.Status)
                                                 @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
                                                  {  new SelectListItem { Text = "New", Value = "1"},
                                                     new SelectListItem { Text = "Approved", Value = "2"},

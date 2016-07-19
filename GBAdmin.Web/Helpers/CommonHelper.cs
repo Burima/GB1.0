@@ -47,7 +47,7 @@ namespace GBAdmin.Web.Helpers
 
         public User GetAdminByID(long CreatedBy)
         {
-            var User = GBContext.Users.FirstOrDefault(p => p.CreatedBy == CreatedBy);
+            var User = GBContext.Users.FirstOrDefault(p => p.UserID == CreatedBy);
             if (User.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
             {
                 User = GetAdminByID(User.CreatedBy);

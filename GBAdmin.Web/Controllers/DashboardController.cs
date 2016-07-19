@@ -59,13 +59,12 @@ namespace GBAdmin.Web.Controllers
                 User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
                 if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
                 {
-                    DriverDetails = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New
-                        || m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+                    DriverDetails = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
                 }
                 else
                 {
                     DriverDetails = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
-                    .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New || m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+                    .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
                 }
             }
             else
