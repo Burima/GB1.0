@@ -49,3 +49,7 @@
     #Message .msg-close {
         cursor: pointer;
     }
+
+.ibox-content {
+    overflow-x: auto !important;
+}
