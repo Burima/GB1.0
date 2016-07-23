@@ -32,11 +32,11 @@
           <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
           <Property Name="DriverStatusID" Type="int" Nullable="false" />
           <Property Name="ExpectedSalary" Type="nvarchar(max)" />
-          <Property Name="AttachedByVS" Type="bit" Nullable="false" />
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="AttachedOn" Type="datetime" />
           <Property Name="PartnerMatchedOn" Type="datetime" />
           <Property Name="CompletedFirstTripOn" Type="datetime" />
+          <Property Name="AttachedByVS" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DriverStatus">
           <Key>
@@ -82,18 +82,20 @@
           </Key>
           <Property Name="UserDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="bigint" Nullable="false" />
-          <Property Name="PresentAddress" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PermanentAddress" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="GovtIDType" Type="int" Nullable="false" />
-          <Property Name="GovtID" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserProfession" Type="int" Nullable="false" />
+          <Property Name="PresentAddress" Type="varchar" MaxLength="50" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="50" />
+          <Property Name="GovtIDType" Type="int" />
+          <Property Name="GovtID" Type="varchar" MaxLength="50" />
+          <Property Name="UserProfession" Type="int" />
           <Property Name="CurrentEmployer" Type="varchar" MaxLength="50" />
-          <Property Name="OfficeLocation" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="OfficeLocation" Type="varchar" MaxLength="60" />
           <Property Name="EmployeeID" Type="varchar" MaxLength="10" />
-          <Property Name="HighestEducation" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="InstitutionName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="HighestEducation" Type="varchar" MaxLength="20" />
+          <Property Name="InstitutionName" Type="varchar" MaxLength="30" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="UserLogins">
           <Key>
@@ -140,8 +142,8 @@
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
           <Property Name="PhoneVerificationCode" Type="nvarchar" MaxLength="6" />
-          <Property Name="IsVSEmployee" Type="bit" Nullable="false" />
           <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="IsVSEmployee" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_UserClaim_dbo_User_UserID">
           <End Role="Users" Type="Self.Users" Multiplicity="1">
@@ -401,26 +403,6 @@
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="UserClaims" ToRole="Users" />
         </EntityType>
-        <EntityType Name="UserDetail">
-          <Key>
-            <PropertyRef Name="UserDetailID" />
-          </Key>
-          <Property Name="UserDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-          <Property Name="PresentAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PermanentAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="GovtIDType" Type="Int32" Nullable="false" />
-          <Property Name="GovtID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserProfession" Type="Int32" Nullable="false" />
-          <Property Name="CurrentEmployer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OfficeLocation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="HighestEducation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="InstitutionName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserDetails_UserID" FromRole="UserDetails" ToRole="Users" />
-        </EntityType>
         <EntityType Name="UserLogin">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -464,9 +446,9 @@
           <NavigationProperty Name="City" Relationship="Self.FK_Users_CityID" FromRole="Users" ToRole="Cities" />
           <NavigationProperty Name="DriverDetails" Relationship="Self.FK_DriverDetails_CreatedBy" FromRole="Users" ToRole="DriverDetails" />
           <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaim_dbo_User_UserID" FromRole="Users" ToRole="UserClaims" />
-          <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserID" FromRole="Users" ToRole="UserDetails" />
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="UserDetails" Relationship="GB.Data.DBEntity.FK_UserDetails_UserID" FromRole="User" ToRole="UserDetail" />
         </EntityType>
         <Association Name="FK_DriverDetails_CityID">
           <End Role="Cities" Type="Self.City" Multiplicity="1" />
@@ -530,18 +512,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserDetails_UserID">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="UserDetails">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_UserLogin_dbo_User_UserID">
           <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -567,7 +537,6 @@
           <EntitySet Name="ReferPersonDetails" EntityType="Self.ReferPersonDetail" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
-          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_DriverDetails_CityID" Association="Self.FK_DriverDetails_CityID">
@@ -590,10 +559,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserClaims" EntitySet="UserClaims" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserDetails_UserID" Association="Self.FK_UserDetails_UserID">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserDetails" EntitySet="UserDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_UserLogin_dbo_User_UserID" Association="Self.FK_dbo_UserLogin_dbo_User_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserLogins" EntitySet="UserLogins" />
@@ -606,6 +571,11 @@
           <AssociationSet Name="FK_DriverDetails_DriverStatusID" Association="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID">
             <End Role="DriverStatus" EntitySet="DriverStatus" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
+          </AssociationSet>
+          <EntitySet Name="UserDetails" EntityType="GB.Data.DBEntity.UserDetail" />
+          <AssociationSet Name="FK_UserDetails_UserID" Association="GB.Data.DBEntity.FK_UserDetails_UserID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="DriverStatus">
@@ -625,6 +595,40 @@
             </Principal>
             <Dependent Role="DriverDetail">
               <PropertyRef Name="DriverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserDetailID" />
+          </Key>
+          <Property Name="UserDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="PresentAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GovtIDType" Type="Int32" />
+          <Property Name="GovtID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserProfession" Type="Int32" />
+          <Property Name="CurrentEmployer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeLocation" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HighestEducation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="InstitutionName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="GB.Data.DBEntity.FK_UserDetails_UserID" FromRole="UserDetail" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserDetails_UserID">
+          <End Type="GB.Data.DBEntity.User" Role="User" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.UserDetail" Role="UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -704,26 +708,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="GB.Data.DBEntity.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetails">
-                <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
-                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-                <ScalarProperty Name="GovtIDType" ColumnName="GovtIDType" />
-                <ScalarProperty Name="GovtID" ColumnName="GovtID" />
-                <ScalarProperty Name="UserProfession" ColumnName="UserProfession" />
-                <ScalarProperty Name="CurrentEmployer" ColumnName="CurrentEmployer" />
-                <ScalarProperty Name="OfficeLocation" ColumnName="OfficeLocation" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="HighestEducation" ColumnName="HighestEducation" />
-                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserLogins">
             <EntityTypeMapping TypeName="GB.Data.DBEntity.UserLogin">
               <MappingFragment StoreEntitySet="UserLogins">
@@ -780,6 +764,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+                <ScalarProperty Name="HighestEducation" ColumnName="HighestEducation" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OfficeLocation" ColumnName="OfficeLocation" />
+                <ScalarProperty Name="CurrentEmployer" ColumnName="CurrentEmployer" />
+                <ScalarProperty Name="UserProfession" ColumnName="UserProfession" />
+                <ScalarProperty Name="GovtID" ColumnName="GovtID" />
+                <ScalarProperty Name="GovtIDType" ColumnName="GovtIDType" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -794,7 +800,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

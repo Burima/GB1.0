@@ -46,12 +46,13 @@ namespace GBAdmin.Web.Controllers
         [Route("Profile", Name = RouteNames.Profile)]
         public ActionResult Profile()
         {
-            var user = SessionManager.GetSessionUser();
+            var UserID = SessionManager.GetSessionUser().Id;
+            var user = GBContext.Users.Where(p => p.UserID == UserID).FirstOrDefault();
             if (user != null)
             {
-                var userDetails = GBContext.UserDetails.Where(p => p.UserID == user.Id);
+                //var userDetails = GBContext.UserDetails.Where(p => p.UserID == user.Id);
                 userViewModel.ManageUserViewModel = new ManageUserViewModel();
-                userViewModel.UserID = user.Id;
+                userViewModel.UserID = user.UserID;
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.FirstName = user.FirstName;
                 userViewModel.LastName = user.LastName;
@@ -63,15 +64,16 @@ namespace GBAdmin.Web.Controllers
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
                 userViewModel.UserName = user.UserName;
+                userViewModel.CityID = user.CityID;
 
-                if (userDetails != null && userDetails.Count() > 0)
+                if (user.UserDetails != null && user.UserDetails.Count() > 0)
                 {
-                    userViewModel.PresentAddress = userDetails.FirstOrDefault().PresentAddress;
-                    userViewModel.PermanentAddress = userDetails.FirstOrDefault().PermanentAddress;
-                    userViewModel.GovtIDType = userDetails.FirstOrDefault().GovtIDType;
-                    userViewModel.GovtID = userDetails.FirstOrDefault().GovtID;
-                    userViewModel.HighestEducation = userDetails.FirstOrDefault().HighestEducation;
-                    userViewModel.InstitutionName = userDetails.FirstOrDefault().InstitutionName;
+                    userViewModel.PresentAddress = user.UserDetails.FirstOrDefault().PresentAddress;
+                    userViewModel.PermanentAddress = user.UserDetails.FirstOrDefault().PermanentAddress;
+                    userViewModel.GovtIDType = user.UserDetails.FirstOrDefault().GovtIDType;
+                    userViewModel.GovtID = user.UserDetails.FirstOrDefault().GovtID;
+                    userViewModel.HighestEducation = user.UserDetails.FirstOrDefault().HighestEducation;
+                    userViewModel.InstitutionName = user.UserDetails.FirstOrDefault().InstitutionName;
                 }
 
             }
@@ -79,31 +81,24 @@ namespace GBAdmin.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ViewProfile(UserViewModel userViewModel)
+        public JsonResult ViewProfile(UserViewModel userViewModel)
         {
-
-            userViewModel.Status = 1;
-            userViewModel.LastUpdatedOn = DateTime.Now;
-            //if (userViewModel.UserID == 0)
-            //{
-            //    //UserController accountController = new UserController((UserManagement)userManagement);
-            //    //accountController.Logout();
-
-            //}
-
-            int count = UpdateUser(userViewModel);
-            if (count > 0)
+            if (ModelState.IsValid)
             {
-                var user = SessionManager.GetSessionUser();
-                user.ProfilePicture = userViewModel.ProfilePicture;
-                TempData["message"] = "Profile updated successfully!";
-            }
-            else
-            {
-                TempData["message"] = "Error in updating your profile.Please try again later";
+                userViewModel.Status = 1;
 
+                int count = UpdateUser(userViewModel);
+                if (count > 0)
+                {
+                   return Json(new { Success = true, Message = "Profile updated successfully!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { Success = false, Message = "Error in updating your profile.Please try again later" }, JsonRequestBehavior.AllowGet);
+                }
             }
-            return PartialView("_EditProfile", userViewModel);
+
+            return Json(new { Success = false, Message = "Please check your inputs." }, JsonRequestBehavior.AllowGet);
         }
 
         //[Route("CropImage", Name = RouteNames.CropImage)]
@@ -152,13 +147,15 @@ namespace GBAdmin.Web.Controllers
             var dbUser = GBContext.Users.FirstOrDefault(m => m.UserID == userViewModel.UserID);
             if (dbUser != null)
             {
-                dbUser.UserName = userViewModel.UserName;
                 dbUser.PhoneNumber = userViewModel.PhoneNumber;
                 dbUser.FirstName = userViewModel.FirstName;
                 dbUser.LastName = userViewModel.LastName;
                 dbUser.Gender = userViewModel.Gender;
                 dbUser.ProfilePicture = String.Empty;
                 dbUser.Email = userViewModel.Email;
+                dbUser.CityID = userViewModel.CityID;
+                dbUser.LastUpdatedBy = userViewModel.UserID;
+                dbUser.LastUpdatedOn = DateTime.Now;
 
                 if (dbUser.UserDetails != null && dbUser.UserDetails.Count > 0)
                 {
@@ -169,6 +166,7 @@ namespace GBAdmin.Web.Controllers
                     dbUser.UserDetails.FirstOrDefault().HighestEducation = userViewModel.HighestEducation;
                     dbUser.UserDetails.FirstOrDefault().InstitutionName = userViewModel.InstitutionName;
                     dbUser.UserDetails.FirstOrDefault().LastUpdatedOn = DateTime.Now;
+                    dbUser.UserDetails.FirstOrDefault().LastUpdatedBy = userViewModel.UserID;
                 }
                 else
                 {
@@ -177,13 +175,13 @@ namespace GBAdmin.Web.Controllers
                     userDetail.PermanentAddress = userViewModel.PermanentAddress;
                     userDetail.GovtIDType = userViewModel.GovtIDType;
                     userDetail.GovtID = userViewModel.GovtID;
-                    userDetail.UserProfession = userViewModel.UserProfession;
-                    userDetail.OfficeLocation = userViewModel.OfficeLocation;
-                    userDetail.CurrentEmployer = userViewModel.CurrentEmployer;
-                    userDetail.EmployeeID = userViewModel.EmployeeID;
                     userDetail.HighestEducation = userViewModel.HighestEducation;
                     userDetail.InstitutionName = userViewModel.InstitutionName;
                     userDetail.CreatedOn = DateTime.Now;
+                    userDetail.LastUpdatedOn = DateTime.Now;
+
+                    userDetail.CreatedBy = userViewModel.UserID;
+                    userDetail.LastUpdatedBy = userViewModel.UserID;
                     dbUser.UserDetails = new List<UserDetail>();
                     dbUser.UserDetails.Add(userDetail);
                     GBContext.UserDetails.Add(userDetail);

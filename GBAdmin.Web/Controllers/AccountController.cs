@@ -417,6 +417,10 @@ namespace GBAdmin.Web.Controllers
                         await SignInAsync(user, isPersistent: false);
                         return Json(new { Success = true, Message = "Password Changed Successfully!!" }, JsonRequestBehavior.AllowGet);
                     }
+                    else
+                    {
+                        return Json(new { Success = false, Message = "Please enter valid password" }, JsonRequestBehavior.AllowGet);
+                    }
 
                 }
             }

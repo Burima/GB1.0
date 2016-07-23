@@ -104,18 +104,13 @@
     </div>
 </div>
 
-    <div class="form-group">
-        <div id="Message">
-            <span class="pull-left msg-text"></span>
-            <span class="pull-right msg-close">X</span>
-        </div>
-    </div>
+   
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row  border-bottom white-bg dashboard-header">
             <div class="col-md-10">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                        <li>
+                        <li class="active">
                             <a data-toggle="tab" href="#tabProfileInformation">Profile Information</a>
                         </li>
                         @*<li>
@@ -129,71 +124,119 @@
                         @*tab 1 content*@
 
                         <div id="tabProfileInformation" class="tab-pane active">
-                            @using (Html.BeginForm("ViewProfile", "User", FormMethod.Post, new { role = "form", id = "view-profile-form", style = "min-height:420px" }))
+                        @using (Ajax.BeginForm("ViewProfile", "Users", FormMethod.Post, new AjaxOptions { OnSuccess = "OnProfileUpdateSuccess", OnFailure = "OnProfileUpdateFailure" }, new { role = "form", id = "view-profile-form" }))
                             {
-                            <div class="row">
-                                <div class="col-md-8" style="padding-left:5%;padding-top:3%">
-                                    <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" class="form-control input-sm charAlone" placeholder="First Name" value="@Model.FirstName" name="FirstName">
+                                @Html.HiddenFor(m=>m.UserID)
+                                <div class="row form-group" style="padding-top:3%">
+                                    <div class="row row-padding-top-5">
+                                        <div class="form-group col-md-6 col-xs-10 col-xs-offset-1">
+                                            <div id="Message">
+                                                <span class="pull-left msg-text"></span>
+                                                <span class="pull-right msg-close">X</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" class="form-control input-sm charAlone" placeholder="Last Name" value="@Model.LastName" name="LastName">
+                                    <div class="row row-padding-top-5">
+                                        <div class="col-md-8 col-xs-10 col-xs-offset-1">
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "First Name", tabIndex = "1" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.LastName, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control charAlone", maxlength = "50", placeholder = "Last Name", tabIndex = "2" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", maxlength = "50", placeholder = "Email", tabIndex = "3" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", maxlength = "10", placeholder = "Phone Number", tabIndex = "4" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m=>m.Gender, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+                                                     { new SelectListItem { Text = "Male", Value = "1"},
+                                                       new SelectListItem { Text = "Female", Value = "2"},
+                                                  }, "Select Gender", new { @class = "form-control", tabIndex = "5" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.CityID, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(m => m.CityID, new List<SelectListItem>
+                                                     { new SelectListItem { Text = "Kolkata", Value = "1"},
+                                                       new SelectListItem { Text = "Mumbai", Value = "2"},
+                                                  }, "Select City", new { @class = "form-control", tabIndex = "6" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.PresentAddress, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.PresentAddress, new { @class = "form-control", maxlength = "50", placeholder = "Present Address", tabIndex = "7" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.PermanentAddress, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.PermanentAddress, new { @class = "form-control", maxlength = "50", placeholder = "Permanent Address", tabIndex = "8" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m=>m.GovtIDType, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(m => m.GovtIDType, new List<SelectListItem>
+                                                     { new SelectListItem { Text = "PAN Card", Value = "1"},
+                                                       new SelectListItem { Text = "Voter ID Card", Value = "2"},
+                                                       new SelectListItem { Text = "Driving License", Value = "3"},
+                                                        new SelectListItem { Text = "Aadhar Card", Value = "4"},
+                                                        new SelectListItem { Text = "Passport", Value = "5"},
+                                                  }, "Select GovernmentID Type", new { @class = "form-control", tabIndex = "9" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m => m.GovtID, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.GovtID, new { @class = "form-control", maxlength = "50", placeholder = "Identity Proof Number", tabIndex = "10" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                @Html.LabelFor(m=>m.HighestEducation, new { @class = "col-md-3 control-label" })
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(m => m.HighestEducation, new List<SelectListItem>
+                                                     { new SelectListItem { Text = "PostGraduate", Value = "PostGraduate"},
+                                                       new SelectListItem { Text = "Graduate", Value = "Graduate"},
+                                                       new SelectListItem { Text = "UnderGraduate", Value = "UnderGraduate"},
+                                                      }, "Select Highest Education", new { @class = "form-control", tabIndex = "11" })
+                                                </div>
+                                               </div>
+                                                <div class="row form-group">
+                                                    @Html.LabelFor(m => m.InstitutionName, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-6">
+                                                        @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", maxlength = "50", placeholder = "Institution Name", tabIndex = "12" })
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>I am</label>
-                                        <select class="form-control input-sm" name="Gender">
-                                            <option value="" disabled>Select Gender</option>
-                                            <option @(Model.Gender == 1 ? "selected" : "") value="1">Male</option>
-                                            <option @(Model.Gender == 2 ? "selected" : "") value="2">Female</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Present Address</label>
-                                        <input type="text" class="form-control input-sm" placeholder="Present Address" value="@Model.PresentAddress" name="PresentAddress">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Permanent Address</label>
-                                        <input type="text" class="form-control input-sm" placeholder="Present Address" value="@Model.PermanentAddress" name="PermanentAddress">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>GovernmentID Type</label>
-                                        <select class="form-control input-sm" name="GovtIDType">
-                                            <option disabled selected="selected">Select ID Type</option>
-                                            <option @(Model.GovtIDType == 1 ? "selected" : "") value="1">PAN Card</option>
-                                            <option @(Model.GovtIDType == 2 ? "selected" : "") value="2">Voter ID Card</option>
-                                            <option @(Model.GovtIDType == 3 ? "selected" : "") value="3">Driving License</option>
-                                            <option @(Model.GovtIDType == 4 ? "selected" : "") value="4">Aadhar Card</option>
-                                            <option @(Model.GovtIDType == 5 ? "selected" : "") value="5">Passport</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>ID Number</label>
-                                        <input type="text" class="form-control input-sm" placeholder="Identity Proof Number" value="@Model.GovtID" name="GovtID">
-                                    </div>   
-                                    <div class="form-group">
-                                        <label>Highest Education</label>
-                                        <select class="form-control input-sm" name="HighestEducation">
-                                            <option disabled selected="selected">Select Highest Education</option>
-                                            <option @(Model.HighestEducation == "PostGraduate" ? "selected" : "") value="PostGraduate">Post Graduate</option>
-                                            <option @(Model.HighestEducation == "Graduate" ? "selected" : "") value="Graduate">Graduate</option>
-                                            <option @(Model.HighestEducation == "UnderGraduate" ? "selected" : "") value="UnderGraduate">Under Graduate</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Institution Name</label>
-                                        <input type="text" class="form-control input-sm charAlone" placeholder="Institution Name" value="@Model.InstitutionName" name="InstitutionName">
-                                    </div> 
-                               </div>
-                                <div class="col-md-12" style="padding-top:3%;padding-left:3%">
-                                    <div class="form-group">
-                                        <div>
-                                            <button id="btnSave" class="btn btn-primary" type="submit" tabindex="5">Save</button>
+                                    <div class="row row-padding-top-5">
+                                        <div class="form-group col-md-6 col-xs-10 col-xs-offset-1">
+                                            <div>
+                                                <button id="btnSave" class="btn btn-primary full-width" type="submit" tabindex="13">Save</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                             }                      
                         </div>
                         @*@*tab 2 content*@
@@ -242,7 +285,10 @@
                         <div id="tabChangePassword" class="tab-pane">
                         @using (Ajax.BeginForm("ChangePassword", "Account", FormMethod.Post, new AjaxOptions { OnSuccess = "OnPasswordChangeSuccess", OnFailure = "OnPasswordChangeFailure" }, new { role = "form", id = "form-ChangePassword" }))
                         {
-                            <div class="row form-group" style="padding-left:5%; padding-top:3%">
+                             @Html.AntiForgeryToken()
+                          
+                            <div class="row form-group" style="padding-top:3%">
+                              
                                 @*---Mobile Number---*@
                                 @*<div class=" row">
                             <div class="col-md-12">
@@ -301,22 +347,32 @@
                         </div>*@
                                 @*---Change Password---*@
                                 <div class="row row-padding-top-5">
-                                    <div class="col-md-8">
+                                    <div class="form-group col-md-6 col-xs-10 col-xs-offset-1">
+                                        <div id="Message">
+                                            <span class="pull-left msg-text"></span>
+                                            <span class="pull-right msg-close">X</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-top-5">
+                                    <div class="col-md-6 col-xs-10 col-xs-offset-1">
                                         <div class="form-group">
                                             @*<input id="txtCurrentPassword" type="password" class="form-control input-sm" placeholder="Current Password" name="ManageUserViewModel.OldPassword" />*@
-                                            @Html.PasswordFor(m => m.ManageUserViewModel.OldPassword, new { @class = "form-control", placeholder = "Current Password", tabIndex = "1" })                                          
+                                            @Html.PasswordFor(m => m.ManageUserViewModel.OldPassword, new { @class = "form-control", placeholder = "Current Password", tabIndex = "1" })
                                         </div>
                                         <div class="form-group">
                                             @Html.PasswordFor(m => m.ManageUserViewModel.NewPassword, new { @class = "form-control", placeholder = "New Password", tabIndex = "2" })
-                                            
+
                                             @*<input id="txtNewPassword" type="password" class="form-control input-sm" placeholder="New Password" name="ManageUserViewModel.NewPassword" />*@
                                         </div>
                                         <div class="form-group">
                                             @*<input id="txtRetypePassword" type="password" class="form-control input-sm" placeholder="Retype Password" name="ManageUserViewModel.ConfirmPassword" />*@
-                                            @Html.PasswordFor(m => m.ManageUserViewModel.ConfirmPassword, new { @class = "form-control", placeholder = "Retype Password", tabIndex = "1" })
-                                            
+                                            @Html.PasswordFor(m => m.ManageUserViewModel.ConfirmPassword, new { @class = "form-control", placeholder = "Retype Password", tabIndex = "3" })
+
                                         </div>
                                     </div>
+                                </div>
+                                    
                                     @*<div class="col-md-12">
                                         Password
                                     </div>
@@ -324,16 +380,17 @@
                                         To change your current password please click <a id="linkChangePassword">here</a>
                                     </div>*@
                                     
-                                </div>
-                                @*Save button*@
-                                <div class="col-md-12">
-                                    <div class="form-group" style="padding-top:3%;">
+                               
+                                    @*Save button*@
+                                <div class="row row-padding-top-5">
+                                    <div class="form-group col-md-6 col-xs-10 col-xs-offset-1">
                                         <div>
-                                            <button id="btnSave" class="btn btn-primary" type="submit" tabindex="5">Save</button>
+                                            <button id="btnSave" class="btn btn-primary full-width" type="submit" tabindex="4">Save</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                   
+                             </div>
                         }
                         </div>
 
@@ -343,14 +400,14 @@
 
         </div>
     </div>
-}
+
 
 <!--/wrapper-->
 @section scripts{
     <script>
         var CropImageUrl = '@Url.Action("CropImage", "Users")';
         //var ProfileUrl = '@Url.Action("Profile","Users")';
-    document.getElementById("fileProfile").onchange = function () {
+    @*document.getElementById("fileProfile").onchange = function () {
         $("#photoFilePath").html(this.value.split('\\').pop());
         $("#photoFilePath").attr("title", this.value.split('\\').pop());
         $("#hdnFileName").val('@Model.UserID' + '_' + this.value.split('\\').pop());
@@ -362,28 +419,47 @@
 
         $('#linkChangePassword').click(function () {
             $("#modalChangePassword").modal('show');
-        });
+        });*@
 
 
         var OnPasswordChangeSuccess = function (data) {
-            $("#modalChangePassword").modal('hide');
+            //$("#modalChangePassword").modal('hide');
+            if (data.Success) {
+                $('#form-ChangePassword #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {
+                    location.reload();
+                });
+            } else {
+                $('#form-ChangePassword #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                   
+                });
+            }
+        }
+        var OnPasswordChangeFailure = function (data) {
+            //$("#modalChangePassword").modal('hide');
+            $('#form-ChangePassword #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
+                location.reload();
+            });
+        }
+
+        var OnProfileUpdateSuccess = function (data) {
+            //$("#modalChangePassword").modal('hide');
             if (data.Success) {
                 $('#view-profile-form #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {
                     location.reload();
                 });
             } else {
                 $('#view-profile-form #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
-                    location.reload();
+
                 });
             }
         }
-
-        var OnPasswordChangeFailure = function (data) {
-            $("#modalChangePassword").modal('hide');
+        
+        var OnProfileUpdateFailure = function (data) {
+            //$("#modalChangePassword").modal('hide');
             $('#view-profile-form #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#a94442').show('slow').delay(5000).hide('slow', function () {
                 location.reload();
             });
-         }
+        }
     </script>
     <script src='@Url.Content("~/Scripts/jQueryRotate.js")'></script>
     <script src='@Url.Content("~/Scripts/custom/User/ViewProfile.js")'></script>

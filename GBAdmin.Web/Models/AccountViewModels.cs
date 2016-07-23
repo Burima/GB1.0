@@ -137,34 +137,43 @@ namespace GBAdmin.Web.Models
     {
         public long UserID { get; set; }
         public string UserName { get; set; }
+        [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public bool IsBackGroundVerified { get; set; }
         public string ProfilePicture { get; set; }
         public Nullable<int> Gender { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public string IsVSEmployee { get; set; }
+        [Display(Name = "Present Address")]
         public string PresentAddress { get; set; }
+        [Display(Name = "Permanent Address")]
         public string PermanentAddress { get; set; }
-        public int GovtIDType { get; set; }
+        [Display(Name = "Government ID Type")]
+        public Nullable<int> GovtIDType { get; set; }
+
+        [Display(Name = "Government ID Number")]
         public string GovtID { get; set; }
-        public int UserProfession { get; set; }
-        public string CurrentEmployer { get; set; }
-        public string OfficeLocation { get; set; }
-        public string EmployeeID { get; set; }
+        [Display(Name = "Highest Education")]
         public string HighestEducation { get; set; }
+        [Display(Name = "Institution Name")]
         public string InstitutionName { get; set; }
         public int Status { get; set; }
+        [Required]
+        [Display(Name = "City")]
         public int CityID { get; set; }
     
-
-        public Nullable<System.DateTime> LastUpdatedOn { get; set; }
-
-        public bool AttachedByVS { get; set; }
-
         public ManageUserViewModel ManageUserViewModel { get; set; }
 
     }
