@@ -50,9 +50,7 @@ namespace GBAdmin.Web.Controllers
             var user = GBContext.Users.Where(p => p.UserID == UserID).FirstOrDefault();
             if (user != null)
             {
-                //var userDetails = GBContext.UserDetails.Where(p => p.UserID == user.Id);
                 userViewModel.ManageUserViewModel = new ManageUserViewModel();
-                userViewModel.UserID = user.UserID;
                 userViewModel.PhoneNumber = user.PhoneNumber;
                 userViewModel.FirstName = user.FirstName;
                 userViewModel.LastName = user.LastName;
@@ -144,7 +142,8 @@ namespace GBAdmin.Web.Controllers
 
         private int UpdateUser(UserViewModel userViewModel)
         {
-            var dbUser = GBContext.Users.FirstOrDefault(m => m.UserID == userViewModel.UserID);
+            var UserID = SessionManager.GetSessionUser().Id;
+            var dbUser = GBContext.Users.FirstOrDefault(m => m.UserID == UserID);
             if (dbUser != null)
             {
                 dbUser.PhoneNumber = userViewModel.PhoneNumber;

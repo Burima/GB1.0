@@ -400,7 +400,7 @@ namespace GBAdmin.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(UserViewModel userViewModel)
+        public async Task<ActionResult> ChangePassword(ManageUserViewModel manageUserViewModel)
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -410,7 +410,7 @@ namespace GBAdmin.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await UserManager.ChangePasswordAsync(long.Parse(User.Identity.GetUserId()),
-                        userViewModel.ManageUserViewModel.OldPassword, userViewModel.ManageUserViewModel.NewPassword);
+                        manageUserViewModel.OldPassword, manageUserViewModel.NewPassword);
                     if (result.Succeeded)
                     {
                         var user = await UserManager.FindByIdAsync(long.Parse(User.Identity.GetUserId()));
