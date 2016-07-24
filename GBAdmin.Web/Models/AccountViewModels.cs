@@ -69,7 +69,7 @@ namespace GBAdmin.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "Password do not match.")]
+        [System.Web.Mvc.Compare("Password", ErrorMessage = "Password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -153,6 +153,8 @@ namespace GBAdmin.Web.Models
         public bool EmailConfirmed { get; set; }
         [Required]
         [Display(Name = "Phone Number")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid phone number")]
+        [RegularExpression(@"[789][0-9]{9}", ErrorMessage = "Entered Mobile No is not valid.")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public string IsVSEmployee { get; set; }
