@@ -31,6 +31,7 @@
                     </div>
                     <div class="form-group">
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", tabIndex = "5" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
                     </div>
                     <div class="form-group">
                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "6" })
@@ -39,12 +40,12 @@
                         @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
                         {
                             @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>
-                    { new SelectListItem { Text = "Admin", Value = "Admin"},
-                    new SelectListItem { Text = "Manager", Value = "Manager"},
-                    new SelectListItem { Text = "Employee", Value = "Employee"},
-                    new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
-                    new SelectListItem { Text = "Sales", Value = "Sales"},
-               }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
+                                { new SelectListItem { Text = "Admin", Value = "Admin"},
+                                new SelectListItem { Text = "Manager", Value = "Manager"},
+                                new SelectListItem { Text = "Employee", Value = "Employee"},
+                                new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
+                                new SelectListItem { Text = "Sales", Value = "Sales"},
+                           }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
                         }
                         else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
                         {

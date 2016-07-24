@@ -374,7 +374,11 @@
         $('#linkChangePassword').click(function () {
             $("#modalChangePassword").modal('show');
         });*@
-
+        $(document).ready(function () {
+            $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
+            $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
+            $("#Password").attr('data-toggle', 'popover').attr('data-placement', 'bottom').attr('title', 'Your Password must have:').attr('data-content', '<span style="text-align:left;">Minimum 8 characters<br/>At least one capital letter,<br/>A number<br/>And a special character !@@#$%^&</span> ').popover({ trigger: 'hover', html: true });
+        });
 
         var OnPasswordChangeSuccess = function (data) {
             //$("#modalChangePassword").modal('hide');
