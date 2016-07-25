@@ -155,6 +155,7 @@ namespace GBAdmin.Web.Controllers
                 dbUser.CityID = userViewModel.CityID;
                 dbUser.LastUpdatedBy = userViewModel.UserID;
                 dbUser.LastUpdatedOn = DateTime.Now;
+                dbUser.UserName = userViewModel.Email;
 
                 if (dbUser.UserDetails != null && dbUser.UserDetails.Count > 0)
                 {

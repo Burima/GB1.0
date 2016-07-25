@@ -419,7 +419,7 @@ namespace GBAdmin.Web.Controllers
                     }
                     else
                     {
-                        return Json(new { Success = false, Message = "Current password doesn't match." }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Success = false, Message = "Incorrect password" }, JsonRequestBehavior.AllowGet);
                     }
 
                 }
