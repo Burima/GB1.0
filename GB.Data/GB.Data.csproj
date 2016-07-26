@@ -75,6 +75,9 @@
     <Compile Include="DBEntity\LicenceType.cs">
       <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\Organization.cs">
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\ReferPersonDetail.cs">
       <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>

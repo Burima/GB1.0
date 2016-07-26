@@ -157,7 +157,7 @@ namespace GBAdmin.Web.Models
         [RegularExpression(@"[789][0-9]{9}", ErrorMessage = "Entered Mobile No is not valid.")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
-        public string IsVSEmployee { get; set; }
+        
         [Display(Name = "Present Address")]
         public string PresentAddress { get; set; }
         [Display(Name = "Permanent Address")]

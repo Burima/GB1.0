@@ -31,7 +31,6 @@ namespace GB.Data.DBEntity
         public long LastUpdatedBy { get; set; }
         public int DriverStatusID { get; set; }
         public string ExpectedSalary { get; set; }
-        public bool AttachedByVS { get; set; }
         public int CityID { get; set; }
         public Nullable<System.DateTime> AttachedOn { get; set; }
         public Nullable<System.DateTime> PartnerMatchedOn { get; set; }

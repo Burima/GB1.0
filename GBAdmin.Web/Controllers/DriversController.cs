@@ -49,7 +49,6 @@ namespace GBAdmin.Web.Controllers
                     driver.LastUpdatedOn = DateTime.Now;
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
-                    driver.AttachedByVS = SessionManager.GetSessionUser().IsVSEmployee;
                     driver.CityID = model.CityID;
                     GBContext.DriverDetails.Add(driver);
 
@@ -149,7 +148,6 @@ namespace GBAdmin.Web.Controllers
             driverDetail.ExpectedSalary = dbDriverDetail.ExpectedSalary;
             driverDetail.Ola = dbDriverDetail.Ola;
             driverDetail.Uber = dbDriverDetail.Uber;
-            driverDetail.AttachedByVS = dbDriverDetail.AttachedByVS;
             driverDetail.CityID = dbDriverDetail.CityID;
             driverDetail.User = dbDriverDetail.User;
             return View(driverDetail);
@@ -224,11 +222,7 @@ namespace GBAdmin.Web.Controllers
         public ActionResult AttachedByVS()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            //driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(Convert.ToInt32(GBAdminConfig.VSID), 
-            //    GBAdminConfig.VSRole.ToUpper()).Where(x => x.DriverStatusID != (int)Constants.EnumDriverStatus.New ||
-            //    x.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
-
-            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.AttachedByVS == true).Where(m => m.DriverStatusID
+            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.User.OrganizationID == (int)Constants.Organizations.VS).Where(m => m.DriverStatusID
                 != (int)Constants.EnumDriverStatus.New).Where(y => y.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
 
             return View(driverViewModel);

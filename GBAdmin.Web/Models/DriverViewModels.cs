@@ -54,8 +54,7 @@ namespace GBAdmin.Web.Models
         public int Status { get; set; }
 
         public User User { get; set; }
-        public bool AttachedByVS { get; set; }
-
+        
         [Display(Name = "City")]
         [Required]
         public int CityID { get; set; }

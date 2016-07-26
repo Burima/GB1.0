@@ -33,9 +33,9 @@ namespace GBAdmin.Web.Services
             Dormant = 11,
             
         }
-        public enum Clients
+        public enum Organizations
         {
-            Gaddibaba = 1,
+            VS = 1,
             Uber = 2,            
         }
     }

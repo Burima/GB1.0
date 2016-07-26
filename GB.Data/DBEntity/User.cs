@@ -18,9 +18,9 @@ namespace GB.Data.DBEntity
         {
             this.DriverDetails = new HashSet<DriverDetail>();
             this.UserClaims = new HashSet<UserClaim>();
+            this.UserDetails = new HashSet<UserDetail>();
             this.UserLogins = new HashSet<UserLogin>();
             this.Roles = new HashSet<Role>();
-            this.UserDetails = new HashSet<UserDetail>();
         }
     
         public long UserID { get; set; }
@@ -46,14 +46,15 @@ namespace GB.Data.DBEntity
         public long CreatedBy { get; set; }
         public long LastUpdatedBy { get; set; }
         public string PhoneVerificationCode { get; set; }
-        public bool IsVSEmployee { get; set; }
         public int CityID { get; set; }
+        public int OrganizationID { get; set; }
     
         public virtual City City { get; set; }
         public virtual ICollection<DriverDetail> DriverDetails { get; set; }
+        public virtual Organization Organization { get; set; }
         public virtual ICollection<UserClaim> UserClaims { get; set; }
+        public virtual ICollection<UserDetail> UserDetails { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<UserDetail> UserDetails { get; set; }
     }
 }

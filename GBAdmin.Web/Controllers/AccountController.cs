@@ -131,7 +131,7 @@ namespace GBAdmin.Web.Controllers
                     LockoutEnabled = true,
                     CreatedBy = SessionManager.GetSessionUser().Id,
                     LastUpdatedBy = SessionManager.GetSessionUser().Id,
-                    IsVSEmployee = SessionManager.GetSessionUser().IsVSEmployee,
+                    OrganizationID = SessionManager.GetSessionUser().OrganizationID,
                     CityID = model.CityID
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);

@@ -2,7 +2,7 @@
 @using GBAdmin.Web.Services
 @{
     ViewBag.Title = "Edit";
-    var IsVSEmployee = SessionManager.GetSessionUser().IsVSEmployee;
+    var OrganizationID = SessionManager.GetSessionUser().OrganizationID;
 }
 <style>
     .attached-with {
@@ -178,7 +178,7 @@
                                             }
                                             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
                                             {
-                                                if (!IsVSEmployee && Model.AttachedByVS)
+                                                if (OrganizationID != (int)Constants.Organizations.VS && Model.User.OrganizationID == (int)Constants.Organizations.VS)
                                                 {
                                                     @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
                                                  {
@@ -230,7 +230,8 @@
                                                    new SelectListItem { Text = "Rejected", Value = "3"},
                                                  }, "Select Status", new { @class = "form-control ddlDriverStatus", tabIndex = "5" })
                                             }
-                                            else if (!IsVSEmployee && Model.AttachedByVS &&
+                                            else if (OrganizationID != (int)Constants.Organizations.VS && 
+                                            Model.User.OrganizationID == (int)Constants.Organizations.VS &&
                                             Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
                                             {
                                                 @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
