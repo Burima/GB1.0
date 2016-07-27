@@ -11,7 +11,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+    @if (GBAdminConfig.Client.ToUpper() == Constants.Organizations.Uber.ToString().ToUpper())
     {
         <title>Uber Milap | Login</title>
     }
@@ -33,7 +33,7 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+                @if (GBAdminConfig.Client.ToUpper() == Constants.Organizations.Uber.ToString().ToUpper())
                 {
                     <h1 class="logo-name">UM</h1>
                 }
@@ -43,7 +43,7 @@
                 }
 
             </div>
-            @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+            @if (GBAdminConfig.Client.ToUpper() == Constants.Organizations.Uber.ToString().ToUpper())
             {
                 <h3>Welcome to Uber Milap</h3>
             }
@@ -68,7 +68,7 @@
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
                 @*<a href="#"><small>Forgot password?</small></a>*@
             }
-            @if (GBAdminConfig.Client.ToUpper() == Constants.Clients.Uber.ToString().ToUpper())
+            @if (GBAdminConfig.Client.ToUpper() == Constants.Organizations.Uber.ToString().ToUpper())
             {
                  <p class="m-t"> <small>All rights reserved to VS Team &copy; 2016</small> </p>
             }
