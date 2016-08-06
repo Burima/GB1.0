@@ -27,7 +27,7 @@ namespace GBAdmin.Web.Services
             AppliedForLicence = 5,
             LearnerReceived = 6,
             LicenceReceived = 7,
-            AttachedtoUber = 8,
+            Attached = 8,
             PartnerMatched = 9,
             CompletedFirstTrip = 10,
             Dormant = 11,

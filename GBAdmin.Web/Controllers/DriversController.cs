@@ -188,7 +188,7 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
                 dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
                 dbDriverDetail.LastUpdatedOn = DateTime.Now;
-                if (driverDetail.Status == (int)Constants.EnumDriverStatus.AttachedtoUber)
+                if (driverDetail.Status == (int)Constants.EnumDriverStatus.Attached)
                 {
                     dbDriverDetail.AttachedOn = DateTime.Now;
                 }

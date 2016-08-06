@@ -80,7 +80,7 @@ namespace GBAdmin.Web.Controllers
 
             DashboardViewModel.Rejected = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Rejected).Count();
 
-            DashboardViewModel.AttachedToUber = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.AttachedtoUber).Count();
+            DashboardViewModel.AttachedToUber = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Attached).Count();
 
             DashboardViewModel.Total = DashboardViewModel.New + DashboardViewModel.InProgress + DashboardViewModel.Rejected
                 + DashboardViewModel.AttachedToUber;
