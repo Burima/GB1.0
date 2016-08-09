@@ -44,7 +44,7 @@
                                 new SelectListItem { Text = "Manager", Value = "Manager"},
                                 new SelectListItem { Text = "Employee", Value = "Employee"},
                                 new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
-                                new SelectListItem { Text = "Sales", Value = "Sales"},
+                                new SelectListItem { Text = "Marketing", Value = "Marketing"},
                            }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
                         }
                         else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
@@ -53,7 +53,7 @@
                     new SelectListItem { Text = "Manager", Value = "Manager"},
                     new SelectListItem { Text = "Employee", Value = "Employee"},
                     new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
-                    new SelectListItem { Text = "Sales", Value = "Sales"},
+                    new SelectListItem { Text = "Marketing", Value = "Marketing"},
                }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
                         }
                         else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
@@ -61,7 +61,7 @@
                             @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
                     new SelectListItem { Text = "Employee", Value = "Employee"},
                     new SelectListItem { Text = "Telecaller", Value = "Telecaller"},
-                    new SelectListItem { Text = "Sales", Value = "Sales"},
+                    new SelectListItem { Text = "Marketing", Value = "Marketing"},
                }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
                         }
                     </div>

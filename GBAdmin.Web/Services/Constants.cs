@@ -15,7 +15,7 @@ namespace GBAdmin.Web.Services
             Employee = 4,
             Marketing = 5,
             Telecaller=6,
-            Sales=7
+            //Sales=7
         }
 
         public enum EnumDriverStatus
