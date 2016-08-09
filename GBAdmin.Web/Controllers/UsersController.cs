@@ -31,6 +31,7 @@ namespace GBAdmin.Web.Controllers
             {
                 UserList = CommonHelper.GetEmployeeByUserID(UserID, Session["Role"].ToString().ToUpper());
             }
+            UserList = UserList.OrderByDescending(x => x.CreatedOn).ToList();
             return View(UserList);
             
         }

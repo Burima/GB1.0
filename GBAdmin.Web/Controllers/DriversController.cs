@@ -126,6 +126,7 @@ namespace GBAdmin.Web.Controllers
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
             }
 
+            driverViewModel.DriverDetailsList = driverViewModel.DriverDetailsList.OrderByDescending(x => x.CreatedOn).ToList();
             return View(driverViewModel);
         }
 
@@ -223,7 +224,7 @@ namespace GBAdmin.Web.Controllers
         {
             DriverViewModel driverViewModel = new DriverViewModel();
             driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.User.OrganizationID == (int)Constants.Organizations.VS).Where(m => m.DriverStatusID
-                != (int)Constants.EnumDriverStatus.New).Where(y => y.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+                != (int)Constants.EnumDriverStatus.New).Where(y => y.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).OrderByDescending(x=>x.CreatedOn).ToList();
 
             return View(driverViewModel);
         }
