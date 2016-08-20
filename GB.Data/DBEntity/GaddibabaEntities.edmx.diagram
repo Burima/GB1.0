@@ -26,6 +26,11 @@
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID" />
         <EntityTypeShape EntityType="GB.Data.DBEntity.DriverStatus" Width="1.5" PointX="7.375" PointY="9.875" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" />
+        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverDetailsActivityLog" Width="1.5" PointX="13" PointY="3.375" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_LicenceTypeID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

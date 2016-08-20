@@ -22,7 +22,32 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="LicenceTypeID" Type="int" Nullable="false" />
           <Property Name="LicenceNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="Pincode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Pincode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Uber" Type="bit" Nullable="false" />
+          <Property Name="Ola" Type="bit" Nullable="false" />
+          <Property Name="IsReferred" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="bigint" Nullable="false" />
+          <Property Name="DriverStatusID" Type="int" Nullable="false" />
+          <Property Name="ExpectedSalary" Type="nvarchar(max)" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="AttachedOn" Type="datetime" />
+          <Property Name="PartnerMatchedOn" Type="datetime" />
+          <Property Name="CompletedFirstTripOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DriverDetailsActivityLogs">
+          <Key>
+            <PropertyRef Name="DriverDetailsActivityLogID" />
+          </Key>
+          <Property Name="DriverDetailsActivityLogID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="LicenceTypeID" Type="int" Nullable="false" />
+          <Property Name="LicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pincode" Type="nvarchar" MaxLength="10" />
           <Property Name="Uber" Type="bit" Nullable="false" />
           <Property Name="Ola" Type="bit" Nullable="false" />
           <Property Name="IsReferred" Type="bit" Nullable="false" />
@@ -255,6 +280,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_CityID">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="DriverDetailsActivityLogs" Type="Self.DriverDetailsActivityLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLogs">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_CreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="DriverDetailsActivityLogs" Type="Self.DriverDetailsActivityLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLogs">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_DriverStatusID">
+          <End Role="DriverStatus" Type="Self.DriverStatus" Multiplicity="1" />
+          <End Role="DriverDetailsActivityLogs" Type="Self.DriverDetailsActivityLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DriverStatus">
+              <PropertyRef Name="DriverStatusID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLogs">
+              <PropertyRef Name="DriverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_LicenceTypeID">
+          <End Role="LicenceTypes" Type="Self.LicenceTypes" Multiplicity="1" />
+          <End Role="DriverDetailsActivityLogs" Type="Self.DriverDetailsActivityLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenceTypes">
+              <PropertyRef Name="LicenceTypeID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLogs">
+              <PropertyRef Name="LicenceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserDetails_UserID">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="*" />
@@ -294,6 +367,7 @@
         <EntityContainer Name="GBDataDBEntityStoreContainer">
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DriverDetails" EntityType="Self.DriverDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DriverDetailsActivityLogs" EntityType="Self.DriverDetailsActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DriverStatus" EntityType="Self.DriverStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LicenceTypes" EntityType="Self.LicenceTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organizations" EntityType="Self.Organizations" Schema="dbo" store:Type="Tables" />
@@ -336,6 +410,22 @@
             <End Role="LicenceTypes" EntitySet="LicenceTypes" />
             <End Role="DriverDetails" EntitySet="DriverDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_CityID" Association="Self.FK_DriverDetailsActivityLogs_CityID">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="DriverDetailsActivityLogs" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_CreatedBy" Association="Self.FK_DriverDetailsActivityLogs_CreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DriverDetailsActivityLogs" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_DriverStatusID" Association="Self.FK_DriverDetailsActivityLogs_DriverStatusID">
+            <End Role="DriverStatus" EntitySet="DriverStatus" />
+            <End Role="DriverDetailsActivityLogs" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_LicenceTypeID" Association="Self.FK_DriverDetailsActivityLogs_LicenceTypeID">
+            <End Role="LicenceTypes" EntitySet="LicenceTypes" />
+            <End Role="DriverDetailsActivityLogs" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserDetails_UserID" Association="Self.FK_UserDetails_UserID">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserDetails" EntitySet="UserDetails" />
@@ -361,6 +451,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_CityID" FromRole="Cities" ToRole="Users" />
           <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_CityID" FromRole="City" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetailsActivityLogs" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID" FromRole="City" ToRole="DriverDetailsActivityLog" />
         </EntityType>
         <EntityType Name="LicenceType">
           <Key>
@@ -369,6 +460,7 @@
           <Property Name="LicenceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID" FromRole="LicenceType" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetailsActivityLogs" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_LicenceTypeID" FromRole="LicenceType" ToRole="DriverDetailsActivityLog" />
         </EntityType>
         <EntityType Name="Organization">
           <Key>
@@ -473,6 +565,7 @@
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogin_dbo_User_UserID" FromRole="Users" ToRole="UserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_CreatedBy" FromRole="User" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetailsActivityLogs" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy" FromRole="User" ToRole="DriverDetailsActivityLog" />
         </EntityType>
         <Association Name="FK_Users_CityID">
           <End Role="Cities" Type="Self.City" Multiplicity="1" />
@@ -594,6 +687,23 @@
             <End Role="DriverStatus" EntitySet="DriverStatus" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
           </AssociationSet>
+          <EntitySet Name="DriverDetailsActivityLogs" EntityType="GB.Data.DBEntity.DriverDetailsActivityLog" />
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_CityID" Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="DriverDetailsActivityLog" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_CreatedBy" Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DriverDetailsActivityLog" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_DriverStatusID" Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID">
+            <End Role="DriverStatus" EntitySet="DriverStatus" />
+            <End Role="DriverDetailsActivityLog" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_LicenceTypeID" Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_LicenceTypeID">
+            <End Role="LicenceType" EntitySet="LicenceTypes" />
+            <End Role="DriverDetailsActivityLog" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DriverDetail">
           <Key>
@@ -605,7 +715,7 @@
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="LicenceTypeID" Type="Int32" Nullable="false" />
           <Property Name="LicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Pincode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Uber" Type="Boolean" Nullable="false" />
           <Property Name="Ola" Type="Boolean" Nullable="false" />
           <Property Name="IsReferred" Type="Boolean" Nullable="false" />
@@ -667,6 +777,7 @@
           <Property Name="DriverStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DriverDetails" Relationship="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" FromRole="DriverStatus" ToRole="DriverDetail" />
+          <NavigationProperty Name="DriverDetailsActivityLogs" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID" FromRole="DriverStatus" ToRole="DriverDetailsActivityLog" />
         </EntityType>
         <Association Name="FK_DriverDetails_DriverStatusID">
           <End Type="GB.Data.DBEntity.DriverStatus" Role="DriverStatus" Multiplicity="1" />
@@ -677,6 +788,83 @@
             </Principal>
             <Dependent Role="DriverDetail">
               <PropertyRef Name="DriverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DriverDetailsActivityLog">
+          <Key>
+            <PropertyRef Name="DriverDetailsActivityLogID" />
+          </Key>
+          <Property Name="DriverDetailsActivityLogID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="LicenceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Uber" Type="Boolean" Nullable="false" />
+          <Property Name="Ola" Type="Boolean" Nullable="false" />
+          <Property Name="IsReferred" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int64" Nullable="false" />
+          <Property Name="DriverStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ExpectedSalary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="AttachedOn" Type="DateTime" Precision="3" />
+          <Property Name="PartnerMatchedOn" Type="DateTime" Precision="3" />
+          <Property Name="CompletedFirstTripOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="City" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID" FromRole="DriverDetailsActivityLog" ToRole="City" />
+          <NavigationProperty Name="User" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy" FromRole="DriverDetailsActivityLog" ToRole="User" />
+          <NavigationProperty Name="DriverStatu" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID" FromRole="DriverDetailsActivityLog" ToRole="DriverStatus" />
+          <NavigationProperty Name="LicenceType" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_LicenceTypeID" FromRole="DriverDetailsActivityLog" ToRole="LicenceType" />
+        </EntityType>
+        <Association Name="FK_DriverDetailsActivityLogs_CityID">
+          <End Type="GB.Data.DBEntity.City" Role="City" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetailsActivityLog" Role="DriverDetailsActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLog">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_CreatedBy">
+          <End Type="GB.Data.DBEntity.User" Role="User" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetailsActivityLog" Role="DriverDetailsActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_DriverStatusID">
+          <End Type="GB.Data.DBEntity.DriverStatus" Role="DriverStatus" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetailsActivityLog" Role="DriverDetailsActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DriverStatus">
+              <PropertyRef Name="DriverStatusID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLog">
+              <PropertyRef Name="DriverStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_LicenceTypeID">
+          <End Type="GB.Data.DBEntity.LicenceType" Role="LicenceType" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetailsActivityLog" Role="DriverDetailsActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenceType">
+              <PropertyRef Name="LicenceTypeID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLog">
+              <PropertyRef Name="LicenceTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -841,6 +1029,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DriverDetailsActivityLogs">
+            <EntityTypeMapping TypeName="GB.Data.DBEntity.DriverDetailsActivityLog">
+              <MappingFragment StoreEntitySet="DriverDetailsActivityLogs">
+                <ScalarProperty Name="CompletedFirstTripOn" ColumnName="CompletedFirstTripOn" />
+                <ScalarProperty Name="PartnerMatchedOn" ColumnName="PartnerMatchedOn" />
+                <ScalarProperty Name="AttachedOn" ColumnName="AttachedOn" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
+                <ScalarProperty Name="DriverStatusID" ColumnName="DriverStatusID" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsReferred" ColumnName="IsReferred" />
+                <ScalarProperty Name="Ola" ColumnName="Ola" />
+                <ScalarProperty Name="Uber" ColumnName="Uber" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="LicenceNo" ColumnName="LicenceNo" />
+                <ScalarProperty Name="LicenceTypeID" ColumnName="LicenceTypeID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="DriverDetailsActivityLogID" ColumnName="DriverDetailsActivityLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -855,7 +1069,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

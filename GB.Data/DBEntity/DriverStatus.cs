@@ -17,11 +17,13 @@ namespace GB.Data.DBEntity
         public DriverStatus()
         {
             this.DriverDetails = new HashSet<DriverDetail>();
+            this.DriverDetailsActivityLogs = new HashSet<DriverDetailsActivityLog>();
         }
     
         public int DriverStatusID { get; set; }
         public string Status { get; set; }
     
         public virtual ICollection<DriverDetail> DriverDetails { get; set; }
+        public virtual ICollection<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
     }
 }

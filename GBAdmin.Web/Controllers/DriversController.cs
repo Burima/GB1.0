@@ -9,6 +9,7 @@ using GBAdmin.Web.Services;
 using Newtonsoft.Json;
 using GBAdmin.Web.Helpers;
 using GBAdmin.Web.Services.Common;
+using AutoMapper;
 
 namespace GBAdmin.Web.Controllers
 {
@@ -17,6 +18,11 @@ namespace GBAdmin.Web.Controllers
     {
         GaddibabaEntities GBContext = new GaddibabaEntities();
         CommonHelper CommonHelper = new CommonHelper();
+        public DriversController()
+        {
+            Mapper.CreateMap<DriverDetail, DriverDetailsActivityLog>();
+        }
+
         // GET: Drivers/Add
         [HttpGet]
         public ActionResult Add()
@@ -51,7 +57,7 @@ namespace GBAdmin.Web.Controllers
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.CityID = model.CityID;
                     GBContext.DriverDetails.Add(driver);
-
+                    GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
                     if (GBContext.SaveChanges() > 0)
                     {
                         return Json(new { Success = true, Message = "New driver added successfully." }, JsonRequestBehavior.AllowGet);
@@ -205,7 +211,7 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.Ola = driverDetail.Ola;
                 dbDriverDetail.Uber = driverDetail.Uber;
 
-
+                GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(dbDriverDetail));
                 if (GBContext.SaveChanges() > 0)
                 {
                     return Json(new { Success = true, Message = "Driver Details updated Successfully!!" }, JsonRequestBehavior.AllowGet);
