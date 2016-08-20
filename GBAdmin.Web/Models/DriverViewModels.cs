@@ -46,7 +46,6 @@ namespace GBAdmin.Web.Models
         public long UserID { get; set; }
 
         [Display(Name = "Expected Salary")]
-        [Required]
         public string ExpectedSalary { get; set; }
 
         [Display(Name = "Driver Status")]
