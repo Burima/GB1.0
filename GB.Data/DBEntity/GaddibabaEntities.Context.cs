@@ -32,7 +32,6 @@ namespace GB.Data.DBEntity
         }
     
         public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
         public virtual DbSet<LicenceType> LicenceTypes { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<ReferPersonDetail> ReferPersonDetails { get; set; }
@@ -41,6 +40,7 @@ namespace GB.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<DriverDetail> DriverDetails { get; set; }
         public virtual DbSet<DriverStatus> DriverStatus { get; set; }
     }
 }

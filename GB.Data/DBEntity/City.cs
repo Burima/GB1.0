@@ -16,14 +16,14 @@ namespace GB.Data.DBEntity
     {
         public City()
         {
-            this.DriverDetails = new HashSet<DriverDetail>();
             this.Users = new HashSet<User>();
+            this.DriverDetails = new HashSet<DriverDetail>();
         }
     
         public int CityID { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<DriverDetail> DriverDetails { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<DriverDetail> DriverDetails { get; set; }
     }
 }

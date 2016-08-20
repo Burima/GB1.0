@@ -25,7 +25,6 @@ namespace GBAdmin.Web.Models
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Pincode")]
-        [Required]
         [StringLength(6, MinimumLength = 6, ErrorMessage = "Invalid pincode")]
         //[RegularExpression(@"[47][0-9]{5}", ErrorMessage = "Entered pincode is not valid.")]
         public string Pincode { get; set; }
