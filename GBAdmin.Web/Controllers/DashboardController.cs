@@ -25,19 +25,19 @@ namespace GBAdmin.Web.Controllers
             var UserID = SessionManager.GetSessionUser().Id;
             /**
             * Rule:
-            * 1.Super Admin can view All
-            * 2.Admin and Manager can view data entered by him and his subordinates
+            * 1.Super Admin and Admin can view All
+            * 2.Manager can view data entered by him and his subordinates
             * 3.Telecaller can view only the newly entered data which are entered by his/her admin and its subordinates
             * 4.Employee can view only apart from newly entered and rejected data which are entered by his/her admin and its subordinates
             * 5.Sales people can view data entered only by him
             * */
-            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
+                ||Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
             {
                 DriverDetails = GBContext.DriverDetails.ToList();
             }
             
-            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
-                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
             {
                 DriverDetails = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
             }
@@ -69,6 +69,7 @@ namespace GBAdmin.Web.Controllers
             }
             else
             {
+
                 DriverDetails = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
             }
            
