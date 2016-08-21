@@ -73,6 +73,9 @@ namespace GBAdmin.Web.Controllers
                 DriverDetails = GBContext.DriverDetails.Where(m => m.UserID == UserID).ToList();
             }
            
+            //filtered already attached drivers
+            DriverDetails = DriverDetails.Where(x => x.Uber == false).ToList();
+
             DashboardViewModel.New = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).Count();
 
             DashboardViewModel.InProgress = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Approved).Count() + DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.HaveLicence).Count()
