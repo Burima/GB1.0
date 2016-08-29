@@ -158,6 +158,9 @@ namespace GBAdmin.Web.Controllers
             driverDetail.Uber = dbDriverDetail.Uber;
             driverDetail.CityID = dbDriverDetail.CityID;
             driverDetail.User = dbDriverDetail.User;
+            driverDetail.FollowUpOn = dbDriverDetail.FollowUpOn ?? DateTime.Now;
+            driverDetail.FollowUpNotes = dbDriverDetail.FollowUpNotes;
+            driverDetail.NextFollowUp = dbDriverDetail.NextFollowUp?? DateTime.Now;
             return View(driverDetail);
         }
         [HttpPost]
