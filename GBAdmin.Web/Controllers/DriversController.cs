@@ -56,6 +56,7 @@ namespace GBAdmin.Web.Controllers
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.CityID = model.CityID;
+                    driver.FollowUpOn = DateTime.Now;
                     GBContext.DriverDetails.Add(driver);
                     GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
                     if (GBContext.SaveChanges() > 0)
@@ -195,6 +196,9 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
                 dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
                 dbDriverDetail.LastUpdatedOn = DateTime.Now;
+                dbDriverDetail.FollowUpOn = driverDetail.FollowUpOn;
+                dbDriverDetail.FollowUpNotes = driverDetail.FollowUpNotes;
+                dbDriverDetail.NextFollowUp = driverDetail.NextFollowUp;
                 if (driverDetail.Status == (int)Constants.EnumDriverStatus.Attached)
                 {
                     dbDriverDetail.AttachedOn = DateTime.Now;

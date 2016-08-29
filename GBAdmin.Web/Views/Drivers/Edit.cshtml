@@ -4,7 +4,9 @@
     ViewBag.Title = "Edit";
     var OrganizationID = SessionManager.GetSessionUser().OrganizationID;
 }
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <style>
+
     .attached-with {
         font-size: 15px;
         padding-bottom: 7%;
@@ -127,6 +129,7 @@
                             <div id="collapseProfessionalDetails" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="form-group">
+                                        @Html.HiddenFor(m=>m.CityID)
                                         @Html.Label("License Type", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
@@ -207,6 +210,46 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @*<div class="form-group">
+                                        <div class="pull-right" style="padding-right:5%">
+                                            <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="8">Done</button>
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group">
+                                        <div class="pull-right" style="padding-right:5%">
+                                            <button id="btnNextProfessionalDetails" class="btn btn-primary" type="button" tabindex="5">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a id="linkCollapseFollowupDetails" data-toggle="collapse" data-parent="#accordion" href="#collapseFollowupDetails">FollowUp Details</a>
+                                </h5>
+                            </div>
+                            <div id="collapseFollowupDetails" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.FollowUpOn, new { @class = "col-md-2 control-label " })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.FollowUpOn, new { @class = "form-control dtFollowUp datefield", tabIndex = "1", id = "followUpOn",placeholder = "Follow Up On" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.FollowUpNotes, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextAreaFor(model => model.FollowUpNotes, new { @class = "form-control", placeholder = "FollowUp Notes", tabIndex = "2", id = "followUpNotes" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.NextFollowUp, new { @class = "col-md-2 control-label " })
+
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.NextFollowUp, new { @class = "form-control dtFollowUp datefield", tabIndex = "3", id = "nextFollowUp", placeholder = "Next Follow Up" })
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="pull-right" style="padding-right:5%">
                                             <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="8">Done</button>
@@ -225,13 +268,15 @@
 }
 
 @section Scripts{
-    <script>
+@Scripts.Render("~/bundles/jqueryVal")
+<script>
         var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
             $(".ddlDriverStatus").find("option:first").attr('disabled', true);
-
+            $("#followUpOn").datepicker();
+            $("#nextFollowUp").datepicker();
         });
 
         $('#btnNextPersonalDetails').click(function () {
@@ -251,10 +296,25 @@
             $('#linkCollapseProfessionalDetails').removeAttr('href', '#collapseProfessionalDetails');
             $('#collapseProfessionalDetails').removeClass('in');
         });
-        //$('.modalClose').click(function () {
-        //    $('#modalShowMessage').addClass("hidden");
-        //    window.location.href = "/Drivers/List";
-        //})
+       
+        $('#btnNextProfessionalDetails').click(function () {
+            if ($('#form-EditDriver').valid()) {
+                //hide BasicInformation upon valid data
+                $('#collapseProfessionalDetails').removeClass('in');
+                //google api function
+
+                //initialization of the map based on area and city
+                // initialize();
+                $('#linkCollapseFollowupDetails').attr('href', '#collapseFollowupDetails'); //activate collapseable functionality through linking it with the target id
+                $('#collapseFollowupDetails').addClass('in');//open Locality panel
+            }
+        });
+
+        $('#linkCollapseProfessionalDetails').click(function () {
+            $('#linkCollapseFollowupDetails').removeAttr('href', '#collapseFollowupDetails');
+            $('#collapseFollowupDetails').removeClass('in');
+        });
+
         var editDriverSuccess = function (data) {
             if (data.Success) {
                 $('#form-EditDriver #Message .msg-text').html(data.Message).parent('#Message').css('background-color', '#1ab394').show('slow').delay(5000).hide('slow', function () {

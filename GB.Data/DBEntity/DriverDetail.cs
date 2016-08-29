@@ -35,6 +35,9 @@ namespace GB.Data.DBEntity
         public Nullable<System.DateTime> AttachedOn { get; set; }
         public Nullable<System.DateTime> PartnerMatchedOn { get; set; }
         public Nullable<System.DateTime> CompletedFirstTripOn { get; set; }
+        public Nullable<System.DateTime> FollowUpOn { get; set; }
+        public string FollowUpNotes { get; set; }
+        public Nullable<System.DateTime> NextFollowUp { get; set; }
     
         public virtual City City { get; set; }
         public virtual User User { get; set; }

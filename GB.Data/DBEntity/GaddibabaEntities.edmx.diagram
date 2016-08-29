@@ -20,17 +20,17 @@
         <AssociationConnector Association="GB.Data.DBEntity.FK_UserDetails_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_dbo_UserLogin_dbo_User_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="GB.Data.DBEntity.UserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverDetail" Width="1.5" PointX="10" PointY="2.5" />
+        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverDetail" Width="1.5" PointX="10" PointY="3.125" />
+        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverDetailsActivityLog" Width="1.5" PointX="13" PointY="3.125" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_CityID" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_CreatedBy" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID" />
-        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverStatus" Width="1.5" PointX="7.375" PointY="9.875" />
-        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" />
-        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverDetailsActivityLog" Width="1.5" PointX="13" PointY="3.375" />
-        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy" />
-        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID" />
         <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_LicenceTypeID" />
+        <EntityTypeShape EntityType="GB.Data.DBEntity.DriverStatus" Width="1.5" PointX="7.375" PointY="10.875" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" />
+        <AssociationConnector Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

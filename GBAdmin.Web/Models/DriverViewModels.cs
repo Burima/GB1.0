@@ -56,6 +56,17 @@ namespace GBAdmin.Web.Models
         [Display(Name = "City")]
         [Required]
         public int CityID { get; set; }
+
+        [Display(Name = "FollowUp On")]
+        [DisplayFormat(NullDisplayText = "", DataFormatString = "{0:d}")]
+        [DataType(DataType.Date)]
+        public DateTime FollowUpOn { get; set; }
+        [Display(Name = "FollowUp Notes")]
+        public string FollowUpNotes { get; set; }
+        [Display(Name = "Next FollowUp")]
+        [DisplayFormat(NullDisplayText = "", DataFormatString = "{0:d}")]
+        [DataType(DataType.Date)]
+        public DateTime NextFollowUp { get; set; }
         public Nullable<System.DateTime> AttachedOn { get; set; }
         public Nullable<System.DateTime> PartnerMatchedOn { get; set; }
         public Nullable<System.DateTime> CompletedFirstTripOn { get; set; }
