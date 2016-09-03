@@ -14,8 +14,12 @@ namespace GB.Data.DBEntity
     
     public partial class DriverDetail
     {
-        [System.ComponentModel.DataAnnotations.Key]
-        public long ID { get; set; }
+        public DriverDetail()
+        {
+            this.DriverDetailsActivityLogs = new HashSet<DriverDetailsActivityLog>();
+        }
+    
+        public long DriverDetailID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
@@ -42,6 +46,7 @@ namespace GB.Data.DBEntity
         public virtual City City { get; set; }
         public virtual User User { get; set; }
         public virtual LicenceType LicenceType { get; set; }
+        public virtual ICollection<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
         public virtual DriverStatus DriverStatus { get; set; }
     }
 }

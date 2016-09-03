@@ -36,21 +36,21 @@
                             {
                                 foreach (var driverDetails in Model.DriverDetailsList)
                                 {
-                                    <tr class="gradeX" id="@driverDetails.ID">
+                                    <tr class="gradeX" id="@driverDetails.DriverDetailID">
                                         <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
                                         <td class="col-md-2">@driverDetails.LicenceType.Type</td>
                                         <td class="col-md-2">@driverDetails.LicenceNo</td>
                                         @*<td class="col-md-2">
-                                            @if (driverDetails.Uber == true)
-                                            { <label style="font-weight:normal">Uber</label> }
-                                            @if (driverDetails.Ola == true)
-                                            {<label style="font-weight:normal">Ola</label>}
-                                           
-                                            @if (driverDetails.Uber == false && driverDetails.Ola == false)
-                                            {
-                                                <label style="font-weight:normal">NA</label>
-                                            }
-                                        </td>*@
+                                                @if (driverDetails.Uber == true)
+                                                { <label style="font-weight:normal">Uber</label> }
+                                                @if (driverDetails.Ola == true)
+                                                {<label style="font-weight:normal">Ola</label>}
+
+                                                @if (driverDetails.Uber == false && driverDetails.Ola == false)
+                                                {
+                                                    <label style="font-weight:normal">NA</label>
+                                                }
+                                            </td>*@
                                         <td class="col-md-2">@driverDetails.City.Name</td>
                                         <td class="col-md-2">
                                             @driverDetails.DriverStatus.Status
@@ -58,9 +58,9 @@
                                         <td class="col-md-2">@driverDetails.User.FirstName @driverDetails.User.LastName</td>
                                         <td class="col-md-2">
                                             @*<div class="col-md-2"><input type="button" class="btnViewDriverDetails" value="Details" onclick="fnGetDriverByID(this)"></div>*@
-                                            <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { driverDetails.ID })" class="btnViewDriverDetails">Details</a></div>
+                                            <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new {ID=driverDetails.DriverDetailID })" class="btnViewDriverDetails">Details</a></div>
                                         </td>
-                                </tr>
+                                    </tr>
                                 }
                             }
 
@@ -103,7 +103,8 @@
 
         function fnGetDriverByID(element) {
             var trId = $(element).closest('tr').attr('id');
-            var jmodel = { DriverDetailsID: JSON.stringify(trId) };
+            alert(trId);
+            var jmodel = { DriverDetailID: JSON.stringify(trId) };
 
             $.ajax({
                 url: EditDriverDetailsbyIDUrl,

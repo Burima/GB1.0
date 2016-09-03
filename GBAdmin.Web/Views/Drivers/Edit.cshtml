@@ -74,6 +74,7 @@
                                 </h5>
                             </div>
                             <div id="collapsePersonalDetails" class="panel-collapse collapse in">
+                             
                                 <div class="panel-body">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
@@ -268,7 +269,7 @@
 }
 
 @section Scripts{
-@Scripts.Render("~/bundles/jqueryVal")
+
 <script>
         var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {

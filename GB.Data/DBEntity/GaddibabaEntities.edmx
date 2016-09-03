@@ -14,9 +14,9 @@
         </EntityType>
         <EntityType Name="DriverDetails">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="DriverDetailID" />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverDetailID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
@@ -67,6 +67,7 @@
           <Property Name="FollowUpOn" Type="datetime" />
           <Property Name="FollowUpNotes" Type="varchar(max)" />
           <Property Name="NextFollowUp" Type="datetime" />
+          <Property Name="DriverDetailID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="DriverStatus">
           <Key>
@@ -322,6 +323,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_ID">
+          <End Role="DriverDetails" Type="Self.DriverDetails" Multiplicity="1" />
+          <End Role="DriverDetailsActivityLogs" Type="Self.DriverDetailsActivityLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DriverDetails">
+              <PropertyRef Name="DriverDetailID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLogs">
+              <PropertyRef Name="DriverDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DriverDetailsActivityLogs_LicenceTypeID">
           <End Role="LicenceTypes" Type="Self.LicenceTypes" Multiplicity="1" />
           <End Role="DriverDetailsActivityLogs" Type="Self.DriverDetailsActivityLogs" Multiplicity="*" />
@@ -426,6 +439,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_DriverDetailsActivityLogs_DriverStatusID" Association="Self.FK_DriverDetailsActivityLogs_DriverStatusID">
             <End Role="DriverStatus" EntitySet="DriverStatus" />
+            <End Role="DriverDetailsActivityLogs" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_ID" Association="Self.FK_DriverDetailsActivityLogs_ID">
+            <End Role="DriverDetails" EntitySet="DriverDetails" />
             <End Role="DriverDetailsActivityLogs" EntitySet="DriverDetailsActivityLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_DriverDetailsActivityLogs_LicenceTypeID" Association="Self.FK_DriverDetailsActivityLogs_LicenceTypeID">
@@ -693,6 +710,10 @@
             <End Role="LicenceType" EntitySet="LicenceTypes" />
             <End Role="DriverDetail" EntitySet="DriverDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_DriverDetailsActivityLogs_ID" Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_ID">
+            <End Role="DriverDetail" EntitySet="DriverDetails" />
+            <End Role="DriverDetailsActivityLog" EntitySet="DriverDetailsActivityLogs" />
+          </AssociationSet>
           <AssociationSet Name="FK_DriverDetailsActivityLogs_CreatedBy" Association="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy">
             <End Role="User" EntitySet="Users" />
             <End Role="DriverDetailsActivityLog" EntitySet="DriverDetailsActivityLogs" />
@@ -713,9 +734,9 @@
           </EntityContainer>
         <EntityType Name="DriverDetail">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="DriverDetailID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverDetailID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
@@ -741,6 +762,7 @@
           <NavigationProperty Name="City" Relationship="GB.Data.DBEntity.FK_DriverDetails_CityID" FromRole="DriverDetail" ToRole="City" />
           <NavigationProperty Name="User" Relationship="GB.Data.DBEntity.FK_DriverDetails_CreatedBy" FromRole="DriverDetail" ToRole="User" />
           <NavigationProperty Name="LicenceType" Relationship="GB.Data.DBEntity.FK_DriverDetails_LicenceTypeID" FromRole="DriverDetail" ToRole="LicenceType" />
+          <NavigationProperty Name="DriverDetailsActivityLogs" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_ID" FromRole="DriverDetail" ToRole="DriverDetailsActivityLog" />
           <NavigationProperty Name="DriverStatus" Relationship="GB.Data.DBEntity.FK_DriverDetails_DriverStatusID" FromRole="DriverDetail" ToRole="DriverStatus" />
         </EntityType>
         <EntityType Name="DriverDetailsActivityLog">
@@ -770,7 +792,9 @@
           <Property Name="FollowUpOn" Type="DateTime" Precision="3" />
           <Property Name="FollowUpNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NextFollowUp" Type="DateTime" Precision="3" />
+          <Property Name="DriverDetailID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="City" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CityID" FromRole="DriverDetailsActivityLog" ToRole="City" />
+          <NavigationProperty Name="DriverDetail" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_ID" FromRole="DriverDetailsActivityLog" ToRole="DriverDetail" />
           <NavigationProperty Name="User" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_CreatedBy" FromRole="DriverDetailsActivityLog" ToRole="User" />
           <NavigationProperty Name="LicenceType" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_LicenceTypeID" FromRole="DriverDetailsActivityLog" ToRole="LicenceType" />
           <NavigationProperty Name="DriverStatus" Relationship="GB.Data.DBEntity.FK_DriverDetailsActivityLogs_DriverStatusID" FromRole="DriverDetailsActivityLog" ToRole="DriverStatus" />
@@ -820,6 +844,18 @@
             </Principal>
             <Dependent Role="DriverDetail">
               <PropertyRef Name="LicenceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverDetailsActivityLogs_ID">
+          <End Type="GB.Data.DBEntity.DriverDetail" Role="DriverDetail" Multiplicity="1" />
+          <End Type="GB.Data.DBEntity.DriverDetailsActivityLog" Role="DriverDetailsActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DriverDetail">
+              <PropertyRef Name="DriverDetailID" />
+            </Principal>
+            <Dependent Role="DriverDetailsActivityLog">
+              <PropertyRef Name="DriverDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1032,13 +1068,14 @@
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DriverDetailID" ColumnName="DriverDetailID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DriverDetailsActivityLogs">
             <EntityTypeMapping TypeName="GB.Data.DBEntity.DriverDetailsActivityLog">
               <MappingFragment StoreEntitySet="DriverDetailsActivityLogs">
+                <ScalarProperty Name="DriverDetailID" ColumnName="DriverDetailID" />
                 <ScalarProperty Name="NextFollowUp" ColumnName="NextFollowUp" />
                 <ScalarProperty Name="FollowUpNotes" ColumnName="FollowUpNotes" />
                 <ScalarProperty Name="FollowUpOn" ColumnName="FollowUpOn" />

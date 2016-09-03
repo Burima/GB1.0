@@ -37,8 +37,10 @@ namespace GB.Data.DBEntity
         public Nullable<System.DateTime> FollowUpOn { get; set; }
         public string FollowUpNotes { get; set; }
         public Nullable<System.DateTime> NextFollowUp { get; set; }
+        public long DriverDetailID { get; set; }
     
         public virtual City City { get; set; }
+        public virtual DriverDetail DriverDetail { get; set; }
         public virtual User User { get; set; }
         public virtual LicenceType LicenceType { get; set; }
         public virtual DriverStatus DriverStatus { get; set; }

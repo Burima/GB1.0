@@ -1,0 +1,1 @@
+EXEC sp_RENAME 'DriverDetails.ID' , 'DriverDetailID', 'COLUMN'

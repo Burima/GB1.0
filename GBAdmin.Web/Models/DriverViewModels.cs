@@ -9,7 +9,7 @@ namespace GBAdmin.Web.Models
 {
     public class DriverViewModel
     {
-        public long ID { get; set; }
+        public long DriverDetailID { get; set; }
 
         [Display(Name = "First Name")]
         [Required]

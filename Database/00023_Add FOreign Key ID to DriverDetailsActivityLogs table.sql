@@ -1,0 +1,4 @@
+ALTER TABLE DriverDetailsActivityLogs
+ADD CONSTRAINT FK_DriverDetailsActivityLogs_ID
+FOREIGN KEY (DriverDetailID)
+REFERENCES DriverDetails(DriverDetailID)

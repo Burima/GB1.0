@@ -57,7 +57,6 @@ namespace GBAdmin.Web.Controllers
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.CityID = model.CityID;
-                    driver.FollowUpOn = DateTime.Now;
                     GBContext.DriverDetails.Add(driver);
                     GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
                     if (GBContext.SaveChanges() > 0)
@@ -145,8 +144,8 @@ namespace GBAdmin.Web.Controllers
         {
             DriverViewModel driverDetail = new DriverViewModel();
             int Id = JsonConvert.DeserializeObject<int>(ID);
-            var dbDriverDetail = GBContext.DriverDetails.Where(m => m.ID == Id).FirstOrDefault();
-            driverDetail.ID = dbDriverDetail.ID;
+            var dbDriverDetail = GBContext.DriverDetails.Where(m => m.DriverDetailID == Id).FirstOrDefault();
+            driverDetail.DriverDetailID = dbDriverDetail.DriverDetailID;
             driverDetail.FirstName = dbDriverDetail.FirstName;
             driverDetail.LastName = dbDriverDetail.LastName;
             driverDetail.PhoneNumber = dbDriverDetail.PhoneNumber;
@@ -165,13 +164,13 @@ namespace GBAdmin.Web.Controllers
             return View(driverDetail);
         }
         [HttpPost]
-        [Route("Driver/Details/{ID}")]
+        [Route("Driver/Details/{DriverDetailID}")]
         public ActionResult Edit(DriverViewModel driverDetail)
         {
             if (ModelState.IsValid)
             {
 
-                DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.ID == driverDetail.ID).FirstOrDefault();
+                DriverDetail dbDriverDetail = (DriverDetail)GBContext.DriverDetails.Where(m => m.DriverDetailID == driverDetail.DriverDetailID).FirstOrDefault();
                 //check ph number
                 if (dbDriverDetail.PhoneNumber != driverDetail.PhoneNumber)
                 {
