@@ -158,9 +158,9 @@ namespace GBAdmin.Web.Controllers
             driverDetail.Uber = dbDriverDetail.Uber;
             driverDetail.CityID = dbDriverDetail.CityID;
             driverDetail.User = dbDriverDetail.User;
-            driverDetail.FollowUpOn = dbDriverDetail.FollowUpOn.ToString() ?? DateTime.Now.ToString();
+            driverDetail.FollowUpOn = String.Format("{0:dd/MM/yyyy}", dbDriverDetail.FollowUpOn).Replace("-", "/") ?? String.Empty;
             driverDetail.FollowUpNotes = dbDriverDetail.FollowUpNotes;
-            driverDetail.NextFollowUp = dbDriverDetail.NextFollowUp.ToString()?? DateTime.Now.ToString();
+            driverDetail.NextFollowUp = String.Format("{0:dd/MM/yyyy}", dbDriverDetail.NextFollowUp).Replace("-", "/") ?? String.Empty;
             return View(driverDetail);
         }
         [HttpPost]
@@ -199,9 +199,9 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
                 dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
                 dbDriverDetail.LastUpdatedOn = DateTime.Now;
-                dbDriverDetail.FollowUpOn = DateTime.ParseExact(driverDetail.FollowUpOn.ToString(), "MM/dd/yyyy", CultureInfo.InvariantCulture); ;
+                dbDriverDetail.FollowUpOn = DateTime.ParseExact(driverDetail.FollowUpOn.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture); ;
                 dbDriverDetail.FollowUpNotes = driverDetail.FollowUpNotes;
-                dbDriverDetail.NextFollowUp = DateTime.ParseExact(driverDetail.NextFollowUp.ToString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                dbDriverDetail.NextFollowUp = DateTime.ParseExact(driverDetail.NextFollowUp.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 if (driverDetail.Status == (int)Constants.EnumDriverStatus.Attached)
                 {
                     dbDriverDetail.AttachedOn = DateTime.Now;

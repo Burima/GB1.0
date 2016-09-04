@@ -276,8 +276,8 @@
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
             $(".charAlone").on(" keydown ", function (event) { return isCharField(event); });
             $(".ddlDriverStatus").find("option:first").attr('disabled', true);
-            $("#followUpOn").datepicker();
-            $("#nextFollowUp").datepicker();
+            $("#followUpOn").datepicker({ dateFormat: "dd/mm/yy" });
+            $("#nextFollowUp").datepicker({ dateFormat: "dd/mm/yy" });
         });
 
         $('#btnNextPersonalDetails').click(function () {
