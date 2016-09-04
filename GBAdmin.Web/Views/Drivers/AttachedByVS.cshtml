@@ -36,7 +36,7 @@
                             {
                                 foreach (var driverDetails in Model.DriverDetailsList)
                                 {
-                                    <tr class="gradeX" id="@driverDetails.ID">
+                                    <tr class="gradeX" id="@driverDetails.DriverDetailID">
                                         <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
                                         <td class="col-md-2">@driverDetails.LicenceType.Type</td>
                                         <td class="col-md-2">@driverDetails.LicenceNo</td>
@@ -44,7 +44,7 @@
                                         <td class="col-md-2">@driverDetails.DriverStatus.Status</td>
                                         @*<td class="col-md-2">@driverDetails.LastUpdatedOn</td>*@
                                         <td class="col-md-2">
-                                            <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { driverDetails.ID })" class="btnViewDriverDetails">Details</a></div>
+                                            <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new { ID = driverDetails.DriverDetailID })" class="btnViewDriverDetails">Details</a></div>
                                         </td>
                                     </tr>
                                 }
