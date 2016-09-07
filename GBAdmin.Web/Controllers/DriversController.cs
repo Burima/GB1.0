@@ -236,8 +236,7 @@ namespace GBAdmin.Web.Controllers
         public ActionResult AttachedByVS()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.User.OrganizationID == (int)Constants.Organizations.VS).Where(m => m.DriverStatusID
-                != (int)Constants.EnumDriverStatus.New).Where(y => y.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected && y.Uber==false).OrderByDescending(x=>x.CreatedOn).ToList();
+            driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.User.OrganizationID == (int)Constants.Organizations.VS && x.Uber == false).OrderByDescending(x=>x.CreatedOn).ToList();
 
             return View(driverViewModel);
         }
