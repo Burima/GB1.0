@@ -70,6 +70,7 @@ namespace GBAdmin.Web.Models
     
         //public ReferPersonViewModel ReferPersonViewModel { get; set; }
         public List<DriverDetail> DriverDetailsList { get; set; }
+        public virtual ICollection<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
     }
 
     public class ReferPersonViewModel

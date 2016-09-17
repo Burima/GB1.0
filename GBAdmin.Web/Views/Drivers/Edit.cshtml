@@ -6,7 +6,6 @@
 }
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <style>
-
     .attached-with {
         font-size: 15px;
         padding-bottom: 7%;
@@ -63,7 +62,8 @@
         </div>
     </div>
     <div class="row  border-bottom white-bg dashboard-header">
-        <div class="col-sm-12">
+        <!-- Edit details -->
+        <div class="col-sm-8">
             <div class="ibox-content">
                 <div class="panel-body">
                     <div class="panel-group" id="accordion">
@@ -74,7 +74,7 @@
                                 </h5>
                             </div>
                             <div id="collapsePersonalDetails" class="panel-collapse collapse in">
-                             
+
                                 <div class="panel-body">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-                                       
+
                                         <div class="col-md-10">
                                             @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
                                                 || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
@@ -101,7 +101,7 @@
                                             }
                                             else
                                             {
-                                                @Html.HiddenFor(m=>m.PhoneNumber)
+                                                @Html.HiddenFor(m => m.PhoneNumber)
                                                 @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", disabled = "disabled", placeholder = "Phone Number", tabIndex = "3" })
                                             }
 
@@ -130,7 +130,7 @@
                             <div id="collapseProfessionalDetails" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        @Html.HiddenFor(m=>m.CityID)
+                                        @Html.HiddenFor(m => m.CityID)
                                         @Html.Label("License Type", new { @class = "col-md-2 control-label" })
                                         <div class="col-md-10">
                                             @Html.DropDownListFor(m => m.LicenceType, new List<SelectListItem>
@@ -160,11 +160,11 @@
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
-                                       
+
                                         <div class="col-md-10">
                                             @if (Session["Role"].ToString().ToUpper() == Constants.Roles.Marketing.ToString().ToUpper())
                                             {
-                                                  @Html.HiddenFor(m=>m.Status)
+                                                @Html.HiddenFor(m => m.Status)
                                                 @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
                                                  {  new SelectListItem { Text = "New", Value = "1"},
                                                     new SelectListItem { Text = "Approved", Value = "2"},
@@ -181,7 +181,7 @@
                                             }
                                             else
                                             {
-                                                 @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
+                                                @Html.DropDownListFor(m => m.Status, new List<SelectListItem>
                                                  {  new SelectListItem { Text = "New", Value = "1"},
                                                     new SelectListItem { Text = "Approved", Value = "2"},
                                                     new SelectListItem { Text = "Rejected", Value = "3"},
@@ -212,10 +212,10 @@
                                         </div>
                                     </div>
                                     @*<div class="form-group">
-                                        <div class="pull-right" style="padding-right:5%">
-                                            <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="8">Done</button>
-                                        </div>
-                                    </div>*@
+                                            <div class="pull-right" style="padding-right:5%">
+                                                <button id="btnSaveAllInformation" class="btn btn-primary" type="submit" tabindex="8">Done</button>
+                                            </div>
+                                        </div>*@
                                     <div class="form-group">
                                         <div class="pull-right" style="padding-right:5%">
                                             <button id="btnNextProfessionalDetails" class="btn btn-primary" type="button" tabindex="5">Next</button>
@@ -235,7 +235,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.FollowUpOn, new { @class = "col-md-2 control-label " })
                                         <div class="col-md-10">
-                                            @Html.TextBoxFor(model => model.FollowUpOn, new { @class = "form-control dtFollowUp datefield", tabIndex = "1", id = "followUpOn",placeholder = "Follow Up On" })
+                                            @Html.TextBoxFor(model => model.FollowUpOn, new { @class = "form-control dtFollowUp datefield", tabIndex = "1", id = "followUpOn", placeholder = "Follow Up On" })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -263,14 +263,92 @@
                 </div>
             </div>
 
-        </div>
+        </div><!-- End Edit details -->
+        <!-- Followup details-->
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins table-bordered" >
+                <div class="ibox-title">
+                    <h5>Followup History</h5>
+                    @if (Model.DriverDetailsActivityLogs != null && Model.DriverDetailsActivityLogs.Count > 0)
+                    {
+                        <div class="ibox-tools">
+                            <span class="label label-warning-light">@Model.DriverDetailsActivityLogs.Count Followups</span>
+                    </div>
+                    }
+                </div>
+                <div class="ibox-content">
+
+                    <div>
+                        <div class="feed-activity-list">
+
+                            @if (Model.DriverDetailsActivityLogs != null && Model.DriverDetailsActivityLogs.Count > 0)
+                            {
+                                foreach (var log in Model.DriverDetailsActivityLogs)
+                                {
+                                    var user=log.User;
+                                    <div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src='@Url.Content(user.ProfilePicture != null && user.ProfilePicture != String.Empty ? user.ProfilePicture : "~/Images/default_profile_pic.jpg")'>
+                                        </a>
+                                        <div class="media-body ">
+                                            @*<small class="pull-right">2h ago</small>*@
+                                            <strong>@user.FirstName</strong> followed on <strong>@String.Format("{0:dd/MM/yyyy}", log.FollowUpOn)</strong><br>
+                                            @*<small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>*@
+                                            <div class="well">
+                                                <strong>Notes: </strong>@log.FollowUpNotes<br /><br />
+                                                @if (log.NextFollowUp != null)
+                                                {
+                                                    <text><strong>Next Followup: </strong>@String.Format("{0:dd/MM/yyyy}", log.NextFollowUp)</text>
+                                                }
+                                                else
+                                                {
+                                                    <text> <strong>Next Followup: </strong> NA</text>
+                                                }
+
+
+                                            </div>
+                                            @*<div class="pull-right">
+                                                    <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> like </a>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                            @*<div class="feed-element">
+                                    <a href="@Url.Action("Profile", "AppViews")" class="pull-left">
+                                        <img alt="image" class="img-circle" src="~/Images/a5.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <small class="pull-right">2h ago</small>
+                                        <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                        <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                                        <div class="well">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                            Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> like </a>
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                        </div>
+
+                        @*<button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>*@
+
+                    </div>
+
+                </div>
+            </div>
+        </div> <!-- End Followup details-->
     </div>
 
 }
 
 @section Scripts{
 
-<script>
+    <script>
         var DriversListUrl = '@Url.Action("List","Drivers")';
         $(document).ready(function () {
             $(".numbersAlone").on("keyup keydown keypress", function (event) { return isNumberKey(event); });
@@ -297,7 +375,7 @@
             $('#linkCollapseProfessionalDetails').removeAttr('href', '#collapseProfessionalDetails');
             $('#collapseProfessionalDetails').removeClass('in');
         });
-       
+
         $('#btnNextProfessionalDetails').click(function () {
             if ($('#form-EditDriver').valid()) {
                 //hide BasicInformation upon valid data

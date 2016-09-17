@@ -161,6 +161,7 @@ namespace GBAdmin.Web.Controllers
             driverDetail.FollowUpOn = String.Format("{0:dd/MM/yyyy}", dbDriverDetail.FollowUpOn).Replace("-", "/") ?? String.Empty;
             driverDetail.FollowUpNotes = dbDriverDetail.FollowUpNotes;
             driverDetail.NextFollowUp = String.Format("{0:dd/MM/yyyy}", dbDriverDetail.NextFollowUp).Replace("-", "/") ?? String.Empty;
+            driverDetail.DriverDetailsActivityLogs = dbDriverDetail.DriverDetailsActivityLogs.Where(x=>x.FollowUpOn!=null).OrderByDescending(x => x.FollowUpOn).ToList();
             return View(driverDetail);
         }
         [HttpPost]
