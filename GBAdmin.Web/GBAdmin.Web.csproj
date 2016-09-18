@@ -177,6 +177,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\OwnersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +189,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\DriverViewModels.cs" />
+    <Compile Include="Models\OwnerViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Common\GBAdminConfig.cs" />
     <Compile Include="Services\Common\RouteNames.cs" />
@@ -881,6 +883,9 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Drivers\AttachedByVS.cshtml" />
     <Content Include="Views\Users\_ChangePassword.cshtml" />
+    <Content Include="Views\Owners\Add.cshtml" />
+    <Content Include="Views\Owners\Edit.cshtml" />
+    <Content Include="Views\Owners\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

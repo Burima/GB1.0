@@ -22,6 +22,8 @@ namespace GB.Data.DBEntity
             this.Roles = new HashSet<Role>();
             this.DriverDetails = new HashSet<DriverDetail>();
             this.DriverDetailsActivityLogs = new HashSet<DriverDetailsActivityLog>();
+            this.OwnerDetails = new HashSet<OwnerDetail>();
+            this.OwnerDetailsActivityLogs = new HashSet<OwnerDetailsActivityLog>();
         }
     
         public long UserID { get; set; }
@@ -58,5 +60,7 @@ namespace GB.Data.DBEntity
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<DriverDetail> DriverDetails { get; set; }
         public virtual ICollection<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
+        public virtual ICollection<OwnerDetail> OwnerDetails { get; set; }
+        public virtual ICollection<OwnerDetailsActivityLog> OwnerDetailsActivityLogs { get; set; }
     }
 }

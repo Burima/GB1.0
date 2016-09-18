@@ -200,9 +200,16 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.ExpectedSalary = driverDetail.ExpectedSalary;
                 dbDriverDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
                 dbDriverDetail.LastUpdatedOn = DateTime.Now;
-                dbDriverDetail.FollowUpOn = DateTime.ParseExact(driverDetail.FollowUpOn.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture); ;
+                if (driverDetail.FollowUpOn != null && driverDetail.FollowUpOn != String.Empty)
+                {
+                    dbDriverDetail.FollowUpOn = DateTime.ParseExact(driverDetail.FollowUpOn.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
                 dbDriverDetail.FollowUpNotes = driverDetail.FollowUpNotes;
-                dbDriverDetail.NextFollowUp = DateTime.ParseExact(driverDetail.NextFollowUp.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                if (driverDetail.NextFollowUp != null && driverDetail.NextFollowUp != String.Empty)
+                {
+                    dbDriverDetail.NextFollowUp = DateTime.ParseExact(driverDetail.NextFollowUp.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+               
                 if (driverDetail.Status == (int)Constants.EnumDriverStatus.Attached)
                 {
                     dbDriverDetail.AttachedOn = DateTime.Now;

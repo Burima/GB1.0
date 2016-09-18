@@ -12,24 +12,29 @@ namespace GB.Data.DBEntity
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class OwnerDetail
     {
-        public City()
+        public OwnerDetail()
         {
-            this.Users = new HashSet<User>();
-            this.DriverDetails = new HashSet<DriverDetail>();
-            this.DriverDetailsActivityLogs = new HashSet<DriverDetailsActivityLog>();
-            this.OwnerDetails = new HashSet<OwnerDetail>();
             this.OwnerDetailsActivityLogs = new HashSet<OwnerDetailsActivityLog>();
         }
     
+        public long OwnerDetailID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Pincode { get; set; }
+        public long UserID { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public System.DateTime LastUpdatedOn { get; set; }
+        public long LastUpdatedBy { get; set; }
         public int CityID { get; set; }
-        public string Name { get; set; }
+        public Nullable<System.DateTime> FollowUpOn { get; set; }
+        public string FollowUpNotes { get; set; }
+        public Nullable<System.DateTime> NextFollowUp { get; set; }
     
-        public virtual ICollection<User> Users { get; set; }
-        public virtual ICollection<DriverDetail> DriverDetails { get; set; }
-        public virtual ICollection<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
-        public virtual ICollection<OwnerDetail> OwnerDetails { get; set; }
+        public virtual City City { get; set; }
         public virtual ICollection<OwnerDetailsActivityLog> OwnerDetailsActivityLogs { get; set; }
+        public virtual User User { get; set; }
     }
 }

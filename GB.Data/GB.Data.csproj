@@ -81,6 +81,12 @@
     <Compile Include="DBEntity\Organization.cs">
       <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntity\OwnerDetail.cs">
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\OwnerDetailsActivityLog.cs">
+      <DependentUpon>GaddibabaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntity\ReferPersonDetail.cs">
       <DependentUpon>GaddibabaEntities.tt</DependentUpon>
     </Compile>
