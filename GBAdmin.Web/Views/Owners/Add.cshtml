@@ -54,10 +54,7 @@
                        @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control numbersAlone pincode", maxlength = "6", placeholder = "Pincode", tabIndex = "6" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Notes, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", placeholder = "Notes", tabIndex = "7" })
-                        </div>
+                       @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", placeholder = "Notes", tabIndex = "7" })
                     </div>
                     <div class="form-group">
                         <div class="btn-group-justified">
