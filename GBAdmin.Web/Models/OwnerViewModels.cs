@@ -24,6 +24,10 @@ namespace GBAdmin.Web.Models
         [Display(Name = "Pincode")]
         [StringLength(6, MinimumLength = 6, ErrorMessage = "Invalid pincode")]
         public string Pincode { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+
+        public string Notes { get; set; }
         public User User { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }

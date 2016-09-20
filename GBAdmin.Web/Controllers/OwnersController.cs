@@ -45,6 +45,8 @@ namespace GBAdmin.Web.Controllers
                     owner.LastName = model.LastName;
                     owner.PhoneNumber = model.PhoneNumber;
                     owner.Pincode = model.Pincode;
+                    owner.Email = model.Email;
+                    owner.Notes = model.Notes;
                     owner.UserID = UserID;
                     owner.CreatedOn = DateTime.Now;
                     owner.LastUpdatedOn = DateTime.Now;
@@ -89,6 +91,8 @@ namespace GBAdmin.Web.Controllers
             ownerDetail.FirstName = dbOwnerDetail.FirstName;
             ownerDetail.LastName = dbOwnerDetail.LastName;
             ownerDetail.PhoneNumber = dbOwnerDetail.PhoneNumber;
+            ownerDetail.Email = dbOwnerDetail.Email;
+            ownerDetail.Notes = dbOwnerDetail.Notes;
             ownerDetail.Pincode = dbOwnerDetail.Pincode;
             ownerDetail.CityID = dbOwnerDetail.CityID;
             ownerDetail.User = dbOwnerDetail.User;
@@ -120,6 +124,8 @@ namespace GBAdmin.Web.Controllers
                 dbOwnerDetail.LastName = ownerDetail.LastName;
                 dbOwnerDetail.PhoneNumber = ownerDetail.PhoneNumber;
                 dbOwnerDetail.Pincode = ownerDetail.Pincode;
+                dbOwnerDetail.Email = ownerDetail.Email;
+                dbOwnerDetail.Notes = ownerDetail.Notes;
                 dbOwnerDetail.LastUpdatedBy = SessionManager.GetSessionUser().Id;
                 dbOwnerDetail.LastUpdatedOn = DateTime.Now;
                 if (ownerDetail.FollowUpOn != null && ownerDetail.FollowUpOn!= String.Empty)

@@ -5,6 +5,8 @@ CREATE TABLE [dbo].[OwnerDetailsActivityLogs](
 	[LastName] [nvarchar](max) NULL,
 	[PhoneNumber] [nvarchar](12) NOT NULL,
 	[Pincode] [nvarchar](10) NULL,
+	[Email][nvarchar](max) NULL,
+	[Notes][nvarchar](max) NULL,
 	[UserID] [bigint] NOT NULL,
 	[CreatedOn] [datetime] NOT NULL,
 	[LastUpdatedOn] [datetime] NOT NULL,

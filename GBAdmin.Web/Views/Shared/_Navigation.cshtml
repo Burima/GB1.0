@@ -68,7 +68,7 @@
                     }
                 </ul>
             </li>
-            @if (Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper())
+            @if (user.OrganizationID.ToString() == GBAdmin.Web.Services.Constants.Organizations.VS.ToString())
             {
                 <li class="@Html.IsSelected(controller: "Owners")">
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Owners</span><span class="fa arrow"></span></a>

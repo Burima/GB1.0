@@ -24,6 +24,8 @@ namespace GB.Data.DBEntity
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Pincode { get; set; }
+        public string Email { get; set; }
+        public string Notes { get; set; }
         public long UserID { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime LastUpdatedOn { get; set; }
