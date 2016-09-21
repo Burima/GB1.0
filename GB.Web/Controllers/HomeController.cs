@@ -49,5 +49,12 @@ namespace GB.Web.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        [Route("refer-a-friend", Name = RouteNames.Careers)]
+        public ActionResult Refer()
+        {
+            return View("Refer");
+        }
     }
 }
