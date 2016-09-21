@@ -19,6 +19,8 @@ namespace GB.Data.DBEntity
             this.Users = new HashSet<User>();
             this.DriverDetails = new HashSet<DriverDetail>();
             this.DriverDetailsActivityLogs = new HashSet<DriverDetailsActivityLog>();
+            this.OwnerDetails = new HashSet<OwnerDetail>();
+            this.OwnerDetailsActivityLogs = new HashSet<OwnerDetailsActivityLog>();
         }
     
         public int CityID { get; set; }
@@ -27,5 +29,7 @@ namespace GB.Data.DBEntity
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<DriverDetail> DriverDetails { get; set; }
         public virtual ICollection<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
+        public virtual ICollection<OwnerDetail> OwnerDetails { get; set; }
+        public virtual ICollection<OwnerDetailsActivityLog> OwnerDetailsActivityLogs { get; set; }
     }
 }

@@ -68,6 +68,16 @@
                     }
                 </ul>
             </li>
+            @if (user.OrganizationID== (int)GBAdmin.Web.Services.Constants.Organizations.VS)
+            {
+                <li class="@Html.IsSelected(controller: "Owners")">
+                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Owners</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Owners")">Add</a></li>
+                        <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Owners")">List</a></li>
+                    </ul>
+                </li>
+            }
             @if (Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Manager.ToString().ToUpper())
             {
                 <li class="@Html.IsSelected(controller: "Users")">

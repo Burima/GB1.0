@@ -43,5 +43,7 @@ namespace GB.Data.DBEntity
         public virtual DbSet<DriverDetail> DriverDetails { get; set; }
         public virtual DbSet<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
         public virtual DbSet<DriverStatus> DriverStatus { get; set; }
+        public virtual DbSet<OwnerDetail> OwnerDetails { get; set; }
+        public virtual DbSet<OwnerDetailsActivityLog> OwnerDetailsActivityLogs { get; set; }
     }
 }
