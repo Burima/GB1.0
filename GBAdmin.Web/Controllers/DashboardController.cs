@@ -25,22 +25,22 @@ namespace GBAdmin.Web.Controllers
             var UserID = SessionManager.GetSessionUser().Id;
             /**
             * Rule:
-            * 1.Super Admin and Admin can view All
-            * 2.Manager can view data entered by him and his subordinates
-            * 3.Telecaller can view only the newly entered data which are entered by his/her admin and its subordinates
-            * 4.Employee can view only apart from newly entered and rejected data which are entered by his/her admin and its subordinates
-            * 5.Sales people can view data entered only by him
+            * 1.Super Admin,Admin,Manager and employee can view All
+            * 2.Telecaller can view only the newly entered data which are entered by his/her admin and its subordinates
+            * 3.Sales people can view data entered only by him
             * */
             if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
-                ||Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
+                ||Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
+                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper()
+                || Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
             {
                 DriverDetails = GBContext.DriverDetails.ToList();
             }
             
-            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
-            {
-                DriverDetails = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
-            }
+            //else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+            //{
+            //    DriverDetails = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
+            //}
             else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Telecaller.ToString().ToUpper())
             {
                 User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
@@ -54,19 +54,19 @@ namespace GBAdmin.Web.Controllers
                     .Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).ToList();
                 }
             }
-            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
-            {
-                User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
-                if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
-                {
-                    DriverDetails = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
-                }
-                else
-                {
-                    DriverDetails = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
-                    .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
-                }
-            }
+            //else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
+            //{
+            //    User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
+            //    if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+            //    {
+            //        DriverDetails = GBContext.DriverDetails.Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+            //    }
+            //    else
+            //    {
+            //        DriverDetails = CommonHelper.GetDriverDetailsByUserID(Admin.UserID, Constants.Roles.Admin.ToString().ToUpper())
+            //        .Where(m => m.DriverStatusID != (int)Constants.EnumDriverStatus.New).Where(m=> m.DriverStatusID != (int)Constants.EnumDriverStatus.Rejected).ToList();
+            //    }
+            //}
             else
             {
 
