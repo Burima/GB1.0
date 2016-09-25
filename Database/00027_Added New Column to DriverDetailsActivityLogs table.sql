@@ -1,2 +1,2 @@
 alter table DriverDetailsActivityLogs
-add isVisibletoUber bit NOT NULL Default 1;
+add isVisibletoUber bit NOT NULL Default 0;

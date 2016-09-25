@@ -35,7 +35,8 @@ namespace GBAdmin.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var UserID = SessionManager.GetSessionUser().Id;
+                var User = SessionManager.GetSessionUser();
+                var UserID = User.Id;
 
                 var driverDetail = GBContext.DriverDetails.Where(m => m.PhoneNumber == model.PhoneNumber
                     || (m.LicenceNo != null && m.LicenceNo != String.Empty && m.LicenceNo == model.LicenceNo)).FirstOrDefault();
@@ -57,7 +58,14 @@ namespace GBAdmin.Web.Controllers
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.CityID = model.CityID;
-                    driver.isVisibletoUber = false;
+                    if (User.OrganizationID == (int)Constants.Organizations.Uber)
+                    {
+                        driver.isVisibletoUber = true;
+                    }
+                    else
+                    {
+                        driver.isVisibletoUber = false;
+                    }                    
                     GBContext.DriverDetails.Add(driver);
                     GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
                     if (GBContext.SaveChanges() > 0)
