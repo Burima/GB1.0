@@ -1,7 +1,10 @@
 ﻿@model GBAdmin.Web.Models.DriverViewModel
+@using GBAdmin.Web.Services;
+@using GBAdmin.Web.Services.Common
 
 @{
     ViewBag.Title = "Driver Details";
+    var User= SessionManager.GetSessionUser();
 }
 
 <!-- Datatable Css-->
@@ -25,9 +28,12 @@
                                 <th>Driver Name</th>
                                 <th>LicenseType</th>
                                 <th>License No</th>                              
-                                <th>City</th>
                                 <th>Status</th>
-                                <th>Added By</th>
+                                @if (User.OrganizationID == (int)Constants.Organizations.VS)
+                                {
+                                 <th>Added By</th>
+                                 <th>Visible To Uber</th>   
+                                }
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -51,11 +57,14 @@
                                                     <label style="font-weight:normal">NA</label>
                                                 }
                                             </td>*@
-                                        <td class="col-md-2">@driverDetails.City.Name</td>
                                         <td class="col-md-2">
                                             @driverDetails.DriverStatus.Status
                                         </td>
-                                        <td class="col-md-2">@driverDetails.User.FirstName @driverDetails.User.LastName</td>
+                                        @if (User.OrganizationID == (int)Constants.Organizations.VS)
+                                        {
+                                            <td class="col-md-2">@driverDetails.User.FirstName @driverDetails.User.LastName</td>
+                                            <td class="col-md-2"><input type="checkbox" value="model.isVisibletoUber" id="chkisVisibletoUber"></td>
+                                        }
                                         <td class="col-md-2">
                                             @*<div class="col-md-2"><input type="button" class="btnViewDriverDetails" value="Details" onclick="fnGetDriverByID(this)"></div>*@
                                             <div class="col-md-2"><a href="@Url.Action("Details", "Driver", new {ID=driverDetails.DriverDetailID })" class="btnViewDriverDetails">Details</a></div>
@@ -71,9 +80,12 @@
                                 <th>Driver Name</th>
                                 <th>LicenseType</th>
                                 <th>License No</th>
-                                <th>Registered in</th>
                                 <th>Status</th>
-                                <th>Added By</th>
+                                @if (User.OrganizationID == (int)Constants.Organizations.VS)
+                                {
+                                    <th>Added By</th>
+                                    <th>Visible To Uber</th>
+                                }
                                 <th>Action</th>
                             </tr>
                         </tfoot>
