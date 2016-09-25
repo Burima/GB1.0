@@ -22,5 +22,13 @@ namespace GBAdmin.Web.Services
         {
             return (User)System.Web.HttpContext.Current.Session["User"];
         }
+        public static void SessionizeRole(string Role)
+        {
+            System.Web.HttpContext.Current.Session["Role"] = Role;
+        }
+        public static string GetSessionRole()
+        {
+            return (string)System.Web.HttpContext.Current.Session["Role"];
+        }
     }
 }

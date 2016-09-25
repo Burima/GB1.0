@@ -92,9 +92,9 @@
                                         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
 
                                         <div class="col-md-10">
-                                            @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
-                                                || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
-                                                || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+                                            @if (role == Constants.Roles.SuperAdmin.ToString().ToUpper()
+                                                || role == Constants.Roles.Admin.ToString().ToUpper()
+                                                || role == Constants.Roles.Manager.ToString().ToUpper())
                                             {
 
                                                 @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "3" })
@@ -162,7 +162,7 @@
                                         @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
 
                                         <div class="col-md-10">
-                                            @if (Session["Role"].ToString().ToUpper() == Constants.Roles.Marketing.ToString().ToUpper())
+                                            @if (role == Constants.Roles.Marketing.ToString().ToUpper())
                                             {
                                                 @Html.HiddenFor(m => m.Status)
                                                 @Html.DropDownListFor(m => m.Status, new List<SelectListItem>

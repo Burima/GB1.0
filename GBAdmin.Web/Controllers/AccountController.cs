@@ -84,7 +84,8 @@ namespace GBAdmin.Web.Controllers
                     await SignInAsync(user, model.LoginViewModel.RememberMe);
                     //sessionize user
                     SessionManager.SessionizeUser(user);
-                    Session["Role"] = UserManager.GetRoles(user.Id).FirstOrDefault();
+                    SessionManager.SessionizeRole(UserManager.GetRoles(user.Id).FirstOrDefault());
+                    //Session["Role"] = UserManager.GetRoles(user.Id).FirstOrDefault();
                     return RedirectToRoute(RouteNames.Dashboard);
 
                 }

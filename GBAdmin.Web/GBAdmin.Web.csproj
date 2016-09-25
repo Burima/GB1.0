@@ -169,6 +169,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\ESAdminAuthorizeAttribute.cs" />
+    <Compile Include="ActionFilters\ESEmployeeAuthorizeAttribute.cs" />
+    <Compile Include="ActionFilters\ESManagerAuthorizeAttribute.cs" />
+    <Compile Include="ActionFilters\ESSuperAdminAuthorizeAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

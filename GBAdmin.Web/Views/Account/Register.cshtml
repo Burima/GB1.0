@@ -37,7 +37,7 @@
                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control numbersAlone", maxlength = "10", placeholder = "Phone Number", tabIndex = "6" })
                     </div>
                     <div class="form-group">
-                        @if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                        @if (role == Constants.Roles.SuperAdmin.ToString().ToUpper())
                         {
                             @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>
                                 { new SelectListItem { Text = "Admin", Value = "Admin"},
@@ -47,7 +47,7 @@
                                 new SelectListItem { Text = "Marketing", Value = "Marketing"},
                            }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
                         }
-                        else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper())
+                        else if (role == Constants.Roles.Admin.ToString().ToUpper())
                         {
                             @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
                     new SelectListItem { Text = "Manager", Value = "Manager"},
@@ -56,7 +56,7 @@
                     new SelectListItem { Text = "Marketing", Value = "Marketing"},
                }, "Select Role", new { @class = "form-control", placeholder = "Role", tabIndex = "7" })
                         }
-                        else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+                        else if (role == Constants.Roles.Manager.ToString().ToUpper())
                         {
                             @Html.DropDownListFor(m => m.RoleName, new List<SelectListItem>{
                     new SelectListItem { Text = "Employee", Value = "Employee"},

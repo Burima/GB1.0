@@ -83,26 +83,27 @@ namespace GBAdmin.Web.Controllers
         {
             DriverViewModel driverViewModel = new DriverViewModel();
             var UserID = SessionManager.GetSessionUser().Id;
+            var role = SessionManager.GetSessionRole().ToUpper();
             /**
              * Rule:
              * 1.Super Admin,Admin,Manager and Employee can view All
              * 2.Telecaller can view only the newly entered data which are entered by his/her admin and its subordinates
              * 3.Sales people can view data entered only by him
              * */
-            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper()
-               || Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
-               || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper()
-               || Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
+            if (role == Constants.Roles.SuperAdmin.ToString().ToUpper()
+               || role == Constants.Roles.Admin.ToString().ToUpper()
+               || role == Constants.Roles.Manager.ToString().ToUpper()
+               || role == Constants.Roles.Employee.ToString().ToUpper())
             {
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.ToList();
             }
             
-            //else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Admin.ToString().ToUpper()
-            //    || Session["Role"].ToString().ToUpper() == Constants.Roles.Manager.ToString().ToUpper())
+            //else if (role == Constants.Roles.Admin.ToString().ToUpper()
+            //    || role == Constants.Roles.Manager.ToString().ToUpper())
             //{
-            //    driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(UserID, Session["Role"].ToString().ToUpper());
+            //    driverViewModel.DriverDetailsList = CommonHelper.GetDriverDetailsByUserID(UserID, role);
             //}
-            else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Telecaller.ToString().ToUpper())
+            else if (role == Constants.Roles.Telecaller.ToString().ToUpper())
             {
                 User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
                 if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
@@ -115,7 +116,7 @@ namespace GBAdmin.Web.Controllers
                     .Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).ToList();
                 }
             }
-            //else if (Session["Role"].ToString().ToUpper() == Constants.Roles.Employee.ToString().ToUpper())
+            //else if (role == Constants.Roles.Employee.ToString().ToUpper())
             //{
             //    User Admin = CommonHelper.GetAdminByID(SessionManager.GetSessionUser().CreatedBy);
             //    if (Admin.Roles.FirstOrDefault().Name.ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())

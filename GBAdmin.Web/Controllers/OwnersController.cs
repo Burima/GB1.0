@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GB.Data.DBEntity;
+using GBAdmin.Web.ActionFilters;
 using GBAdmin.Web.Models;
 using GBAdmin.Web.Services;
 using Newtonsoft.Json;
@@ -12,7 +13,7 @@ using System.Web.Mvc;
 
 namespace GBAdmin.Web.Controllers
 {
-    [Authorize]
+    [ESEmployeeAuthorize]
     public class OwnersController : Controller
     {
         

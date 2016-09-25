@@ -3,7 +3,8 @@
 @using GBAdmin.Web.Services.Common
 
 @{
-    var user = @SessionManager.GetSessionUser();
+    var user = SessionManager.GetSessionUser();
+    var role = SessionManager.GetSessionRole().ToUpper();
 }
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
@@ -61,7 +62,7 @@
                 <ul class="nav nav-second-level">
                     <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Drivers")">Add</a></li>
                     <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Drivers")">List</a></li>
-                    @if (Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper())
+                    @if (role == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || role == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper())
                     {
 
                         <li class="@Html.IsSelected(action: "AttachedByVS")"><a href="@Url.Action("AttachedByVS", "Drivers")">Attached By VS</a></li>
@@ -69,17 +70,17 @@
                 </ul>
             </li>
             @if (user.OrganizationID== (int)GBAdmin.Web.Services.Constants.Organizations.VS &&
-                Session["Role"].ToString().ToUpper() != GBAdmin.Web.Services.Constants.Roles.Marketing.ToString().ToUpper() )
+                (role == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || role == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper() || role == GBAdmin.Web.Services.Constants.Roles.Manager.ToString().ToUpper() || role == GBAdmin.Web.Services.Constants.Roles.Employee.ToString().ToUpper()))
             {
                 <li class="@Html.IsSelected(controller: "Owners")">
-                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Owners</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-briefcase"></i> <span class="nav-label">Owners</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li class="@Html.IsSelected(action: "Add")"><a href="@Url.Action("Add", "Owners")">Add</a></li>
                         <li class="@Html.IsSelected(action: "List")"><a href="@Url.Action("List", "Owners")">List</a></li>
                     </ul>
                 </li>
             }
-            @if (Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper() || Session["Role"].ToString().ToUpper() == GBAdmin.Web.Services.Constants.Roles.Manager.ToString().ToUpper())
+            @if (role == GBAdmin.Web.Services.Constants.Roles.SuperAdmin.ToString().ToUpper() || role == GBAdmin.Web.Services.Constants.Roles.Admin.ToString().ToUpper() || role == GBAdmin.Web.Services.Constants.Roles.Manager.ToString().ToUpper())
             {
                 <li class="@Html.IsSelected(controller: "Users")">
                     <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>

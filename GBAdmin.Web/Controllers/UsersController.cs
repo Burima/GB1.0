@@ -23,13 +23,13 @@ namespace GBAdmin.Web.Controllers
         {
             var UserID = SessionManager.GetSessionUser().Id;
             var UserList = new List<User>();
-            if (Session["Role"].ToString().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
+            if (SessionManager.GetSessionRole().ToUpper() == Constants.Roles.SuperAdmin.ToString().ToUpper())
             {
                 UserList = GBContext.Users.ToList();
             }
             else
             {
-                UserList = CommonHelper.GetEmployeeByUserID(UserID, Session["Role"].ToString().ToUpper());
+                UserList = CommonHelper.GetEmployeeByUserID(UserID, SessionManager.GetSessionRole().ToUpper());
             }
             UserList = UserList.OrderByDescending(x => x.CreatedOn).ToList();
             return View(UserList);
