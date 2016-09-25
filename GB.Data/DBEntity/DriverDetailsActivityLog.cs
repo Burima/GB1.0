@@ -38,6 +38,7 @@ namespace GB.Data.DBEntity
         public string FollowUpNotes { get; set; }
         public Nullable<System.DateTime> NextFollowUp { get; set; }
         public long DriverDetailID { get; set; }
+        public bool isVisibletoUber { get; set; }
     
         public virtual City City { get; set; }
         public virtual DriverDetail DriverDetail { get; set; }

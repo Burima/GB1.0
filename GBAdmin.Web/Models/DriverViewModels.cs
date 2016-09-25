@@ -62,6 +62,8 @@ namespace GBAdmin.Web.Models
         [Display(Name = "FollowUp Notes")]
         public string FollowUpNotes { get; set; }
         [Display(Name = "Next FollowUp")]
+
+        public bool isVisibletoUber { get; set; }
        
         public string NextFollowUp { get; set; }
         public Nullable<System.DateTime> AttachedOn { get; set; }

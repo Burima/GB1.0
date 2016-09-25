@@ -42,6 +42,7 @@ namespace GB.Data.DBEntity
         public Nullable<System.DateTime> FollowUpOn { get; set; }
         public string FollowUpNotes { get; set; }
         public Nullable<System.DateTime> NextFollowUp { get; set; }
+        public bool isVisibletoUber { get; set; }
     
         public virtual City City { get; set; }
         public virtual User User { get; set; }
