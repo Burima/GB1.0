@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Register";
     var showMessage = TempData["Message"] != null ? true : false;
+    var role = SessionManager.GetSessionRole().ToUpper();
 }
 
 <div class="row  border-bottom white-bg dashboard-header">
