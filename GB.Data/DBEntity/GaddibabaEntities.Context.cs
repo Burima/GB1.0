@@ -23,12 +23,12 @@ namespace GB.Data.DBEntity
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasMany(i => i.Roles).WithMany(u => u.Users)
-              .Map(m =>
-              {
-                  m.ToTable("UserRoles");
-                  m.MapLeftKey("UserId");
-                  m.MapRightKey("RoleId");
-              });
+             .Map(m =>
+             {
+                 m.ToTable("UserRoles");
+                 m.MapLeftKey("UserId");
+                 m.MapRightKey("RoleId");
+             });
         }
     
         public virtual DbSet<City> Cities { get; set; }
@@ -40,10 +40,10 @@ namespace GB.Data.DBEntity
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<OwnerDetail> OwnerDetails { get; set; }
+        public virtual DbSet<OwnerDetailsActivityLog> OwnerDetailsActivityLogs { get; set; }
         public virtual DbSet<DriverDetail> DriverDetails { get; set; }
         public virtual DbSet<DriverDetailsActivityLog> DriverDetailsActivityLogs { get; set; }
         public virtual DbSet<DriverStatus> DriverStatus { get; set; }
-        public virtual DbSet<OwnerDetail> OwnerDetails { get; set; }
-        public virtual DbSet<OwnerDetailsActivityLog> OwnerDetailsActivityLogs { get; set; }
     }
 }

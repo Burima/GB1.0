@@ -22,7 +22,8 @@ namespace GBAdmin.Web.Controllers
         {
             DashboardViewModel DashboardViewModel = new DashboardViewModel();
             List<DriverDetail> DriverDetails = new List<DriverDetail>();
-            var UserID = SessionManager.GetSessionUser().Id;
+            var User = SessionManager.GetSessionUser();
+            var UserID = User.Id;
             var role = SessionManager.GetSessionRole().ToUpper();
             /**
             * Rule:
@@ -77,15 +78,22 @@ namespace GBAdmin.Web.Controllers
             //filtered already attached drivers
             DriverDetails = DriverDetails.Where(x => x.Uber == false).ToList();
 
+            if (User.OrganizationID == (int)Constants.Organizations.Uber)
+            {
+                DriverDetails = DriverDetails.Where(x => x.isVisibletoUber == true).ToList();
+            }
+
             DashboardViewModel.New = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.New).Count();
 
             DashboardViewModel.InProgress = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Approved).Count() + DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.HaveLicence).Count()
                 + DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.AppliedForLicence).Count() + DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.LearnerReceived).Count() +
-                DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.LicenceReceived).Count();
+                DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.LicenceReceived).Count() + DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Dormant).Count();
 
             DashboardViewModel.Rejected = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Rejected).Count();
 
-            DashboardViewModel.AttachedToUber = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Attached).Count();
+            DashboardViewModel.AttachedToUber = DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.Attached).Count()+
+                DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.PartnerMatched).Count()+
+                 DriverDetails.Where(m => m.DriverStatusID == (int)Constants.EnumDriverStatus.CompletedFirstTrip).Count();
 
             DashboardViewModel.Total = DashboardViewModel.New + DashboardViewModel.InProgress + DashboardViewModel.Rejected
                 + DashboardViewModel.AttachedToUber;

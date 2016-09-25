@@ -57,6 +57,7 @@ namespace GBAdmin.Web.Controllers
                     driver.DriverStatusID = 1;//for new entry its always 1
                     driver.ExpectedSalary = model.ExpectedSalary;
                     driver.CityID = model.CityID;
+                    driver.isVisibletoUber = false;
                     GBContext.DriverDetails.Add(driver);
                     GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
                     if (GBContext.SaveChanges() > 0)
@@ -82,7 +83,8 @@ namespace GBAdmin.Web.Controllers
         public ActionResult List()
         {
             DriverViewModel driverViewModel = new DriverViewModel();
-            var UserID = SessionManager.GetSessionUser().Id;
+            var User = SessionManager.GetSessionUser();
+            var UserID = User.Id;
             var role = SessionManager.GetSessionRole().ToUpper();
             /**
              * Rule:
@@ -95,6 +97,7 @@ namespace GBAdmin.Web.Controllers
                || role == Constants.Roles.Manager.ToString().ToUpper()
                || role == Constants.Roles.Employee.ToString().ToUpper())
             {
+               
                 driverViewModel.DriverDetailsList = GBContext.DriverDetails.ToList();
             }
             
@@ -136,6 +139,10 @@ namespace GBAdmin.Web.Controllers
             }
 
             driverViewModel.DriverDetailsList = driverViewModel.DriverDetailsList.OrderByDescending(x => x.CreatedOn).Where(x=>x.Uber==false).ToList();
+            if (User.OrganizationID == (int)Constants.Organizations.Uber)
+            {
+                driverViewModel.DriverDetailsList = driverViewModel.DriverDetailsList.Where(x => x.isVisibletoUber == true).ToList();
+            }
             return View(driverViewModel);
         }
 
@@ -247,6 +254,11 @@ namespace GBAdmin.Web.Controllers
         {
             DriverViewModel driverViewModel = new DriverViewModel();
             driverViewModel.DriverDetailsList = GBContext.DriverDetails.Where(x => x.User.OrganizationID == (int)Constants.Organizations.VS && x.Uber == false).OrderByDescending(x=>x.CreatedOn).ToList();
+
+            if (SessionManager.GetSessionUser().OrganizationID == (int)Constants.Organizations.Uber)
+            {
+                driverViewModel.DriverDetailsList = driverViewModel.DriverDetailsList.Where(x => x.isVisibletoUber == true).ToList();
+            }
 
             return View(driverViewModel);
         }
