@@ -67,7 +67,7 @@ namespace GBAdmin.Web.Controllers
                         driver.isVisibletoUber = false;
                     }                    
                     GBContext.DriverDetails.Add(driver);
-                    GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
+                    //GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(driver));
                     if (GBContext.SaveChanges() > 0)
                     {
                         return Json(new { Success = true, Message = "New driver added successfully." }, JsonRequestBehavior.AllowGet);
@@ -251,7 +251,7 @@ namespace GBAdmin.Web.Controllers
                 dbDriverDetail.Ola = driverDetail.Ola;
                 dbDriverDetail.Uber = driverDetail.Uber;
 
-                GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(dbDriverDetail));
+                //GBContext.DriverDetailsActivityLogs.Add(Mapper.Map<DriverDetail, DriverDetailsActivityLog>(dbDriverDetail));
                 if (GBContext.SaveChanges() > 0)
                 {
                     return Json(new { Success = true, Message = "Driver Details updated Successfully!!" }, JsonRequestBehavior.AllowGet);
