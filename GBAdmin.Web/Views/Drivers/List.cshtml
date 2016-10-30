@@ -5,6 +5,7 @@
 @{
     ViewBag.Title = "Driver Details";
     var User= SessionManager.GetSessionUser();
+    var role = SessionManager.GetSessionRole().ToUpper();
 }
 
 <!-- Datatable Css-->
@@ -32,7 +33,10 @@
                                 @if (User.OrganizationID == (int)Constants.Organizations.VS)
                                 {
                                  <th>Added By</th>
-                                 <th>Visible To Uber</th>   
+                                }
+                                @if (role == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                                {
+                                    <th>Visible To Uber</th>
                                 }
                                 <th>Action</th>
                             </tr>
@@ -63,6 +67,9 @@
                                         @if (User.OrganizationID == (int)Constants.Organizations.VS)
                                         {
                                             <td class="col-md-2">@driverDetails.User.FirstName @driverDetails.User.LastName</td>
+                                        }
+                                        @if (role == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                                        {
                                             <td class="col-md-2"><input type="checkbox" value="model.isVisibletoUber" id="chkisVisibletoUber"></td>
                                         }
                                         <td class="col-md-2">
@@ -84,6 +91,9 @@
                                 @if (User.OrganizationID == (int)Constants.Organizations.VS)
                                 {
                                     <th>Added By</th>
+                                }
+                                @if (role == Constants.Roles.SuperAdmin.ToString().ToUpper())
+                                {
                                     <th>Visible To Uber</th>
                                 }
                                 <th>Action</th>
