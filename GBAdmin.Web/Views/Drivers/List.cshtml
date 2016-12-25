@@ -27,8 +27,8 @@
                         <thead>
                             <tr>
                                 <th>Driver Name</th>
-                                <th>LicenseType</th>
-                                <th>License No</th>                              
+                                <th>Phone Number</th>
+                                <th>LicenseType</th>                            
                                 <th>Status</th>
                                 @if (User.OrganizationID == (int)Constants.Organizations.VS)
                                 {
@@ -48,7 +48,7 @@
                                 {
                                     <tr class="gradeX" id="@driverDetails.DriverDetailID">
                                         <td class="col-md-2">@driverDetails.FirstName @driverDetails.LastName</td>
-                                        <td class="col-md-2">@driverDetails.LicenceType.Type</td>
+                                        <td class="col-md-2">@driverDetails.PhoneNumber</td>
                                         <td class="col-md-2">@driverDetails.LicenceNo</td>
                                         @*<td class="col-md-2">
                                                 @if (driverDetails.Uber == true)
@@ -85,8 +85,8 @@
                         <tfoot>
                             <tr>
                                 <th>Driver Name</th>
+                                <th>Phone Number</th>
                                 <th>LicenseType</th>
-                                <th>License No</th>
                                 <th>Status</th>
                                 @if (User.OrganizationID == (int)Constants.Organizations.VS)
                                 {
